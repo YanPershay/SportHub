@@ -1,4 +1,4 @@
-import 'package:SportHub_client/screens/registration/registration_usercredentials_screen.dart';
+import 'package:SportHub_client/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: RegistrationUserCredentialsScreen(),
+          body: LoginScreen(),
         ));
   }
 }

@@ -1,3 +1,5 @@
+import 'package:SportHub_client/bottom_nav_screen.dart';
+import 'package:SportHub_client/screens/registration/registration_usercredentials_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,10 +16,10 @@ class LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: Form(
-          key: formKey,
+    return new Scaffold(
+      body: new Container(
+          padding: EdgeInsets.only(top: 20),
+          margin: EdgeInsets.all(16),
           child: Column(
             children: <Widget>[
               emailField(),
@@ -25,7 +27,8 @@ class LoginScreenState extends State<LoginScreen> {
               Container(
                 margin: EdgeInsets.all(20),
               ),
-              submitButton()
+              loginButton(),
+              registrationButton()
             ],
           )),
     );
@@ -53,14 +56,32 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget submitButton() {
+  Widget loginButton() {
     return RaisedButton(
-      color: Colors.blue,
-      child: Text('Submit'),
+      color: Colors.black,
+      child: Text(
+        'Login',
+        style: TextStyle(color: Colors.white),
+      ),
       onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-        }
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => BottomNavScreen()));
+      },
+    );
+  }
+
+  Widget registrationButton() {
+    return RaisedButton(
+      color: Colors.black,
+      child: Text(
+        'Registartion',
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegistrationUserCredentialsScreen()));
       },
     );
   }

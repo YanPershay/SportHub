@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../login_screen.dart';
+
 class RegistrationUserInfoScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -19,21 +21,38 @@ class RegistrationUserInfoScreenState
   String motivation = '';
 
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.all(20),
-        child: Form(
-            child: Column(
-          children: <Widget>[
-            firstNameField(),
-            lastNameField(),
-            dateOfBirthField(),
-            sportLevelDropdown(),
-            heightField(),
-            weightField(),
-            aboutField(),
-            motivationField()
-          ],
-        )));
+    return new Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: new Container(
+            padding: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.all(16),
+            child: Column(children: <Widget>[
+              firstNameField(),
+              lastNameField(),
+              dateOfBirthField(),
+              sportLevelDropdown(),
+              heightField(),
+              weightField(),
+              aboutField(),
+              motivationField(),
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
+                    child: Text("Registrate"),
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                        textStyle: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold)),
+                  )),
+            ])));
   }
 
   Widget firstNameField() {

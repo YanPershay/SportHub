@@ -1,3 +1,4 @@
+import 'package:SportHub_client/pages/feed_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -11,9 +12,16 @@ class BottomNavScreen extends StatefulWidget {
 
 class BottomNavScreenState extends State<BottomNavScreen> {
   var currentPage = 0;
+  var title = [
+    Text('Home'),
+    Text('Friends'),
+    Text('New'),
+    Text('Trains'),
+    Text('Profile')
+  ];
   var pages = [
-    Text('Feed'),
-    Text('Search'),
+    FeedPage(),
+    Text('Friends'),
     Text('New'),
     Text('Trains'),
     Text('Profile')
@@ -24,13 +32,8 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     return MaterialApp(
         title: 'Bottom navigation',
         home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Text(
-              'Bottom navigation',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
+          appBar:
+              AppBar(backgroundColor: Colors.black, title: title[currentPage]),
           body: Center(
             child: pages.elementAt(currentPage),
           ),
@@ -43,7 +46,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
                 backgroundColor: Colors.black,
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.search), label: 'Search'),
+                  icon: Icon(Icons.people), label: 'Friends'),
               BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'New'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.accessibility_new_sharp), label: 'Trains'),

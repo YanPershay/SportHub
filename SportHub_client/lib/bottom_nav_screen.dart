@@ -1,4 +1,5 @@
 import 'package:SportHub_client/pages/feed_page.dart';
+import 'package:SportHub_client/pages/friends/friends_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   ];
   var pages = [
     FeedPage(),
-    Text('Friends'),
+    FriendsPage(),
     Text('New'),
     Text('Trains'),
     Text('Profile')

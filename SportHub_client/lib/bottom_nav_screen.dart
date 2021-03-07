@@ -1,5 +1,6 @@
 import 'package:SportHub_client/pages/feed_page.dart';
 import 'package:SportHub_client/pages/friends/friends_page.dart';
+import 'package:SportHub_client/screens/newpost/add_newpost_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -56,9 +57,13 @@ class BottomNavScreenState extends State<BottomNavScreen> {
             ],
             currentIndex: currentPage,
             fixedColor: Colors.red,
-            onTap: (int intIndex) {
+            onTap: (int index) {
               setState(() {
-                currentPage = intIndex;
+                if (index == 2)
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewPostScreen()));
+                else
+                  currentPage = index;
               });
             },
           ),

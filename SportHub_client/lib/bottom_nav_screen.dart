@@ -1,3 +1,4 @@
+import 'package:SportHub_client/pages/adminposts/trains_page.dart';
 import 'package:SportHub_client/pages/feed_page.dart';
 import 'package:SportHub_client/pages/friends/friends_page.dart';
 import 'package:SportHub_client/screens/newpost/add_newpost_screen.dart';
@@ -24,8 +25,8 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   var pages = [
     FeedPage(),
     FriendsPage(),
-    Text('New'),
-    Text('Trains'),
+    NewPostScreen(),
+    TrainsPage(),
     Text('Profile')
   ];
 

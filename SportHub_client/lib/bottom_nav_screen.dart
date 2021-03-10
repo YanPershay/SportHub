@@ -1,6 +1,7 @@
 import 'package:SportHub_client/pages/adminposts/trains_page.dart';
 import 'package:SportHub_client/pages/feed_page.dart';
 import 'package:SportHub_client/pages/friends/friends_page.dart';
+import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/screens/newpost/add_newpost_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     FriendsPage(),
     NewPostScreen(),
     TrainsPage(),
-    Text('Profile')
+    UserProfilePage()
   ];
 
   @override
@@ -35,8 +36,8 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     return MaterialApp(
         title: 'Bottom navigation',
         home: Scaffold(
-          appBar:
-              AppBar(backgroundColor: Colors.black, title: title[currentPage]),
+          //appBar:
+          //  AppBar(backgroundColor: Colors.black, title: title[currentPage]),
           body: Center(
             child: pages.elementAt(currentPage),
           ),

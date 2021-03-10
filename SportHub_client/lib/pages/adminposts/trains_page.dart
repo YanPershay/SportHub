@@ -10,6 +10,7 @@ class TrainsPageState extends State<TrainsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.black, title: Text("Trains")),
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       body: buildCard(),

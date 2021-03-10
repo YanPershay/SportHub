@@ -19,16 +19,31 @@ class FriendsPageState extends State<FriendsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: controller,
-      children: <Widget>[
-        SubscribersWidget(
-          title: "Subscribers",
-        ),
-        SubscribersWidget(
-          title: "Subscribes",
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+          bottom: PreferredSize(
+              child: Container(
+                color: Colors.black,
+                height: 1.0,
+              ),
+              preferredSize: Size.fromHeight(1.0)),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: Text(
+            "Friends",
+            style: TextStyle(color: Colors.black),
+          )),
+      body: PageView(
+        controller: controller,
+        children: <Widget>[
+          SubscribersWidget(
+            title: "Subscribers",
+          ),
+          SubscribersWidget(
+            title: "Subscribes",
+          ),
+        ],
+      ),
     );
   }
 }

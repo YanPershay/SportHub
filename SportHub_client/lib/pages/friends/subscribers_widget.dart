@@ -18,11 +18,18 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        bottom: PreferredSize(
+            child: Container(
+              color: Colors.black,
+              height: 1.0,
+            ),
+            preferredSize: Size.fromHeight(1.0)),
+        elevation: 0,
         toolbarHeight: 40,
         backgroundColor: Colors.white,
         title: new Text(
           widget.title,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
       body: Column(children: <Widget>[

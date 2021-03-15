@@ -9,6 +9,6 @@ namespace SportHub.Core.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> GetByGuidAsync(Guid id);
+        Task<User> GetUserByGuidAsync(Guid id);
     }
 }

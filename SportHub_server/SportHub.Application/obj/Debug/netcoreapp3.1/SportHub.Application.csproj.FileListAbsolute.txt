@@ -3,3 +3,12 @@ D:\Thesis\SportHUB\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\
 D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csprojAssemblyReference.cache
 D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.AssemblyInfoInputs.cache
 D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.AssemblyInfo.cs
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Application.deps.json
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Application.dll
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Application.pdb
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Core.pdb
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Infrastructure.pdb
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csproj.CoreCompileInputs.cache
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csproj.CopyComplete
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.dll
+D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.pdb

@@ -43,7 +43,7 @@ namespace SportHub.Infrastructure.Data
             {
                 new User
                 {
-                    UserId = new Guid(),
+                    GuidId = new Guid(),
                     Username = "yan_pershay",
                     Email = "yanpershay@gmail.com",
                     Password = "12345678",

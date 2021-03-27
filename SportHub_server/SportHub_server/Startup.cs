@@ -38,7 +38,7 @@ namespace SportHub_server
             services.AddControllers();
             services.AddApiVersioning();
             services.AddDbContext<SportHubContext>(
-                s => s.UseSqlServer(Configuration.GetConnectionString("SportHubConnection")), ServiceLifetime.Singleton);
+                s => s.UseSqlServer(Configuration.GetConnectionString("SportHubConnection")), ServiceLifetime.Transient);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -48,9 +48,15 @@ namespace SportHub_server
                 });
             });
             services.AddAutoMapper(typeof(Startup));
+
             services.AddMediatR(typeof(CreateUserHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(CreateUserInfoHandler).GetTypeInfo().Assembly);
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserInfoRepository, UserInfoRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

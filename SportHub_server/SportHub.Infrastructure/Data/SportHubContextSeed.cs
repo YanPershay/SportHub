@@ -24,6 +24,12 @@ namespace SportHub.Infrastructure.Data
                     await context.Users.AddRangeAsync(GetUsers());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.UsersInfo.AnyAsync())
+                {
+                    await context.UsersInfo.AddRangeAsync(GetUsersInfo());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -37,19 +43,25 @@ namespace SportHub.Infrastructure.Data
             }
         }
 
+        private static Guid guid = new Guid();
+
         private static IEnumerable<User> GetUsers()
         {
             return new List<User>()
             {
-                new User
-                {
-                    GuidId = new Guid(),
-                    Username = "yan_pershay",
-                    Email = "yanpershay@gmail.com",
-                    Password = "12345678",
-                    IsOnline = false,
-                    IsAdmin = true
-                }
+                new User(guid, "yan_pershay", "yanpershay@gmail.com", "12345678", false, true)
+            };
+        }
+
+        private static IEnumerable<UserInfo> GetUsersInfo()
+        {
+            return new List<UserInfo>()
+            {
+                new UserInfo("Yan", "Pershay", "Belarus", "Minsk", "27.01.2000", "Newer", 178, 75,
+                "I like sport! I train every day!",
+                "Up to 85kg",
+                "https://sun9-52.userapi.com/impg/dGpjgpkRRVUZeKb8NCjJDkwjoVI_vSxj2WeDuQ/frO2qVmmqxk.jpg?size=960x1280&quality=96&sign=03354df4b6a772466325e5926f835506&type=album",
+                guid)
             };
         }
     }

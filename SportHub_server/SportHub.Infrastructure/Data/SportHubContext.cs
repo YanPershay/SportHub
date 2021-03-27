@@ -14,5 +14,15 @@ namespace SportHub.Infrastructure.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserInfo> UsersInfo { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+            .HasOne(a => a.UserInfo)
+            .WithOne(a => a.User)
+            .HasPrincipalKey<User>(x => x.GuidId)
+            .HasForeignKey<UserInfo>(c => c.UserId).IsRequired();
+        }
     }
 }

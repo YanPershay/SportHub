@@ -30,6 +30,12 @@ namespace SportHub.Infrastructure.Data
                     await context.UsersInfo.AddRangeAsync(GetUsersInfo());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.Posts.AnyAsync())
+                {
+                    await context.Posts.AddRangeAsync(GetPosts());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -43,7 +49,8 @@ namespace SportHub.Infrastructure.Data
             }
         }
 
-        private static Guid guid = new Guid();
+        private static Guid guid = Guid.NewGuid();
+        
 
         private static IEnumerable<User> GetUsers()
         {
@@ -62,6 +69,15 @@ namespace SportHub.Infrastructure.Data
                 "Up to 85kg",
                 "https://sun9-52.userapi.com/impg/dGpjgpkRRVUZeKb8NCjJDkwjoVI_vSxj2WeDuQ/frO2qVmmqxk.jpg?size=960x1280&quality=96&sign=03354df4b6a772466325e5926f835506&type=album",
                 guid)
+            };
+        }
+
+        private static IEnumerable<Post> GetPosts()
+        {
+            return new List<Post>()
+            {
+                new Post("My first train!", "http://the-runners.com/wp-content/uploads/2017/02/62144-1024x682.jpg",
+                DateTime.Now, false, guid)
             };
         }
     }

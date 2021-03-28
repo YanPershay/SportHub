@@ -15,6 +15,7 @@ namespace SportHub.Infrastructure.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserInfo> UsersInfo { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,12 @@ namespace SportHub.Infrastructure.Data
             .WithOne(a => a.User)
             .HasPrincipalKey<User>(x => x.GuidId)
             .HasForeignKey<UserInfo>(c => c.UserId).IsRequired();
+
+            modelBuilder.Entity<User>()
+            .HasMany(a => a.Posts)
+            .WithOne(a => a.User)
+            .HasPrincipalKey(x => x.GuidId)
+            .HasForeignKey(c => c.UserId).IsRequired();
         }
     }
 }

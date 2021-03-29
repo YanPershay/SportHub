@@ -6,6 +6,7 @@ namespace SportHub.Application.Responses
 {
     public class AdminPostResponse
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
         public int Duration { get; set; }

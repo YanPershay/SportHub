@@ -48,6 +48,12 @@ namespace SportHub.Infrastructure.Data
                     await context.AdminPosts.AddRangeAsync(GetAdminPosts());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.Comments.AnyAsync())
+                {
+                    await context.Comments.AddRangeAsync(GetComments());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -62,7 +68,7 @@ namespace SportHub.Infrastructure.Data
         }
 
         private static Guid guid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
-        
+        private const int postId = 1;
 
         private static IEnumerable<User> GetUsers()
         {
@@ -113,6 +119,14 @@ namespace SportHub.Infrastructure.Data
                 new AdminPost(3, "Healthy food", "Eat healthy food please!!!", 3, 3,
                 "https://fathom-news.com/wp-content/uploads/2021/03/02-Blog-Healthy-Food-L-1000x530.jpg",
                 DateTime.Now, true, guid)
+            };
+        }
+
+        private static IEnumerable<Comment> GetComments()
+        {
+            return new List<Comment>()
+            {
+                new Comment("Nice train dude!", DateTime.Now, true, guid, postId)
             };
         }
     }

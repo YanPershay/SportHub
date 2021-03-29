@@ -18,6 +18,8 @@ namespace SportHub.Infrastructure.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostCategory> PostCategories { get; set; }
         public DbSet<AdminPost> AdminPosts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +46,20 @@ namespace SportHub.Infrastructure.Data
             .WithOne(a => a.User)
             .HasPrincipalKey(x => x.GuidId)
             .HasForeignKey(c => c.UserId).IsRequired();
+
+            modelBuilder.Entity<Post>()
+            .HasMany(c => c.Comments)
+            .WithOne(p => p.Post)
+            .HasForeignKey(p => p.PostId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
+            modelBuilder.Entity<User>()
+            .HasMany(a => a.Comments)
+            .WithOne(a => a.User)
+            .HasPrincipalKey(x => x.GuidId)
+            .HasForeignKey(c => c.UserId)
+            .IsRequired();
         }
     }
 }

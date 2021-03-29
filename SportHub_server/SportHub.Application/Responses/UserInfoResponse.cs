@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportHub.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,5 +21,6 @@ namespace SportHub.Application.Responses
         public string AvatarUrl { get; set; }
 
         public Guid UserId { get; set; }
+
     }
 }

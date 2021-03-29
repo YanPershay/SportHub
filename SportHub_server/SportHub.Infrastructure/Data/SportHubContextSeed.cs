@@ -36,6 +36,18 @@ namespace SportHub.Infrastructure.Data
                     await context.Posts.AddRangeAsync(GetPosts());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.PostCategories.AnyAsync())
+                {
+                    await context.PostCategories.AddRangeAsync(GetPostCategories());
+                    await context.SaveChangesAsync();
+                }
+
+                if (!await context.AdminPosts.AnyAsync())
+                {
+                    await context.AdminPosts.AddRangeAsync(GetAdminPosts());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -49,7 +61,7 @@ namespace SportHub.Infrastructure.Data
             }
         }
 
-        private static Guid guid = Guid.NewGuid();
+        private static Guid guid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
         
 
         private static IEnumerable<User> GetUsers()
@@ -78,6 +90,29 @@ namespace SportHub.Infrastructure.Data
             {
                 new Post("My first train!", "http://the-runners.com/wp-content/uploads/2017/02/62144-1024x682.jpg",
                 DateTime.Now, false, guid)
+            };
+        }
+
+        private static IEnumerable<PostCategory> GetPostCategories()
+        {
+            return new List<PostCategory>()
+            {
+                new PostCategory("Trains"),
+                new PostCategory("Exercises"),
+                new PostCategory("Food"),
+                new PostCategory("Motivation"),
+                new PostCategory("Medicine"),
+                new PostCategory("Other")
+            };
+        }
+
+        private static IEnumerable<AdminPost> GetAdminPosts()
+        {
+            return new List<AdminPost>()
+            {
+                new AdminPost(3, "Healthy food", "Eat healthy food please!!!", 3, 3,
+                "https://fathom-news.com/wp-content/uploads/2021/03/02-Blog-Healthy-Food-L-1000x530.jpg",
+                DateTime.Now, true, guid)
             };
         }
     }

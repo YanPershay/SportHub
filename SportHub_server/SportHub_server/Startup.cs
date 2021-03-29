@@ -45,12 +45,14 @@ namespace SportHub_server
             services.AddMediatR(typeof(CreateUserHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(CreateUserInfoHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(CreatePostHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(CreateAdminPostHandler).GetTypeInfo().Assembly);
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserInfoRepository, UserInfoRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IAdminPostRepository, AdminPostRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,6 +18,7 @@ namespace SportHub.Core.Entities
         public List<Post> Posts { get; set; }
         public List<AdminPost> AdminPosts { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Like> Likes { get; set; }
 
         public User(Guid guidId, string username, string email, string password, bool isOnline, bool isAdmin)
         {

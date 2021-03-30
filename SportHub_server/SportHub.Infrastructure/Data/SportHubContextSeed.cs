@@ -54,6 +54,12 @@ namespace SportHub.Infrastructure.Data
                     await context.Comments.AddRangeAsync(GetComments());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.Likes.AnyAsync())
+                {
+                    await context.Likes.AddRangeAsync(GetLikes());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -127,6 +133,14 @@ namespace SportHub.Infrastructure.Data
             return new List<Comment>()
             {
                 new Comment("Nice train dude!", DateTime.Now, true, guid, postId)
+            };
+        }
+
+        private static IEnumerable<Like> GetLikes()
+        {
+            return new List<Like>()
+            {
+                new Like(guid, postId)
             };
         }
     }

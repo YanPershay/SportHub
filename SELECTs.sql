@@ -1,5 +1,9 @@
-select * from posts
-select * from users
-select * from usersinfo
-select * from PostCategories
-select * from AdminPosts
+USE SportHub
+GO
+SELECT * FROM Posts
+SELECT * FROM Users
+SELECT * FROM Usersinfo
+SELECT * FROM PostCategories
+SELECT * FROM AdminPosts
+SELECT * FROM Comments
+SELECT * FROM Likes

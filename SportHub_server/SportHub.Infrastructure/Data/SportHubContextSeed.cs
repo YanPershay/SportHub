@@ -60,6 +60,12 @@ namespace SportHub.Infrastructure.Data
                     await context.Likes.AddRangeAsync(GetLikes());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.Subscribes.AnyAsync())
+                {
+                    await context.Subscribes.AddRangeAsync(GetSubscribes());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -74,13 +80,16 @@ namespace SportHub.Infrastructure.Data
         }
 
         private static Guid guid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
+        private static Guid guid2 = Guid.Parse("aa3cca72-8fac-4e55-b2ac-d0f59f6a1d7e");
+
         private const int postId = 1;
 
         private static IEnumerable<User> GetUsers()
         {
             return new List<User>()
             {
-                new User(guid, "yan_pershay", "yanpershay@gmail.com", "12345678", false, true)
+                new User(guid, "yan_pershay", "yanpershay@gmail.com", "12345678", false, true),
+                new User(guid2, "semenomin", "semenomin@gmail.com", "12345678", false, true)
             };
         }
 
@@ -92,7 +101,13 @@ namespace SportHub.Infrastructure.Data
                 "I like sport! I train every day!",
                 "Up to 85kg",
                 "https://sun9-52.userapi.com/impg/dGpjgpkRRVUZeKb8NCjJDkwjoVI_vSxj2WeDuQ/frO2qVmmqxk.jpg?size=960x1280&quality=96&sign=03354df4b6a772466325e5926f835506&type=album",
-                guid)
+                guid),
+
+                new UserInfo("Semen", "Pilik", "Belarus", "Minsk", "09.12.1999", "Newer", 178, 75,
+                "I like sport! I train every day!",
+                "Up to 55kg",
+                "https://sun9-51.userapi.com/impf/c851224/v851224926/2c9bd/HxYwQOl1Wv4.jpg?size=1728x2160&quality=96&sign=38505411f40b2ce859a2d163946dec11&type=album",
+                guid2)
             };
         }
 
@@ -101,7 +116,9 @@ namespace SportHub.Infrastructure.Data
             return new List<Post>()
             {
                 new Post("My first train!", "http://the-runners.com/wp-content/uploads/2017/02/62144-1024x682.jpg",
-                DateTime.Now, false, guid)
+                DateTime.Now, false, guid),
+                new Post("My second train!", "https://freehealthnewz.com/wp-content/uploads/2018/10/eb02e74720dd9168d7b3ff86716de02a.jpg",
+                DateTime.Now, false, guid2)
             };
         }
 
@@ -141,6 +158,14 @@ namespace SportHub.Infrastructure.Data
             return new List<Like>()
             {
                 new Like(guid, postId)
+            };
+        }
+
+        private static IEnumerable<Subscribe> GetSubscribes()
+        {
+            return new List<Subscribe>()
+            {
+                new Subscribe(guid, guid2)
             };
         }
     }

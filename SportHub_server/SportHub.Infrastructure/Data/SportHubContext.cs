@@ -20,7 +20,7 @@ namespace SportHub.Infrastructure.Data
         public DbSet<AdminPost> AdminPosts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
-
+        public DbSet<Subscribe> Subscribes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -74,6 +74,22 @@ namespace SportHub.Infrastructure.Data
             .HasPrincipalKey(x => x.GuidId)
             .HasForeignKey(c => c.UserId)
             .IsRequired();
+
+            modelBuilder.Entity<User>()
+            .HasMany(a => a.Subscribes)
+            .WithOne(a => a.User)
+            .HasPrincipalKey(x => x.GuidId)
+            .HasForeignKey(c => c.UserId).IsRequired();
+
+            modelBuilder.Entity<User>()
+            .HasMany(a => a.Subscribers)
+            .WithOne(a => a.User)
+            .HasPrincipalKey(x => x.GuidId)
+            .HasForeignKey(c => c.SubscriberId).IsRequired();
+
+            modelBuilder.Entity<Subscribe>()
+            .HasIndex(p => new { p.SubscriberId, p.UserId })
+            .IsUnique(true);
         }
     }
 }

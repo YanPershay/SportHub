@@ -9,6 +9,11 @@ namespace SportHub.Core.Repositories
 {
     public interface ISubscribeRepository : IRepository<Subscribe>
     {
-        Task<IEnumerable<Subscribe>> GetSubscribesByUserId(Guid id);
+        Task<IEnumerable<Subscribe>> GetMySubscribesByUserId(Guid subscriberId);
+        Task<IEnumerable<Subscribe>> GetSubscribersByUserId(Guid id);
+
+        Task<int> GetSubscribersCountByUserId(Guid id);
+        Task<int> GetMySubscribesCountByUserId(Guid subscriberId);
+
     }
 }

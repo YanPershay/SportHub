@@ -13,6 +13,8 @@ namespace SportHub.Core.Entities
         public Guid SubscriberId { get; set; }
         public User Subscriber { get; set; }
 
+        public Subscribe() { }
+
         public Subscribe(Guid userId, Guid subscruberId)
         {
             UserId = userId;

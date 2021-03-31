@@ -75,17 +75,18 @@ namespace SportHub.Infrastructure.Data
             .HasForeignKey(c => c.UserId)
             .IsRequired();
 
-            modelBuilder.Entity<User>()
-            .HasMany(a => a.Subscribes)
-            .WithOne(a => a.User)
-            .HasPrincipalKey(x => x.GuidId)
-            .HasForeignKey(c => c.UserId).IsRequired();
-
-            modelBuilder.Entity<User>()
-            .HasMany(a => a.Subscribers)
-            .WithOne(a => a.User)
+            modelBuilder.Entity<Subscribe>()
+            .HasOne(a => a.Subscriber)
+            .WithMany(a => a.Subscribers)
             .HasPrincipalKey(x => x.GuidId)
             .HasForeignKey(c => c.SubscriberId).IsRequired();
+
+            modelBuilder.Entity<Subscribe>()
+            .HasOne(a => a.User)
+            .WithMany(a => a.Subscribes)
+            .HasPrincipalKey(x => x.GuidId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasForeignKey(c => c.UserId).IsRequired();
 
             modelBuilder.Entity<Subscribe>()
             .HasIndex(p => new { p.SubscriberId, p.UserId })

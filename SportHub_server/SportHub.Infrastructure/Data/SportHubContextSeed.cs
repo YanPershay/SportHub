@@ -66,6 +66,12 @@ namespace SportHub.Infrastructure.Data
                     await context.Subscribes.AddRangeAsync(GetSubscribes());
                     await context.SaveChangesAsync();
                 }
+
+                if (!await context.SavedPosts.AnyAsync())
+                {
+                    await context.SavedPosts.AddRangeAsync(GetSavedPosts());
+                    await context.SaveChangesAsync();
+                }
             }
             catch(Exception ex)
             {
@@ -166,6 +172,14 @@ namespace SportHub.Infrastructure.Data
             return new List<Subscribe>()
             {
                 new Subscribe(guid, guid2)
+            };
+        }
+
+        private static IEnumerable<SavedPost> GetSavedPosts()
+        {
+            return new List<SavedPost>()
+            {
+                new SavedPost(guid, postId)
             };
         }
     }

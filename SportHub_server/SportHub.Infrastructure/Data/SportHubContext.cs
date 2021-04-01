@@ -21,8 +21,14 @@ namespace SportHub.Infrastructure.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
+        public DbSet<SavedPost> SavedPosts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.GuidId)
+                .HasName("PrimaryKey_GuidId");
+
             modelBuilder.Entity<User>()
             .HasOne(a => a.UserInfo)
             .WithOne(a => a.User)
@@ -90,6 +96,25 @@ namespace SportHub.Infrastructure.Data
 
             modelBuilder.Entity<Subscribe>()
             .HasIndex(p => new { p.SubscriberId, p.UserId })
+            .IsUnique(true);
+
+            modelBuilder.Entity<User>()
+            .HasMany(c => c.SavedPosts)
+            .WithOne(p => p.User)
+            .HasForeignKey(p => p.UserId)
+            .HasPrincipalKey(x => x.GuidId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
+            modelBuilder.Entity<Post>()
+            .HasMany(a => a.SavedPosts)
+            .WithOne(a => a.Post)
+            .HasForeignKey(c => c.PostId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
+            modelBuilder.Entity<SavedPost>()
+            .HasIndex(p => new { p.UserId, p.PostId })
             .IsUnique(true);
         }
     }

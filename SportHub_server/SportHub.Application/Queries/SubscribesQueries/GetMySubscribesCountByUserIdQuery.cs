@@ -5,11 +5,11 @@ using System.Text;
 
 namespace SportHub.Application.Queries.SubscribesQueries
 {
-    class GetMySubscribesCountByUserId : IRequest<int>
+    public class GetMySubscribesCountByUserIdQuery : IRequest<int>
     {
         public Guid SubscriberId { get; set; }
 
-        public GetMySubscribesCountByUserId(Guid subscriberId)
+        public GetMySubscribesCountByUserIdQuery(Guid subscriberId)
         {
             SubscriberId = subscriberId;
         }

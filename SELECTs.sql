@@ -8,6 +8,6 @@ SELECT * FROM AdminPosts
 SELECT * FROM Comments
 SELECT * FROM Likes
 SELECT * FROM Subscribes
-
+SELECT * FROM SavedPosts
 
 

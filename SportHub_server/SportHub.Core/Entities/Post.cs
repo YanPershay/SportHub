@@ -17,6 +17,7 @@ namespace SportHub.Core.Entities
 
         public List<Comment> Comments { get; set; }
         public List<Like> Likes { get; set; }
+        public List<SavedPost> SavedPosts { get; set; }
 
         public Post(string text, string imageUrl, DateTime dateCreated, bool isUpdated, Guid userId)
         {

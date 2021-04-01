@@ -8,6 +8,7 @@ namespace SportHub.Core.Entities
 {
     public class User : Entity
     {
+        [Key]
         public Guid GuidId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
@@ -21,6 +22,8 @@ namespace SportHub.Core.Entities
         public List<Like> Likes { get; set; }
         public List<Subscribe> Subscribes { get; set; }
         public List<Subscribe> Subscribers { get; set; }
+
+        public List<SavedPost> SavedPosts { get; set; }
 
         public User(Guid guidId, string username, string email, string password, bool isOnline, bool isAdmin)
         {

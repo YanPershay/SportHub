@@ -16,4 +16,3 @@ namespace SportHub.Application.Queries.SubscribesQueries
         }
     }
 }
-}

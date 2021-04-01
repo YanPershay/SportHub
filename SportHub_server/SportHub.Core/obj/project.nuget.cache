@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "CwRbrTUbPg98pPIHCxvOC4sLyTu5CghEBaHLWMGaipyrN54y7wmDIeZMqZEAHCGcjOh9V7L5BSpweEcTJW6UnA==",
+  "dgSpecHash": "eXFu57y2y1mvNAvM9Qqd13KpWzF/qqqx5f1juBPJvD2UUWkOdDwvs1QMojOyLx2QCYpDC7AcoBTipyko+xq4Hw==",
   "success": true,
   "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.configuration.commandline\\5.0.0\\microsoft.extensions.configuration.commandline.5.0.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

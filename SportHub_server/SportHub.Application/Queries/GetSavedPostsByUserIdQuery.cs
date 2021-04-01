@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SportHub.Application.Queries.SubscribesQueries
+namespace SportHub.Application.Queries
 {
-    public class GetSubscribersCountByUserId : IRequest<int>
+    public class GetSavedPostsByUserIdQuery : IRequest<IEnumerable<SavedPostResponse>>
     {
         public Guid UserId { get; set; }
-
-        public GetSubscribersCountByUserId(Guid userId)
+        public GetSavedPostsByUserIdQuery(Guid userId)
         {
             UserId = userId;
         }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jyMUwKcyuGvC/Yo3B7+kxNKrOBx+nt6YhqZBvbRiStPIem1m38JjdGnUB9JNm8CJWnMSyX88P/7SaNfKqqXzSw==",
+  "dgSpecHash": "XcqFVJKdTp8bcrlX94senlj7TB7Ius/dmoaK4rnrlkpmU9sCW83UFFh+MtfO9zubmnpZ2ol0q/TPrXWRFItiHQ==",
   "success": true,
   "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
   "expectedPackageFiles": [
@@ -25,7 +25,9 @@
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.configuration.commandline\\5.0.0\\microsoft.extensions.configuration.commandline.5.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",

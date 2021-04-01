@@ -80,3 +80,5 @@ D:\Thesis\SportHUB\SportHub_server\SportHub_server\obj\Debug\netcoreapp3.1\Sport
 D:\Thesis\SportHUB\SportHub_server\SportHub_server\obj\Debug\netcoreapp3.1\SportHub.API.dll
 D:\Thesis\SportHUB\SportHub_server\SportHub_server\obj\Debug\netcoreapp3.1\SportHub.API.pdb
 D:\Thesis\SportHUB\SportHub_server\SportHub_server\obj\Debug\netcoreapp3.1\SportHub.API.genruntimeconfig.cache
+D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.CommandLine.dll

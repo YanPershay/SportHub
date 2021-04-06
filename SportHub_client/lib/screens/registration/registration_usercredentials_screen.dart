@@ -1,3 +1,4 @@
+import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/screens/registration/registration_userinfo_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,10 @@ class RegistartionUserCredentialsScreenState
   String email = '';
   String password = '';
 
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController usernameController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Container(
@@ -29,8 +34,9 @@ class RegistartionUserCredentialsScreenState
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  RegistrationUserInfoScreen()));
+                              builder: (context) => RegistrationUserInfoScreen(
+                                    userCredentials: setUser(),
+                                  )));
                     },
                     child: Text('Next'),
                     style: ElevatedButton.styleFrom(
@@ -45,32 +51,36 @@ class RegistartionUserCredentialsScreenState
 
   Widget emailField() {
     return TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       decoration:
           InputDecoration(labelText: "Email", hintText: "user@gmail.com"),
-      onSaved: (String value) {
-        email = value;
-      },
     );
   }
 
   Widget passwordField() {
     return TextFormField(
-        obscureText: true,
-        decoration: InputDecoration(
-            labelText: "Password", hintText: "Enter your password"),
-        onSaved: (String value) {
-          password = value;
-        });
+      controller: passwordController,
+      obscureText: true,
+      decoration: InputDecoration(
+          labelText: "Password", hintText: "Enter your password"),
+    );
   }
 
   Widget usernameField() {
     return TextFormField(
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-            labelText: "Username", hintText: "Enter your username"),
-        onSaved: (String value) {
-          username = value;
-        });
+      controller: usernameController,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+          labelText: "Username", hintText: "Enter your username"),
+    );
+  }
+
+  User setUser() {
+    User userCredentials = new User(
+        email: emailController.text,
+        username: usernameController.text,
+        password: passwordController.text);
+    return userCredentials;
   }
 }

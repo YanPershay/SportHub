@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:SportHub_client/screens/login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/entities/user_info.dart';
@@ -18,17 +19,6 @@ class RegistrationUserInfoScreen extends StatefulWidget {
 
 class RegistrationUserInfoScreenState
     extends State<RegistrationUserInfoScreen> {
-  // String firstName = '';
-  // String lastName = '';
-  // DateTime dateOfBirth = DateTime.now();
-  // String sportLevel = '';
-  // double height = 0;
-  // double weight = 0;
-  // String about = '';
-  // String motivation = '';
-  // String country = '';
-  // String city = '';
-
   TextEditingController firstNameController = new TextEditingController();
   TextEditingController lastNameController = new TextEditingController();
   TextEditingController dateOfBirthController = new TextEditingController();
@@ -62,6 +52,10 @@ class RegistrationUserInfoScreenState
                   child: ElevatedButton(
                     onPressed: () {
                       registrateUser();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
                     },
                     child: Text("Registrate"),
                     style: ElevatedButton.styleFrom(
@@ -190,6 +184,29 @@ class RegistrationUserInfoScreenState
         userId: userId);
   }
 
+  void _showDialog(String title, String message) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(message),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<UserInfo> registrateUser() async {
     var userJson = widget.userCredentials.toJson();
 
@@ -213,11 +230,14 @@ class RegistrationUserInfoScreenState
           body: jsonEncode(userInfoJson));
 
       if (userInfoResponse.statusCode == 200) {
+        _showDialog("Success", "You has been successfully registered!");
         return UserInfo.fromJson(jsonDecode(userInfoResponse.body));
       } else {
+        _showDialog("Failed", "You full user registration failed (");
         throw Exception('Failed to create user info');
       }
     } else {
+      _showDialog("Failed", "You user creds registration failed (");
       throw Exception('Failed to create user');
     }
   }

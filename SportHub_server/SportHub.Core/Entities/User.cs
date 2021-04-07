@@ -25,6 +25,8 @@ namespace SportHub.Core.Entities
 
         public List<SavedPost> SavedPosts { get; set; }
 
+        public User() { }
+
         public User(Guid guidId, string username, string email, string password, bool isOnline, bool isAdmin)
         {
             GuidId = guidId;

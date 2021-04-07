@@ -1,11 +1,15 @@
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SportHub.API.Interfaces;
+using SportHub.API.JwtMiddlewareTest;
 using SportHub.Application.Handlers;
 using SportHub.Core.Repositories;
 using SportHub.Core.Repositories.Base;
@@ -14,6 +18,7 @@ using SportHub.Infrastructure.Repositories;
 using SportHub.Infrastructure.Repositories.Base;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace SportHub_server
 {
@@ -30,6 +35,9 @@ namespace SportHub_server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
             services.AddApiVersioning();
             services.AddDbContext<SportHubContext>(
                 s => s.UseSqlServer(Configuration.GetConnectionString("SportHubConnection")), ServiceLifetime.Transient);
@@ -63,6 +71,9 @@ namespace SportHub_server
             services.AddTransient<ILikeRepository, LikeRepository>();
             services.AddTransient<ISubscribeRepository, SubscribeRepository>();
             services.AddTransient<ISavedPostRepository, SavedPostRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +88,9 @@ namespace SportHub_server
 
             app.UseRouting();
 
+            app.UseMiddleware<JwtMiddleware>();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

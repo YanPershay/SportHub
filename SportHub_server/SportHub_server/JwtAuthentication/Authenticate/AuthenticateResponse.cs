@@ -10,6 +10,7 @@ namespace SportHub.API.JwtMiddlewareTest
     {
         public Guid GuidId { get; set; }
         public string Username { get; set; }
+        public bool IsAdmin { get; set; }
         public string Token { get; set; }
 
 
@@ -17,6 +18,7 @@ namespace SportHub.API.JwtMiddlewareTest
         {
             GuidId = user.GuidId;
             Username = user.Username;
+            IsAdmin = user.IsAdmin;
             Token = token;
         }
     }

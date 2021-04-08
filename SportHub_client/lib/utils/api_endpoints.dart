@@ -1,5 +1,5 @@
 class ApiEndpoints {
-  static const String host = "3744bf08d110.ngrok.io";
+  static const String host = "13d11a9da63a.ngrok.io";
   static const String basePath = "/api/v1";
 
   static const String userPOST = basePath + "/user";

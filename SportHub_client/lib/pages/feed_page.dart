@@ -3,6 +3,16 @@ import 'package:SportHub_client/utils/card_item.dart';
 import 'package:flutter/material.dart';
 
 class FeedPage extends StatelessWidget {
+// SharedPreferences prefs;
+
+// @override
+// void initState() {
+//   super.initState();
+//   SharedPreferences.getInstance().then((sharedPrefs) {
+//     setState(() => prefs = sharedPrefs);
+//   });
+// }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

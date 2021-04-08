@@ -4,6 +4,7 @@ import 'package:SportHub_client/pages/friends/friends_page.dart';
 import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/screens/newpost/add_newpost_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomNavScreen extends StatefulWidget {
   BottomNavScreen({Key key}) : super(key: key);
@@ -15,14 +16,24 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class BottomNavScreenState extends State<BottomNavScreen> {
+  SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((sharedPrefs) {
+      setState(() => prefs = sharedPrefs);
+    });
+  }
+
   var currentPage = 0;
-  var title = [
-    Text('Home'),
-    Text('Friends'),
-    Text('New'),
-    Text('Trains'),
-    Text('Profile')
-  ];
+  // var title = [
+  //   Text('Home'),
+  //   Text('Friends'),
+  //   Text('New'),
+  //   Text('Trains'),
+  //   Text('Profile')
+  // ];
   var pages = [
     FeedPage(),
     FriendsPage(),

@@ -1,6 +1,8 @@
 import 'package:SportHub_client/utils/card_item.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -9,10 +11,20 @@ class UserProfilePage extends StatefulWidget {
 
 class UserProfilePageState extends State<UserProfilePage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+//получаем юзер инфо, посты при открытии профиля, добавляем все в бд. при sign out бд очистится
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(backgroundColor: Colors.black, title: Text("yan_pershay")),
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+            title: Text(
+              SharedPrefs.username,
+              style: TextStyle(color: Colors.white),
+            )),
         backgroundColor: Colors.black,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,

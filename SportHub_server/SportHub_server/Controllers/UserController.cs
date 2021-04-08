@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SportHub.API.Interfaces;
 using SportHub.API.JwtMiddlewareTest;
 using SportHub.Application.Commands;
 using SportHub.Application.Queries;

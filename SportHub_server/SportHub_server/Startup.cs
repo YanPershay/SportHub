@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SportHub.API.Interfaces;
 using SportHub.API.JwtMiddlewareTest;
 using SportHub.Application.Handlers;
 using SportHub.Core.Repositories;

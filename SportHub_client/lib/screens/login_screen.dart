@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:SportHub_client/bottom_nav_screen.dart';
+import 'package:SportHub_client/entities/auth_response.dart';
 import 'package:SportHub_client/entities/user_credentials.dart';
 import 'package:SportHub_client/screens/registration/registration_usercredentials_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,8 +67,7 @@ class LoginScreenState extends State<LoginScreen> {
         style: TextStyle(color: Colors.white),
       ),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => BottomNavScreen()));
+        authorization();
       },
     );
   }
@@ -91,33 +92,30 @@ class LoginScreenState extends State<LoginScreen> {
     UserCredentials userCredentials = new UserCredentials(
         username: usernameController.text, password: passwordController.text);
 
-    final userResponse =
-        await http.post(Uri.https(ApiEndpoints.host, ApiEndpoints.userPOST),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(userCredentials.toJson()));
+    final authResponse = await http.post(
+        Uri.https(ApiEndpoints.host, ApiEndpoints.authenticationPOST),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(userCredentials.toJson()));
 
-    if (userResponse.statusCode == 200) {
-      var userInfoJson =
-          createUserInfoObj(User.fromJson(jsonDecode(userResponse.body)).guidId)
-              .toJson();
-      final userInfoResponse = await http.post(
-          Uri.https(ApiEndpoints.host, ApiEndpoints.userInfoPOST),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(userInfoJson));
+    if (authResponse.statusCode == 200) {
+      var authUser = AuthResponse.fromJson(jsonDecode(authResponse.body));
 
-      if (userInfoResponse.statusCode == 200) {
-        _showDialog("Success", "You has been successfully registered!");
-        return UserInfo.fromJson(jsonDecode(userInfoResponse.body));
-      } else {
-        _showDialog("Failed", "You full user registration failed (");
-        throw Exception('Failed to create user info');
-      }
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('userId', authUser.guidId);
+      prefs.setString('username', authUser.username);
+      prefs.setString('token', authUser.token);
+      prefs.setBool('isAdmin', authUser.isAdmin);
+
+      SharedPrefs.username = authUser.username;
+      SharedPrefs.userId = authUser.guidId;
+      SharedPrefs.token = authUser.token;
+      SharedPrefs.isAdmin = authUser.isAdmin;
+
+      return Navigator.push(
+          context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
     } else {
-      _showDialog("Failed", "You user creds registration failed (");
       throw Exception('Failed to create user');
     }
   }

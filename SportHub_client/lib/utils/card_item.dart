@@ -1,10 +1,16 @@
+import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/entities/user_info.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CardItem extends StatelessWidget {
-  const CardItem({
-    Key key,
-  }) : super(key: key);
+  final Post post;
+  final UserInfo userInfo;
+
+  const CardItem({Key key, @required this.post, @required this.userInfo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +21,35 @@ class CardItem extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage("assets/profile.jpg"),
+                  leading: CachedNetworkImage(
+                    imageUrl: userInfo.avatarUrl,
+                    imageBuilder: (context, imageProvider) => Container(
+                      width: 40.0,
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover),
+                      ),
+                    ),
+                    placeholder: (context, url) => CircularProgressIndicator(
+                      backgroundColor: Colors.red,
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                  title: Text("yan_pershay"),
-                  subtitle: Text("Newer"),
+                  title: Text(SharedPrefs.username),
+                  subtitle: Text(userInfo.sportLevel),
                 ),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/running.jpg"),
-                            fit: BoxFit.cover)),
+                    child: CachedNetworkImage(
+                      imageUrl: post.imageUrl,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
                   ),
                 ),
                 SizedBox(height: 14),
@@ -35,7 +58,7 @@ class CardItem extends StatelessWidget {
                     children: <Widget>[
                       SizedBox(width: 10),
                       Text(
-                        "My first train! I should train every day",
+                        post.text,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w500),
                       )

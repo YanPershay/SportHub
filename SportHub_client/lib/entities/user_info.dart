@@ -5,8 +5,8 @@ class UserInfo {
   String city; //
   String dateOfBirth; //
   String sportLevel; //
-  int height; //
-  int weight; //
+  double height; //
+  double weight; //
   String aboutMe; //
   String motivation; //
   String avatarUrl;

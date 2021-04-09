@@ -175,8 +175,8 @@ class RegistrationUserInfoScreenState
         city: cityController.text,
         dateOfBirth: dateOfBirthController.text,
         sportLevel: dropdownValue,
-        height: int.parse(heightController.text),
-        weight: int.parse(weightController.text),
+        height: double.parse(heightController.text),
+        weight: double.parse(weightController.text),
         aboutMe: aboutController.text,
         motivation: motivationController.text,
         avatarUrl:

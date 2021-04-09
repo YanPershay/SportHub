@@ -27,13 +27,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   }
 
   var currentPage = 0;
-  // var title = [
-  //   Text('Home'),
-  //   Text('Friends'),
-  //   Text('New'),
-  //   Text('Trains'),
-  //   Text('Profile')
-  // ];
+
   var pages = [
     FeedPage(),
     FriendsPage(),

@@ -1,3 +1,5 @@
+import 'package:SportHub_client/entities/user_info.dart';
+
 class User {
   String guidId;
   String username;
@@ -5,6 +7,7 @@ class User {
   String password;
   bool isOnline;
   bool isAdmin;
+  UserInfo userInfo;
 
   User(
       {this.guidId,
@@ -12,7 +15,8 @@ class User {
       this.email,
       this.password,
       this.isOnline,
-      this.isAdmin});
+      this.isAdmin,
+      this.userInfo});
 
   User.fromJson(Map<String, dynamic> json) {
     guidId = json['guidId'];
@@ -21,6 +25,9 @@ class User {
     password = json['password'];
     isOnline = json['isOnline'];
     isAdmin = json['isAdmin'];
+    userInfo = json['userInfo'] != null
+        ? new UserInfo.fromJson(json['userInfo'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +38,9 @@ class User {
     data['password'] = this.password;
     data['isOnline'] = this.isOnline;
     data['isAdmin'] = this.isAdmin;
+    if (this.userInfo != null) {
+      data['userInfo'] = this.userInfo.toJson();
+    }
     return data;
   }
 }

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:SportHub_client/bottom_nav_screen.dart';
-import 'package:SportHub_client/entities/auth_response.dart';
-import 'package:SportHub_client/entities/user_credentials.dart';
+import 'package:SportHub_client/entities/utilsEntities/auth_response.dart';
+import 'package:SportHub_client/entities/utilsEntities/user_credentials.dart';
 import 'package:SportHub_client/screens/registration/registration_usercredentials_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';

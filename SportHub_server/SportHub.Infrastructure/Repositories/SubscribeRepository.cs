@@ -20,12 +20,12 @@ namespace SportHub.Infrastructure.Repositories
 
         public async Task<IEnumerable<Subscribe>> GetSubscribersByUserId(Guid id)
         {
-            return await _context.Subscribes.Where(s => s.UserId.Equals(id)).ToListAsync();
+            return await _context.Subscribes.Where(s => s.UserId.Equals(id)).Include(u => u.Subscriber).ThenInclude(u => u.UserInfo).ToListAsync();
         }
 
         public async Task<IEnumerable<Subscribe>> GetMySubscribesByUserId(Guid subscriberId)
         {
-            return await _context.Subscribes.Where(s => s.SubscriberId.Equals(subscriberId)).ToListAsync();
+            return await _context.Subscribes.Where(s => s.SubscriberId.Equals(subscriberId)).Include(u => u.User).ThenInclude(u => u.UserInfo).ToListAsync();
         }
 
         public async Task<int> GetSubscribersCountByUserId(Guid id)

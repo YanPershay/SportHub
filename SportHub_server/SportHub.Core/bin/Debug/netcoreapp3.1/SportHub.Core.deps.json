@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.Extensions.Configuration.CommandLine": "5.0.0",
+          "Newtonsoft.Json": "3.5.8",
           "System.IdentityModel.Tokens.Jwt": "6.10.0"
         },
         "runtime": {
@@ -353,6 +354,14 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
+      "Newtonsoft.Json/3.5.8": {
+        "runtime": {
+          "lib/35/Newtonsoft.Json.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
+          }
+        }
+      },
       "System.Buffers/4.5.0": {},
       "System.ComponentModel.Annotations/4.5.0": {},
       "System.IdentityModel.Tokens.Jwt/6.10.0": {
@@ -646,6 +655,13 @@
       "sha512": "sha512-+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/3.5.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Xmri4q9s1NjuiBtOFkWMU9sUZdw5V7kFSf3CQQ3TlDyzWQHo94d5cHNxsSlnezGAZSPfdEG5k7bOrkzTe6rUOQ==",
+      "path": "newtonsoft.json/3.5.8",
+      "hashPath": "newtonsoft.json.3.5.8.nupkg.sha512"
     },
     "System.Buffers/4.5.0": {
       "type": "package",

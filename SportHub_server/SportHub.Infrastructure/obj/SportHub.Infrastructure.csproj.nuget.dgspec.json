@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[3.5.8, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.10.0, )"

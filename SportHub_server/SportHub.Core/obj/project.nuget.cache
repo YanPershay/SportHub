@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rb6oqmhV99OMScJ1wmzcuaLPP0OYBViCYpaieSaszOO0HI/1gk7HTtAL0aZerTG+QUg9ZsIlZQGBfX0DEAhHpg==",
+  "dgSpecHash": "Hdm+Wom/eiVIT0ATg+VKWCKOgGUdcUr6gWUFdDOtkPMmvSSxC21h7an1hNAL4mqA2acnFzNETGlbEDLCTfCh4w==",
   "success": true,
   "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\newtonsoft.json\\3.5.8\\newtonsoft.json.3.5.8.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\system.componentmodel.annotations\\4.5.0\\system.componentmodel.annotations.4.5.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.10.0\\system.identitymodel.tokens.jwt.6.10.0.nupkg.sha512",
@@ -46,5 +47,16 @@
     "C:\\Users\\Yan\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Newtonsoft.Json 3.5.8\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

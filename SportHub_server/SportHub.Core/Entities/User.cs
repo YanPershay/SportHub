@@ -15,7 +15,7 @@ namespace SportHub.Core.Entities
         public string Password { get; set; }
         public bool IsOnline { get; set; }
         public bool IsAdmin { get; set; }
-        public UserInfo UserInfo { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
         public List<Post> Posts { get; set; }
         public List<AdminPost> AdminPosts { get; set; }
         public List<Comment> Comments { get; set; }

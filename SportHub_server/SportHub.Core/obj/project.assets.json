@@ -400,6 +400,15 @@
           }
         }
       },
+      "Newtonsoft.Json/3.5.8": {
+        "type": "package",
+        "compile": {
+          "lib/35/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/35/Newtonsoft.Json.dll": {}
+        }
+      },
       "System.Buffers/4.5.0": {
         "type": "package",
         "compile": {
@@ -1079,6 +1088,26 @@
         "version.txt"
       ]
     },
+    "Newtonsoft.Json/3.5.8": {
+      "sha512": "Xmri4q9s1NjuiBtOFkWMU9sUZdw5V7kFSf3CQQ3TlDyzWQHo94d5cHNxsSlnezGAZSPfdEG5k7bOrkzTe6rUOQ==",
+      "type": "package",
+      "path": "newtonsoft.json/3.5.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/20/Newtonsoft.Json.Net20.dll",
+        "lib/20/Newtonsoft.Json.Net20.pdb",
+        "lib/20/Newtonsoft.Json.Net20.xml",
+        "lib/35/Newtonsoft.Json.dll",
+        "lib/35/Newtonsoft.Json.pdb",
+        "lib/35/Newtonsoft.Json.xml",
+        "lib/SL/Newtonsoft.Json.Silverlight.dll",
+        "lib/SL/Newtonsoft.Json.Silverlight.pdb",
+        "lib/SL/Newtonsoft.Json.Silverlight.xml",
+        "newtonsoft.json.3.5.8.nupkg.sha512",
+        "newtonsoft.json.nuspec"
+      ]
+    },
     "System.Buffers/4.5.0": {
       "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
       "type": "package",
@@ -1463,6 +1492,7 @@
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.AspNetCore.Authentication >= 2.2.0",
       "Microsoft.Extensions.Configuration.CommandLine >= 5.0.0",
+      "Newtonsoft.Json >= 3.5.8",
       "System.IdentityModel.Tokens.Jwt >= 6.10.0"
     ]
   },
@@ -1513,6 +1543,10 @@
             "target": "Package",
             "version": "[5.0.0, )"
           },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[3.5.8, )"
+          },
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[6.10.0, )"
@@ -1536,5 +1570,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Newtonsoft.Json 3.5.8\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

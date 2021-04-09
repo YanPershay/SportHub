@@ -135,6 +135,10 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[3.5.8, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.10.0, )"
@@ -320,6 +324,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             },
             "Microsoft.AspNetCore.Mvc.Versioning": {
               "target": "Package",

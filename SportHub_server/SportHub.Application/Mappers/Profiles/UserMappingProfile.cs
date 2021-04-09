@@ -9,6 +9,7 @@ namespace SportHub.Application.Mappers
     {
         public UserMappingProfile()
         {
+            CreateMap<UserInfo, UserInfoResponse>().ReverseMap();
             CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<User, CreateUserCommand>().ReverseMap();
         }

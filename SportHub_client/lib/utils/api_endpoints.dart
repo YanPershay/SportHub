@@ -11,4 +11,9 @@ class ApiEndpoints {
   static const String baseUrl = protocol + host + basePath;
   static const String userInfoGET = baseUrl + "/userinfo?guid=";
   static const String userPostsGET = baseUrl + "/post?guid=";
+
+  static const String mySubscribesGET =
+      baseUrl + "/subscribe/getmysubs?subscriberid=";
+
+  static const String subscribersGET = baseUrl + "/subscribe/getsubs?userid=";
 }

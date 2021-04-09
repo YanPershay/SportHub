@@ -1,8 +1,29 @@
-import 'package:SportHub_client/pages/friends/user.dart';
+import 'dart:convert';
+
+import 'package:SportHub_client/entities/user.dart';
+import 'package:SportHub_client/entities/utilsEntities/my_subs_helper.dart';
+import 'package:SportHub_client/entities/utilsEntities/subs_helper.dart';
+import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class SubscribersWidget extends StatefulWidget {
-  SubscribersWidget({Key key, this.title}) : super(key: key);
+  final List subscribes;
+  //final List subscribesResponse;
+
+  //List<User> subscribers;
+  //List<SubsHelper> subscribersResponse;
+
+  SubscribersWidget({
+    Key key,
+    this.title,
+    @required this.subscribes,
+    //@required this.subscribesResponse,
+    //@required this.subscribers,
+    //@required this.subscribersResponse
+  }) : super(key: key);
 
   final String title;
 
@@ -11,12 +32,9 @@ class SubscribersWidget extends StatefulWidget {
 }
 
 class SubscribersWidgetState extends State<SubscribersWidget> {
-  User user =
-      new User(0, "About me", "yan_pershay", "Newer", "assets/profile.jpg");
-
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: new AppBar(
         bottom: PreferredSize(
             child: Container(
@@ -44,14 +62,27 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
         ),
         Expanded(
             child: ListView.builder(
-          itemCount: 5,
+          itemCount: widget.subscribes.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(user.picture),
+              leading: CachedNetworkImage(
+                imageUrl: widget.subscribes[index].userInfo.avatarUrl,
+                imageBuilder: (context, imageProvider) => Container(
+                  width: 40.0,
+                  height: 40.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                  ),
+                ),
+                placeholder: (context, url) => CircularProgressIndicator(
+                  backgroundColor: Colors.red,
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-              title: Text(user.name),
-              subtitle: Text(user.level),
+              title: Text(widget.subscribes[index].username),
+              subtitle: Text(widget.subscribes[index].userInfo.sportLevel),
               trailing: RaisedButton(
                 color: Colors.black,
                 child: Text(

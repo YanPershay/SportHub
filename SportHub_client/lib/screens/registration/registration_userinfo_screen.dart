@@ -180,7 +180,7 @@ class RegistrationUserInfoScreenState
         aboutMe: aboutController.text,
         motivation: motivationController.text,
         avatarUrl:
-            "https://img.ura-inform.com/news/avatar[260737](400x285).jpeg",
+            "https://i.pinimg.com/736x/33/85/f2/3385f2e1ae928f80fda6304ce36c6165--avatar-makeup-film-avatar.jpg",
         userId: userId);
   }
 

@@ -14,6 +14,7 @@ namespace SportHub.Application.Responses
         public bool IsUpdated { get; set; }
 
         public Guid UserId { get; set; }
-        //public UserResponse User { get; set; }
+
+        public UserResponse User { get; set; }
     }
 }

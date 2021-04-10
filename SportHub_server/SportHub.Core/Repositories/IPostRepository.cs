@@ -11,5 +11,6 @@ namespace SportHub.Core.Repositories
     public interface IPostRepository : IRepository<Post>
     {
         Task<IEnumerable<Post>> GetPostsByGuidAsync(Guid id);
+        Task<IEnumerable<Post>> GetSubscribesPosts(Guid subscriberId);
     }
 }

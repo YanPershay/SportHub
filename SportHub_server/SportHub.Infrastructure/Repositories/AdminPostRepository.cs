@@ -20,7 +20,7 @@ namespace SportHub.Infrastructure.Repositories
 
         public async Task<IEnumerable<AdminPost>> GetAdminPostsByCategoryIdAsync(int id)
         {
-            return await _context.AdminPosts.Where(u => u.CategoryId.Equals(id)).ToListAsync();
+            return await _context.AdminPosts.Where(u => u.CategoryId.Equals(id)).Include(p => p.User).ToListAsync();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace SportHub.Application.Mappers.Profiles
     {
         public AdminPostMappingProfile()
         {
+            CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<AdminPost, AdminPostResponse>().ReverseMap();
             CreateMap<AdminPost, CreateAdminPostCommand>().ReverseMap();
         }

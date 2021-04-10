@@ -37,7 +37,7 @@ class CardItem extends StatelessWidget {
                     ),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                  title: Text(SharedPrefs.username),
+                  title: Text(post.user.username),
                   subtitle: Text(userInfo.sportLevel),
                 ),
                 Expanded(

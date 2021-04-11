@@ -1,5 +1,6 @@
 import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/entities/user_info.dart';
+import 'package:SportHub_client/screens/comments_screen.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -69,20 +70,27 @@ class CardItem extends StatelessWidget {
                     SizedBox(width: 10),
                     Row(
                       children: <Widget>[
-                        Icon(
-                          Icons.thumb_up,
-                          color: Colors.grey,
+                        IconButton(
+                          icon: Icon(Icons.thumb_up_alt_outlined),
+                          onPressed: () {},
                         ),
-                        SizedBox(width: 8),
-                        Text("55")
+                        Text(post.likes.length.toString())
                       ],
                     ),
                     SizedBox(width: 10),
                     Row(
                       children: <Widget>[
-                        Icon(Icons.comment),
-                        SizedBox(width: 8),
-                        Text("12")
+                        IconButton(
+                          icon: Icon(Icons.comment_rounded),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CommentsScreen(postId: post.id)));
+                          },
+                        ),
+                        Text(post.comments.length.toString())
                       ],
                     ),
                     Row(

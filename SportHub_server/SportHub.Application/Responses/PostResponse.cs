@@ -16,5 +16,8 @@ namespace SportHub.Application.Responses
         public Guid UserId { get; set; }
 
         public UserResponse User { get; set; }
+
+        public List<LikeResponse> Likes { get; set; }
+        public List<CommentResponse> Comments { get; set; }
     }
 }

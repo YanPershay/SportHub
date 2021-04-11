@@ -13,5 +13,6 @@ namespace SportHub.Application.Responses
 
         public Guid UserId { get; set; }
         public int PostId { get; set; }
+        public UserResponse User { get; set; }
     }
 }

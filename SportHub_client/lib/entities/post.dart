@@ -1,3 +1,5 @@
+import 'package:SportHub_client/entities/comment.dart';
+import 'package:SportHub_client/entities/like.dart';
 import 'package:SportHub_client/entities/user.dart';
 
 class Post {
@@ -8,6 +10,8 @@ class Post {
   bool isUpdated;
   String userId;
   User user;
+  List<Like> likes;
+  List<Comment> comments;
 
   Post(
       {this.id,
@@ -16,7 +20,9 @@ class Post {
       this.dateCreated,
       this.isUpdated,
       this.userId,
-      this.user});
+      this.user,
+      this.likes,
+      this.comments});
 
   Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -26,6 +32,18 @@ class Post {
     isUpdated = json['isUpdated'];
     userId = json['userId'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    if (json['likes'] != null) {
+      likes = new List<Like>();
+      json['likes'].forEach((v) {
+        likes.add(new Like.fromJson(v));
+      });
+    }
+    if (json['comments'] != null) {
+      comments = new List<Comment>();
+      json['comments'].forEach((v) {
+        comments.add(new Comment.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -38,6 +56,12 @@ class Post {
     data['userId'] = this.userId;
     if (this.user != null) {
       data['user'] = this.user.toJson();
+    }
+    if (this.likes != null) {
+      data['likes'] = this.likes.map((v) => v.toJson()).toList();
+    }
+    if (this.comments != null) {
+      data['comments'] = this.comments.map((v) => v.toJson()).toList();
     }
     return data;
   }

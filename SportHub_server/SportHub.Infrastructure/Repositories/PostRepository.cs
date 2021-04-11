@@ -20,7 +20,7 @@ namespace SportHub.Infrastructure.Repositories
 
         public async Task<IEnumerable<Post>> GetPostsByGuidAsync(Guid id)
         {
-            return await _context.Posts.Where(u => u.UserId.Equals(id)).Include(u => u.User).ToListAsync();
+            return await _context.Posts.Where(u => u.UserId.Equals(id)).Include(u => u.User).Include(p=>p.Likes).Include(p => p.Comments).ToListAsync();
         }
 
         public async Task<IEnumerable<Post>> GetSubscribesPosts(Guid subscriberId)
@@ -29,7 +29,7 @@ namespace SportHub.Infrastructure.Repositories
             var subscribes = await _context.Subscribes.Where(s => s.SubscriberId.Equals(subscriberId)).ToListAsync();
             foreach (var user in subscribes)
             {
-                var res = await _context.Posts.Include(u => u.User).ThenInclude(u => u.UserInfo).FirstOrDefaultAsync(u => u.UserId.Equals(user.UserId));
+                var res = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).FirstOrDefaultAsync(u => u.UserId.Equals(user.UserId));
                 posts.Add(res);
             }
 

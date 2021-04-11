@@ -50,6 +50,7 @@ class UserProfilePageState extends State<UserProfilePage> {
         future: Future.wait([getUserInfo(), getUserPosts()]),
         builder: (context, snapshot) {
           return Scaffold(
+              resizeToAvoidBottomInset: false,
               appBar: AppBar(
                   backgroundColor: Colors.black,
                   title: Text(
@@ -264,7 +265,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                             ),
                           ),
                           Container(
-                            height: 250,
+                            height: 279,
                             child: ListView.builder(
                                 itemCount: userPosts.length,
                                 itemBuilder: (context, index) => CardItem(

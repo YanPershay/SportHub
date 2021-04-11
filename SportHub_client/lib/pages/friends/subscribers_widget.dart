@@ -11,18 +11,11 @@ import 'package:flutter/material.dart';
 
 class SubscribersWidget extends StatefulWidget {
   final List subscribes;
-  //final List subscribesResponse;
-
-  //List<User> subscribers;
-  //List<SubsHelper> subscribersResponse;
 
   SubscribersWidget({
     Key key,
     this.title,
     @required this.subscribes,
-    //@required this.subscribesResponse,
-    //@required this.subscribers,
-    //@required this.subscribersResponse
   }) : super(key: key);
 
   final String title;

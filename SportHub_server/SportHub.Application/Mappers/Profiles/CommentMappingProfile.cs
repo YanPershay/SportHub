@@ -9,6 +9,9 @@ namespace SportHub.Application.Mappers.Profiles
     {
         public CommentMappingProfile()
         {
+            CreateMap<User, UserResponse>().ReverseMap();
+            CreateMap<UserInfo, UserInfoResponse>().ReverseMap();
+
             CreateMap<Comment, CommentResponse>().ReverseMap();
             CreateMap<Comment, CreateCommentCommand>().ReverseMap();
         }

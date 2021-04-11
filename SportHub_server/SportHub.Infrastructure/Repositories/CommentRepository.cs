@@ -20,7 +20,7 @@ namespace SportHub.Infrastructure.Repositories
 
         public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int id)
         {
-            return await _context.Comments.Where(c => c.PostId == id).ToListAsync();
+            return await _context.Comments.Where(c => c.PostId == id).Include(c => c.User).ThenInclude(u => u.UserInfo).ToListAsync();
         }
     }
 }

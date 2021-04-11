@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AdminPostScreen extends StatefulWidget {
-  AdminPost adminPost;
+  final AdminPost adminPost;
 
   AdminPostScreen({Key, key, @required this.adminPost});
 
@@ -18,7 +18,8 @@ class AdminPostScreenState extends State<AdminPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
       children: <Widget>[
         SizedBox(
           height: 24,
@@ -61,29 +62,19 @@ class AdminPostScreenState extends State<AdminPostScreen> {
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  "Topic of this article is " + widget.adminPost.title,
-                  style: TextStyle(fontSize: 30),
-                ),
-              ),
             ],
           ),
         ),
-        new Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: new Text(
-                  widget.adminPost.text,
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            )),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new Text(
+            widget.adminPost.text,
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+        //),
+        // )//),
       ],
-    ));
+    )));
   }
 }

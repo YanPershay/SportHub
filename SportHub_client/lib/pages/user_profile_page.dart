@@ -1,5 +1,6 @@
 import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/entities/user_info.dart';
+import 'package:SportHub_client/screens/saved_posts_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/card_item.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
@@ -166,24 +167,52 @@ class UserProfilePageState extends State<UserProfilePage> {
                           width: 0.2,
                           height: 22,
                         ),
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 18, right: 18, top: 8, bottom: 5),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(33)),
-                              gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xff66D0EB5),
-                                    Color(0xff4059F1)
-                                  ],
-                                  begin: Alignment.bottomRight,
-                                  end: Alignment.centerLeft)),
-                          child: Text('follow',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                        )
+                        InkWell(
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 18, right: 18, top: 8, bottom: 5),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33)),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xff66D0EB5),
+                                      Color(0xff4059F1)
+                                    ],
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.centerLeft)),
+                            child: Text('Edit',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                        InkWell(
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 18, right: 18, top: 8, bottom: 5),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33)),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xff66D0EB5),
+                                      Color(0xff4059F1)
+                                    ],
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.centerLeft)),
+                            child: Text('Saved',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SavedPostsScreen()));
+                          },
+                        ),
                       ],
                     ),
                   ),

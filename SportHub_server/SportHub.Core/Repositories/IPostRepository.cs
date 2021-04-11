@@ -12,5 +12,6 @@ namespace SportHub.Core.Repositories
     {
         Task<IEnumerable<Post>> GetPostsByGuidAsync(Guid id);
         Task<IEnumerable<Post>> GetSubscribesPosts(Guid subscriberId);
+        Task<IEnumerable<Post>> GetSavedPosts(Guid userId);
     }
 }

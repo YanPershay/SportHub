@@ -67,7 +67,7 @@ class CardItem extends StatelessWidget {
                 SizedBox(height: 14),
                 Row(
                   children: <Widget>[
-                    SizedBox(width: 10),
+                    SizedBox(width: 5),
                     Row(
                       children: <Widget>[
                         IconButton(
@@ -77,7 +77,6 @@ class CardItem extends StatelessWidget {
                         Text(post.likes.length.toString())
                       ],
                     ),
-                    SizedBox(width: 10),
                     Row(
                       children: <Widget>[
                         IconButton(

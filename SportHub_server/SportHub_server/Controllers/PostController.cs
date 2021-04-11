@@ -39,6 +39,15 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("savedPosts")]
+        [ProducesResponseType(StatusCodes.Status200OK)]//потом исключить чтобы не возвращался null
+        public async Task<ActionResult<IEnumerable<PostResponse>>> GetSavedsPosts(Guid userId)
+        {
+            var query = new GetSavedPostsQuery(userId);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PostResponse>> CreatePost([FromBody] CreatePostCommand command)

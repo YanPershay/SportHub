@@ -57,6 +57,14 @@ class CommentItem extends StatelessWidget {
                           comment.text,
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
+                      ),
+                      Container(
+                        width: 300,
+                        child: Text(
+                          DateFormat('dd.MM.yyyy kk:mm')
+                              .format(DateTime.parse(comment.dateCreated)),
+                          style: TextStyle(color: Colors.grey, fontSize: 15),
+                        ),
                       )
                     ],
                   ),

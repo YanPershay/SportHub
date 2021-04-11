@@ -35,5 +35,18 @@ namespace SportHub.Infrastructure.Repositories
 
             return posts;
         }
+
+        public async Task<IEnumerable<Post>> GetSavedPosts(Guid userId)
+        {
+            var posts = new List<Post>();
+            var savedPosts = await _context.SavedPosts.Where(s => s.UserId.Equals(userId)).ToListAsync();
+            foreach (var savedPost in savedPosts)
+            {
+                var res = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).FirstOrDefaultAsync(u => u.Id.Equals(savedPost.PostId));
+                posts.Add(res);
+            }
+
+            return posts;
+        }
     }
 }

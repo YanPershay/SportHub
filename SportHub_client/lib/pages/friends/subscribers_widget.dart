@@ -9,6 +9,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../user_profile_page.dart';
+
 class SubscribersWidget extends StatefulWidget {
   final List subscribes;
 
@@ -44,15 +46,6 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
         ),
       ),
       body: Column(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-          ),
-          child: TextFormField(
-            decoration: InputDecoration(hintText: "Search..."),
-          ),
-        ),
         Expanded(
             child: ListView.builder(
           itemCount: widget.subscribes.length,
@@ -76,6 +69,14 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
               ),
               title: Text(widget.subscribes[index].username),
               subtitle: Text(widget.subscribes[index].userInfo.sportLevel),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserProfilePage(
+                              userId: widget.subscribes[index].guidId,
+                            )));
+              },
               trailing: RaisedButton(
                 color: Colors.black,
                 child: Text(

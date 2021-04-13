@@ -21,6 +21,23 @@ namespace SportHub.Infrastructure.Repositories
         public async Task<User> GetUserByGuidAsync(Guid id)
         {
             return await _context.Users.Include(nameof(UserInfo)).FirstOrDefaultAsync(u => u.GuidId.Equals(id));
-        } 
+        }
+
+        public async Task<IEnumerable<User>> SearchUserAsync(string searchString)
+        {
+            var split = searchString.Split();
+
+            var resultUsers = new List<User>();
+
+            foreach(var str in split)
+            {
+                var result = await _context.Users.Include(u => u.UserInfo)
+                .Where(u => u.Username.Contains(str) || u.UserInfo.FirstName.Contains(str) || u.UserInfo.LastName.Contains(str)).ToListAsync();
+
+                resultUsers.AddRange(result);
+            }
+
+            return resultUsers.Distinct();
+        }
     }
 }

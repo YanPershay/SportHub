@@ -46,6 +46,15 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("searchUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<UserResponse>>> SearchUser(string searchString)
+        {
+            var query = new SearchUserQuery(searchString);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<UserResponse>> CreateUser([FromBody] CreateUserCommand command)

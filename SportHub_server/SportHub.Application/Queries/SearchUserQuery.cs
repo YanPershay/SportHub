@@ -1,0 +1,19 @@
+﻿using MediatR;
+using SportHub.Application.Responses;
+using SportHub.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SportHub.Application.Queries
+{
+    public class SearchUserQuery : IRequest<IEnumerable<UserResponse>>
+    {
+        public string SearchString { get; set; }
+
+        public SearchUserQuery(string searchString)
+        {
+            SearchString = searchString;
+        }
+    }
+}

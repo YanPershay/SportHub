@@ -38,100 +38,105 @@ class TrainsPageState extends State<TrainsPage> {
     return FutureBuilder(
         future: Future.wait([getAdminPosts()]),
         builder: (context, snapshot) {
-          return SingleChildScrollView(
-              child: Column(children: [
-            for (var adminPost in adminPosts)
-              GestureDetector(
-                  onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AdminPostScreen(
-                                      adminPost: adminPost,
-                                    )))
-                      },
-                  child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Stack(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: adminPost.imageUrl,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                          ),
-                          Positioned(
-                            bottom: 16,
-                            right: 16,
-                            left: 16,
-                            child: Text(
-                              adminPost.title,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 24),
-                            ),
-                          )
-                        ],
+          if (!snapshot.hasData) {
+            return Text("Wait");
+          } else {
+            return SingleChildScrollView(
+                child: Column(children: [
+              for (var adminPost in adminPosts)
+                GestureDetector(
+                    onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminPostScreen(
+                                        adminPost: adminPost,
+                                      )))
+                        },
+                    child: Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
                       ),
-                      Padding(
-                          padding: EdgeInsets.all(16).copyWith(bottom: 0),
-                          child: Column(
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                    child: RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                    children: [
-                                      TextSpan(
-                                          text: 'Duration: ' +
-                                              adminPost.duration.toString() +
-                                              '/5'),
-                                    ],
-                                  ),
-                                )),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        Stack(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: adminPost.imageUrl,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                            Positioned(
+                              bottom: 16,
+                              right: 16,
+                              left: 16,
+                              child: Text(
+                                adminPost.title,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 24),
                               ),
-                            ],
-                          )),
-                      Padding(
-                          padding: EdgeInsets.all(18).copyWith(bottom: 10),
-                          child: Column(
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                    child: RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                    children: [
-                                      TextSpan(
-                                          text: 'Complexity: ' +
-                                              adminPost.complexity.toString() +
-                                              '/5'),
-                                    ],
-                                  ),
-                                )),
-                              ),
-                            ],
-                          )),
-                    ]),
-                  ))
-          ]));
+                            )
+                          ],
+                        ),
+                        Padding(
+                            padding: EdgeInsets.all(16).copyWith(bottom: 0),
+                            child: Column(
+                              children: <Widget>[
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                      child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                      children: [
+                                        TextSpan(
+                                            text: 'Duration: ' +
+                                                adminPost.duration.toString() +
+                                                '/5'),
+                                      ],
+                                    ),
+                                  )),
+                                ),
+                              ],
+                            )),
+                        Padding(
+                            padding: EdgeInsets.all(18).copyWith(bottom: 10),
+                            child: Column(
+                              children: <Widget>[
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                      child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                      children: [
+                                        TextSpan(
+                                            text: 'Complexity: ' +
+                                                adminPost.complexity
+                                                    .toString() +
+                                                '/5'),
+                                      ],
+                                    ),
+                                  )),
+                                ),
+                              ],
+                            )),
+                      ]),
+                    ))
+            ]));
+          }
         });
   }
 }

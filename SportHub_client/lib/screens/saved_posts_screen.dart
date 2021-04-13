@@ -29,26 +29,23 @@ class _SavedPostsScreenState extends State<SavedPostsScreen> {
     return FutureBuilder(
         future: Future.wait([getFeedPosts()]),
         builder: (context, snapshot) {
-          return MaterialApp(
-              title: 'Feed app',
-              theme: ThemeData(fontFamily: "Open Sans"),
-              debugShowCheckedModeBanner: false,
-              home: DefaultTabController(
-                length: 5,
-                child: Scaffold(
-                    appBar: AppBar(
-                        backgroundColor: Colors.white,
-                        title: Text(
-                          "Saved posts",
-                          style: TextStyle(color: Colors.black),
-                        )),
-                    body: ListView.builder(
-                        itemCount: savedPosts.length,
-                        itemBuilder: (context, index) => CardItem(
-                              post: savedPosts[index],
-                              userInfo: savedPosts[index].user.userInfo,
-                            ))),
-              ));
+          if (!snapshot.hasData) {
+            return Text("Wait");
+          } else {
+            return Scaffold(
+                appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    title: Text(
+                      "Saved posts",
+                      style: TextStyle(color: Colors.black),
+                    )),
+                body: ListView.builder(
+                    itemCount: savedPosts.length,
+                    itemBuilder: (context, index) => CardItem(
+                          post: savedPosts[index],
+                          userInfo: savedPosts[index].user.userInfo,
+                        )));
+          }
         });
   }
 }

@@ -1,6 +1,6 @@
 class ApiEndpoints {
   static const String protocol = "https://";
-  static const String host = "618c15ec59e3.ngrok.io";
+  static const String host = "f6141d125776.ngrok.io";
   static const String basePath = "/api/v1";
 
   static const String userPOST = basePath + "/user";
@@ -22,4 +22,7 @@ class ApiEndpoints {
   static const String getAdminPostsGET = baseUrl + "/adminpost?id=3";
 
   static const String getCommentsGET = baseUrl + "/comment?id=";
+
+  static const String searchUsersGET =
+      baseUrl + "/user/searchUser?searchString=";
 }

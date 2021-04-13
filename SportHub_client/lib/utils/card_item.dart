@@ -1,5 +1,6 @@
 import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/entities/user_info.dart';
+import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/screens/comments_screen.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -40,6 +41,14 @@ class CardItem extends StatelessWidget {
                   ),
                   title: Text(post.user.username),
                   subtitle: Text(userInfo.sportLevel),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserProfilePage(
+                                  userId: post.userId,
+                                )));
+                  },
                 ),
                 Expanded(
                   child: Container(

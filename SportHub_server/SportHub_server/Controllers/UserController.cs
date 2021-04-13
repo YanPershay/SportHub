@@ -36,7 +36,7 @@ namespace SportHub.API.Controllers
             return Ok(response);
         }
 
-        [JwtAuthorize]
+        //[JwtAuthorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<UserResponse>> GetUserByGuid(Guid guid)

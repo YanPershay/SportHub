@@ -10,6 +10,6 @@ SELECT * FROM Likes
 SELECT * FROM Subscribes
 SELECT * FROM SavedPosts
 
---insert into Subscribes values ('3FA85F64-5717-4562-B3FC-2C963F66AFA6', '07FDECA4-4358-4B4E-AC76-D1CA74138F96')  --подписаться
+--insert into Subscribes values ('CD65F55C-66A1-4E15-90A1-85B239F6527B', '07FDECA4-4358-4B4E-AC76-D1CA74138F96')  --подписаться
 
 

@@ -37,5 +37,18 @@ namespace SportHub.Infrastructure.Repositories
         {
             return await _context.Subscribes.Where(l => l.SubscriberId == subscriberId).CountAsync();
         }
+
+        public async Task<SubscriptionsCount> GetSubscriptionsCountByUserId(Guid userId)
+        {
+            SubscriptionsCount subscriptionsCount = new SubscriptionsCount();
+            subscriptionsCount.MySubscribesCount = await _context.Subscribes.Where(l => l.SubscriberId == userId).CountAsync();
+            subscriptionsCount.SubscribersCount = await _context.Subscribes.Where(l => l.UserId == userId).CountAsync();
+            return subscriptionsCount;
+        }
+
+        public async Task<bool> IsUserSubscribed(Guid subscriberId, Guid userId)
+        {
+            return await _context.Subscribes.AnyAsync(u => u.UserId.Equals(userId) && u.SubscriberId.Equals(subscriberId));
+        }
     }
 }

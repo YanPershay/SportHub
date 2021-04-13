@@ -38,6 +38,7 @@ namespace SportHub_server
 
             services.AddControllers().AddNewtonsoftJson();
 
+
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddApiVersioning();

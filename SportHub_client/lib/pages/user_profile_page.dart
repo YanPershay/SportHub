@@ -1,4 +1,6 @@
 import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/entities/subscriptions.dart';
+import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/entities/user_info.dart';
 import 'package:SportHub_client/screens/saved_posts_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
@@ -19,13 +21,26 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class UserProfilePageState extends State<UserProfilePage> {
-  UserInfo userInfo;
+  User user;
   List<Post> userPosts;
+  bool isSubscribed;
+  Subscriptions subscriptions;
+  //String username = "";
 
-  Future<void> getUserInfo() async {
+  Future<void> getUser() async {
     try {
-      var response = await Dio().get(ApiEndpoints.userInfoGET + widget.userId);
-      userInfo = UserInfo.fromJson(response.data);
+      var response = await Dio().get(ApiEndpoints.userGET + widget.userId);
+      user = User.fromJson(response.data);
+      //username = user.username;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getSubsCount() async {
+    try {
+      var response = await Dio().get(ApiEndpoints.subsCountGET + widget.userId);
+      subscriptions = Subscriptions.fromJson(response.data);
     } catch (e) {
       print(e);
     }
@@ -35,6 +50,15 @@ class UserProfilePageState extends State<UserProfilePage> {
     try {
       var response = await Dio().get(ApiEndpoints.userPostsGET + widget.userId);
       userPosts = (response.data as List).map((x) => Post.fromJson(x)).toList();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> isUserSubscribed() async {
+    try {
+      var response = await Dio().get(ApiEndpoints.isSubscribed + widget.userId);
+      isSubscribed = response.data;
     } catch (e) {
       print(e);
     }
@@ -86,21 +110,49 @@ class UserProfilePageState extends State<UserProfilePage> {
         ],
       );
     } else {
-      return InkWell(
-        child: Container(
-          padding: EdgeInsets.only(left: 18, right: 18, top: 8, bottom: 5),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(33)),
-              gradient: LinearGradient(
-                  colors: [Color(0xff66D0EB5), Color(0xff4059F1)],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.centerLeft)),
-          child: Text('Subscribe',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        ),
-        onTap: () {},
-      );
+      return FutureBuilder(
+          future: Future.wait([isUserSubscribed()]),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Text("Wait");
+            } else {
+              if (isSubscribed) {
+                return InkWell(
+                  child: Container(
+                    padding:
+                        EdgeInsets.only(left: 18, right: 18, top: 8, bottom: 5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(33)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xff66D0EB5), Color(0xff4059F1)],
+                            begin: Alignment.bottomRight,
+                            end: Alignment.centerLeft)),
+                    child: Text('Unsubscribe',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                  onTap: () {},
+                );
+              } else {
+                return InkWell(
+                  child: Container(
+                    padding:
+                        EdgeInsets.only(left: 18, right: 18, top: 8, bottom: 5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(33)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xff66D0EB5), Color(0xff4059F1)],
+                            begin: Alignment.bottomRight,
+                            end: Alignment.centerLeft)),
+                    child: Text('Subscribe',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                  onTap: () {},
+                );
+              }
+            }
+          });
     }
   }
 
@@ -108,7 +160,7 @@ class UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.wait([getUserInfo(), getUserPosts()]),
+        future: Future.wait([getUser(), getUserPosts(), getSubsCount()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Text("Wait");
@@ -118,7 +170,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                 appBar: AppBar(
                     backgroundColor: Colors.black,
                     title: Text(
-                      SharedPrefs.username,
+                      user.username,
                       style: TextStyle(color: Colors.white),
                     )),
                 backgroundColor: Colors.black,
@@ -132,7 +184,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 28, top: 7),
                           child: CachedNetworkImage(
-                            imageUrl: userInfo.avatarUrl,
+                            imageUrl: user.userInfo.avatarUrl,
                             imageBuilder: (context, imageProvider) => Container(
                               width: 80.0,
                               height: 80.0,
@@ -156,7 +208,9 @@ class UserProfilePageState extends State<UserProfilePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                userInfo.firstName + userInfo.lastName,
+                                user.userInfo.firstName +
+                                    " " +
+                                    user.userInfo.lastName,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 23,
@@ -175,9 +229,9 @@ class UserProfilePageState extends State<UserProfilePage> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(
-                                          userInfo.country +
+                                          user.userInfo.country +
                                               ', ' +
-                                              userInfo.city,
+                                              user.userInfo.city,
                                           style: TextStyle(
                                               color: Colors.white,
                                               wordSpacing: 4)),
@@ -199,7 +253,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                           Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text('17k',
+                                Text(subscriptions.subscribersCount.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -217,7 +271,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                           Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text('387',
+                                Text(subscriptions.mySubscribesCount.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -244,7 +298,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                         children: [
                           Container(
                             child: Text(
-                              'Level: ' + userInfo.sportLevel,
+                              'Level: ' + user.userInfo.sportLevel,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
@@ -253,7 +307,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
                               child: Text(
-                                "About: " + userInfo.aboutMe,
+                                "About: " + user.userInfo.aboutMe,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
@@ -263,7 +317,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
                               child: Text(
-                                "Motivation: " + userInfo.motivation,
+                                "Motivation: " + user.userInfo.motivation,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
@@ -274,9 +328,9 @@ class UserProfilePageState extends State<UserProfilePage> {
                             child: Container(
                               child: Text(
                                 'Height: ' +
-                                    userInfo.height.toString() +
+                                    user.userInfo.height.toString() +
                                     ', Weight: ' +
-                                    userInfo.weight.toString(),
+                                    user.userInfo.weight.toString(),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
@@ -286,7 +340,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
                               child: Text(
-                                'Birthday: ' + userInfo.dateOfBirth,
+                                'Birthday: ' + user.userInfo.dateOfBirth,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
@@ -320,7 +374,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                   itemCount: userPosts.length,
                                   itemBuilder: (context, index) => CardItem(
                                         post: userPosts[index],
-                                        userInfo: userInfo,
+                                        userInfo: user.userInfo,
                                       )),
                             )
                           ],

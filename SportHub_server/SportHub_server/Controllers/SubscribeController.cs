@@ -22,23 +22,41 @@ namespace SportHub.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("getmysubscount")]
+        [HttpGet("isSubscribed")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<int>> GetMySubscribesCountByUserId(Guid subscriberId)
+        public async Task<ActionResult<bool>> IsUserSubscribed(Guid subscriberId, Guid userId)
         {
-            var query = new GetMySubscribesCountByUserIdQuery(subscriberId);
+            var query = new IsUserSubscribedQuery(subscriberId, userId);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
 
-        [HttpGet("getsubscount")]
+        //[HttpGet("getmysubscount")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //public async Task<ActionResult<int>> GetMySubscribesCountByUserId(Guid subscriberId)
+        //{
+        //    var query = new GetMySubscribesCountByUserIdQuery(subscriberId);
+        //    var result = await _mediator.Send(query);
+        //    return Ok(result);
+        //}
+
+        [HttpGet("subsCount")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<int>> GetSubscribersCountByUserId(Guid userId)
+        public async Task<ActionResult<SubscriptionsCountResponse>> GetSubscriptionsCountByUserId(Guid userId)
         {
-            var query = new GetSubscribersCountByUserIdQuery(userId);
+            var query = new GetSubscriptionsCountByUserIdQuery(userId);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+
+        //[HttpGet("getsubscount")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //public async Task<ActionResult<int>> GetSubscribersCountByUserId(Guid userId)
+        //{
+        //    var query = new GetSubscribersCountByUserIdQuery(userId);
+        //    var result = await _mediator.Send(query);
+        //    return Ok(result);
+        //}
 
         [HttpGet("getmysubs")]
         [ProducesResponseType(StatusCodes.Status200OK)]

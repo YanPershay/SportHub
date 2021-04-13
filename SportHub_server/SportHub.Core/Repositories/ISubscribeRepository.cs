@@ -11,9 +11,10 @@ namespace SportHub.Core.Repositories
     {
         Task<IEnumerable<Subscribe>> GetMySubscribesByUserId(Guid subscriberId);
         Task<IEnumerable<Subscribe>> GetSubscribersByUserId(Guid id);
-
+        Task<SubscriptionsCount> GetSubscriptionsCountByUserId(Guid userId);
         Task<int> GetSubscribersCountByUserId(Guid id);
         Task<int> GetMySubscribesCountByUserId(Guid subscriberId);
+        Task<bool> IsUserSubscribed(Guid userId, Guid subscriberId);
 
     }
 }

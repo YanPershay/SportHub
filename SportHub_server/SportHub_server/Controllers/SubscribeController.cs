@@ -49,6 +49,15 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("subObj")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<SubscribeObjectResponse>> GetSubscribeObject(Guid subscriberId, Guid userId)
+        {
+            var query = new GetSubscribeObjectQuery(subscriberId, userId);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         //[HttpGet("getsubscount")]
         //[ProducesResponseType(StatusCodes.Status200OK)]
         //public async Task<ActionResult<int>> GetSubscribersCountByUserId(Guid userId)
@@ -79,6 +88,14 @@ namespace SportHub.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<SubscribeResponse>> SubscribeToUser([FromBody] SubscribeToUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<int>> Unsubscribe([FromBody] UnsubscribeCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

@@ -17,6 +17,7 @@ namespace SportHub.Application.Mappers.Profiles
 
             CreateMap<Subscribe, SubscribeResponse>().ReverseMap();
             CreateMap<Subscribe, SubscribeToUserCommand>().ReverseMap();
+            CreateMap<Subscribe, UnsubscribeCommand>().ReverseMap();
         }
     }
 }

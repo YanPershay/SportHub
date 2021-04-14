@@ -75,6 +75,19 @@ class UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
+  Future<void> unsubscribeUser() async {
+    try {
+      var response =
+          await Dio().get(ApiEndpoints.getSubscribeObjGET + widget.userId);
+      if (response.statusCode == 200) {
+        var deleteResponse = await Dio()
+            .delete(ApiEndpoints.unsubscribeDELETE, data: response.data);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -142,7 +155,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    unsubscribeUser();
+                    setState(() {
+                      userButtons();
+                    });
+                  },
                 );
               } else {
                 return InkWell(

@@ -50,5 +50,10 @@ namespace SportHub.Infrastructure.Repositories
         {
             return await _context.Subscribes.AnyAsync(u => u.UserId.Equals(userId) && u.SubscriberId.Equals(subscriberId));
         }
+
+        public async Task<Subscribe> GetSubscribeObject(Guid subscriberId, Guid userId)
+        {
+            return await _context.Subscribes.FirstOrDefaultAsync(u => u.UserId.Equals(userId) && u.SubscriberId.Equals(subscriberId));
+        }
     }
 }

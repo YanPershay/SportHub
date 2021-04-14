@@ -25,7 +25,7 @@ class CardItem extends StatefulWidget {
 class _CardItemState extends State<CardItem> {
   //bool isLikePressed = false;
   int likesCount;
-  List<SavedPost> savedPosts;
+  List<SavedPost> savedPosts = new List<SavedPost>();
   List<Like> likes = new List<Like>();
 
   @override
@@ -50,6 +50,7 @@ class _CardItemState extends State<CardItem> {
       var response = await Dio().post(ApiEndpoints.savePostPOST,
           data: new SavedPost(
               postId: widget.post.id, userId: SharedPrefs.userId));
+      savedPosts.add(SavedPost.fromJson(response.data));
     } catch (e) {
       print(e);
     }
@@ -67,6 +68,7 @@ class _CardItemState extends State<CardItem> {
   }
 
   Like likeToDelete;
+  bool isLikePressed = false;
   Future<void> deleteLike() async {
     for (var like in likes) {
       if (like.userId == SharedPrefs.userId && like.postId == widget.post.id) {
@@ -76,27 +78,35 @@ class _CardItemState extends State<CardItem> {
     try {
       var response =
           await Dio().delete(ApiEndpoints.deleteLikeDELETE, data: likeToDelete);
+      likes.clear();
+      isLikePressed = false;
     } catch (e) {
       print(e);
     }
   }
 
-  bool isLikePressed = false;
+  bool isSavedPressed = false;
+  SavedPost savedPost;
+  Future<void> deleteSavedPost() async {
+    for (var post in savedPosts) {
+      if (post.postId == widget.post.id) {
+        savedPost = post;
+      }
+    }
+    try {
+      var response = await Dio()
+          .delete(ApiEndpoints.deleteSavedPostDELETE, data: savedPost);
+      savedPosts.clear();
+      isSavedPressed = false;
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Widget likeIcon() {
     for (var like in likes) {
       if (like.userId == SharedPrefs.userId) {
         isLikePressed = true;
-        //likesCount = widget.post.likes.length;
-        // return IconButton(
-        //   icon: Icon(Icons.thumb_up_alt_outlined, color: Colors.red),
-        //   onPressed: () {
-        //     deleteLike();
-        //     setState(() {
-        //       isLikePressed = false;
-        //       likesCount -= 1;
-        //     });
-        //   },
-        // );
       }
     }
     return IconButton(
@@ -107,34 +117,24 @@ class _CardItemState extends State<CardItem> {
         setState(() {
           isLikePressed ? isLikePressed = false : isLikePressed = true;
           isLikePressed ? likesCount += 1 : likesCount -= 1;
-          likes.clear();
         });
       },
     );
   }
 
-  bool isSavedPressed = false;
   Widget savedPostIcon() {
     for (var savedPost in savedPosts) {
       if (savedPost.postId == widget.post.id) {
-        return IconButton(
-          icon: Icon(Icons.bookmark),
-          onPressed: () {
-            setState(() {
-              //likesCount -= 1;
-            });
-          },
-        );
+        isSavedPressed = true;
       }
     }
     return IconButton(
-      icon: ((isSavedPressed)
-          ? Icon(Icons.bookmark)
-          : Icon(Icons.bookmark_border_outlined)),
+      icon: Icon(
+          (isSavedPressed) ? Icons.bookmark : Icons.bookmark_border_outlined),
       onPressed: () {
-        savePost();
+        isSavedPressed ? deleteSavedPost() : savePost();
         setState(() {
-          isSavedPressed = true;
+          isSavedPressed ? isSavedPressed = false : isSavedPressed = true;
         });
       },
     );

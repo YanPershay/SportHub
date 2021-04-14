@@ -36,5 +36,13 @@ namespace SportHub.API.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<int>> DeleteSavedPost([FromBody] DeleteSavedPostCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok();
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace SportHub.Core.Repositories
         Task<int> GetSubscribersCountByUserId(Guid id);
         Task<int> GetMySubscribesCountByUserId(Guid subscriberId);
         Task<bool> IsUserSubscribed(Guid userId, Guid subscriberId);
+        Task<Subscribe> GetSubscribeObject(Guid userId, Guid subscriberId);
 
     }
 }

@@ -47,4 +47,10 @@ class ApiEndpoints {
   static const String savePostPOST = baseUrl + "/savedPost";
 
   static const String deleteLikeDELETE = baseUrl + "/like";
+  static const String deleteSavedPostDELETE = baseUrl + "/savedPost";
+  static const String unsubscribeDELETE = baseUrl + "/subscribe";
+  static String getSubscribeObjGET = baseUrl +
+      "/subscribe/subObj?subscriberid=" +
+      SharedPrefs.userId +
+      "&userid=";
 }

@@ -14,6 +14,7 @@ namespace SportHub.Application.Mappers.Profiles
         {
             CreateMap<SavedPost, SavedPostResponse>().ReverseMap();
             CreateMap<SavedPost, SavePostCommand>().ReverseMap();
+            CreateMap<SavedPost, DeleteSavedPostCommand>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,5 @@
 import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/entities/subscribe.dart';
 import 'package:SportHub_client/entities/subscriptions.dart';
 import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/entities/user_info.dart';
@@ -59,6 +60,16 @@ class UserProfilePageState extends State<UserProfilePage> {
     try {
       var response = await Dio().get(ApiEndpoints.isSubscribed + widget.userId);
       isSubscribed = response.data;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> subscribeToUser() async {
+    try {
+      var response = await Dio().post(ApiEndpoints.subscribeToUserPOST,
+          data: new Subscribe(
+              userId: widget.userId, subscriberId: SharedPrefs.userId));
     } catch (e) {
       print(e);
     }
@@ -148,7 +159,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    subscribeToUser();
+                    setState(() {
+                      userButtons();
+                    });
+                  },
                 );
               }
             }

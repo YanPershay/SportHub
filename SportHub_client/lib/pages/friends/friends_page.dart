@@ -167,7 +167,7 @@ class FriendsPageState extends State<FriendsPage> {
                             subscribes: subscribers,
                           ),
                           SubscribersWidget(
-                            title: "Subscribes",
+                            title: "My subscribes",
                             subscribes: mySubscribes,
                           ),
                         ],

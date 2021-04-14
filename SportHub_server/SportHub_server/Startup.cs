@@ -63,6 +63,7 @@ namespace SportHub_server
             services.AddMediatR(typeof(AddLikeHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(SubscribeToUserHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(SavePostHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(DeleteLikeHandler).GetTypeInfo().Assembly);
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

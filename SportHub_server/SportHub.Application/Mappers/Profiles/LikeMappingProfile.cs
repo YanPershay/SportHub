@@ -12,8 +12,11 @@ namespace SportHub.Application.Mappers.Profiles
     {
         public LikeMappingProfile()
         {
+            CreateMap<Post, PostResponse>().ReverseMap();
+
             CreateMap<Like, LikeResponse>().ReverseMap();
             CreateMap<Like, AddLikeCommand>().ReverseMap();
+            CreateMap<Like, DeleteLikeCommand>().ReverseMap();
         }
     }
 }

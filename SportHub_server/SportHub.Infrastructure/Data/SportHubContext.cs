@@ -74,6 +74,29 @@ namespace SportHub.Infrastructure.Data
             .OnDelete(DeleteBehavior.Restrict)
             .IsRequired();
 
+            modelBuilder.Entity<Like>()
+          .HasOne(p => p.User)
+          .WithMany(c => c.Likes)
+          .HasForeignKey(p => p.UserId);
+
+            //TODO: Настроить уникальность лайков путем миграции БД
+
+            //modelBuilder.Entity<Like>()
+            //.HasOne(a => a.User)
+            //.WithMany(a => a.Likes)
+            //.HasPrincipalKey(x => x.GuidId)
+            //.HasForeignKey(c => c.UserId).IsRequired();
+
+            //modelBuilder.Entity<Like>()
+            //.HasOne(a => a.Post)
+            //.WithMany(a => a.Likes)
+            //.OnDelete(DeleteBehavior.Restrict)
+            //.HasForeignKey(c => c.PostId).IsRequired();
+
+            //modelBuilder.Entity<Like>()
+            //.HasIndex(p => new { p.UserId, p.PostId })
+            //.IsUnique(true);
+
             modelBuilder.Entity<User>()
             .HasMany(a => a.Likes)
             .WithOne(a => a.User)

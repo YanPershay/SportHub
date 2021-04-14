@@ -2,7 +2,7 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 
 class ApiEndpoints {
   static const String protocol = "https://";
-  static const String host = "f6141d125776.ngrok.io";
+  static const String host = "a7b54d679e90.ngrok.io";
   static const String basePath = "/api/v1";
 
   static const String userPOST = basePath + "/user";
@@ -36,4 +36,15 @@ class ApiEndpoints {
       "/subscribe/isSubscribed?subscriberId=" +
       SharedPrefs.userId +
       "&userid=";
+
+  static String subscribeToUserPOST = baseUrl + "/subscribe";
+
+  static String likePOST = baseUrl + "/like";
+
+  static String commentPOST = baseUrl + "/comment";
+
+  static const String savedPostsListGET = baseUrl + "/savedPost?userId=";
+  static const String savePostPOST = baseUrl + "/savedPost";
+
+  static const String deleteLikeDELETE = baseUrl + "/like";
 }

@@ -29,6 +29,14 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> DeleteLike([FromBody] DeleteLikeCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok();
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<LikeResponse>> AddLike([FromBody] AddLikeCommand command)

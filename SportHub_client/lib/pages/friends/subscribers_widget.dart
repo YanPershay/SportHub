@@ -51,41 +51,32 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
           itemCount: widget.subscribes.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              leading: CachedNetworkImage(
-                imageUrl: widget.subscribes[index].userInfo.avatarUrl,
-                imageBuilder: (context, imageProvider) => Container(
-                  width: 40.0,
-                  height: 40.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
+                leading: CachedNetworkImage(
+                  imageUrl: widget.subscribes[index].userInfo.avatarUrl,
+                  imageBuilder: (context, imageProvider) => Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
+                    ),
                   ),
+                  placeholder: (context, url) => CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
-                placeholder: (context, url) => CircularProgressIndicator(
-                  backgroundColor: Colors.red,
-                ),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-              title: Text(widget.subscribes[index].username),
-              subtitle: Text(widget.subscribes[index].userInfo.sportLevel),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UserProfilePage(
-                              userId: widget.subscribes[index].guidId,
-                            )));
-              },
-              trailing: RaisedButton(
-                color: Colors.black,
-                child: Text(
-                  'Subscribe',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () => {},
-              ),
-            );
+                title: Text(widget.subscribes[index].username),
+                subtitle: Text(widget.subscribes[index].userInfo.sportLevel),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfilePage(
+                                userId: widget.subscribes[index].guidId,
+                              )));
+                });
           },
         ))
       ]),

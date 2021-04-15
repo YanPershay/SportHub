@@ -33,6 +33,8 @@ namespace SportHub.Infrastructure.Repositories
                 posts.Add(res);
             }
 
+            var userPosts = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).Where(p => p.UserId.Equals(subscriberId)).ToListAsync();
+            posts.AddRange(userPosts);
             return posts;
         }
 

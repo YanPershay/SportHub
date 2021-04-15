@@ -309,6 +309,10 @@
               "target": "Package",
               "version": "[8.1.1, )"
             },
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.8.1, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -343,7 +347,15 @@
               "target": "Package",
               "version": "[5.0.4, )"
             },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.Extensions.Configuration.CommandLine": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[5.0.0, )"
             },

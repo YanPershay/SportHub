@@ -1,6 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:SportHub_client/bottom_nav_screen.dart';
+import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/file.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:storage_path/storage_path.dart';
 
@@ -16,7 +21,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
   void getImagesPath() async {
     var imagePath = await StoragePath.imagesPath;
     var images = jsonDecode(imagePath) as List;
-    files = images.map<FileModel>((e) => FileModel.fromJson(e)).toList();
+    files =
+        images.map<FileModel>((e) => FileModel.fromJson(e)).take(10).toList();
     if (files != null && files.length > 0)
       setState(() {
         selectedModel = files[0];
@@ -24,11 +30,70 @@ class _NewPostScreenState extends State<NewPostScreen> {
       });
   }
 
+  TextEditingController controller = new TextEditingController();
+
+  Future<void> sendImage() async {
+    try {
+      String filename = image.split('/').last;
+
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(image, filename: filename),
+      });
+      var response =
+          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+      if (response.statusCode == 200) {
+        Post post = new Post(
+            text: controller.text,
+            imageUrl: response.data.toString(),
+            dateCreated: DateTime.now().toString(),
+            isUpdated: false,
+            userId: SharedPrefs.userId);
+        var responsePost =
+            await Dio().post(ApiEndpoints.addPostPOST, data: post);
+        if (responsePost.statusCode == 200) {
+          return Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BottomNavScreen()));
+        } else {
+          _showDialog("Error", "Problems with adding Post. Try again later.");
+        }
+      } else {
+        _showDialog(
+            "Error", "Problems with uploading image, please, try again.");
+      }
+      //return response.data.toString();
+    } catch (e) {
+      _showDialog("Error", e);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
     getImagesPath();
+  }
+
+  void _showDialog(String title, String message) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(message),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -58,6 +123,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Column(
           children: <Widget>[
             new TextField(
+              controller: controller,
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
@@ -114,7 +180,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   ),
             ElevatedButton(
               child: Text('Bottom'),
-              onPressed: () {},
+              onPressed: () {
+                sendImage();
+              },
             ),
           ],
         ),

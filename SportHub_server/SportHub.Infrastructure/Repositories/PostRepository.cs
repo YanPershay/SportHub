@@ -20,7 +20,7 @@ namespace SportHub.Infrastructure.Repositories
 
         public async Task<IEnumerable<Post>> GetPostsByGuidAsync(Guid id)
         {
-            return await _context.Posts.Where(u => u.UserId.Equals(id)).Include(u => u.User).Include(p=>p.Likes).Include(p => p.Comments).ToListAsync();
+            return await _context.Posts.Where(u => u.UserId.Equals(id)).Include(u => u.User).Include(p=>p.Likes).Include(p => p.Comments).OrderByDescending(p => p.DateCreated).ToListAsync();
         }
 
         public async Task<IEnumerable<Post>> GetSubscribesPosts(Guid subscriberId)
@@ -35,7 +35,7 @@ namespace SportHub.Infrastructure.Repositories
 
             var userPosts = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).Where(p => p.UserId.Equals(subscriberId)).ToListAsync();
             posts.AddRange(userPosts);
-            return posts.OrderBy(p => p.DateCreated);
+            return posts.OrderByDescending(p => p.DateCreated);
         }
 
         public async Task<IEnumerable<Post>> GetSavedPosts(Guid userId)
@@ -48,7 +48,7 @@ namespace SportHub.Infrastructure.Repositories
                 posts.Add(res);
             }
 
-            return posts;
+            return posts.OrderByDescending(p => p.DateCreated);
         }
     }
 }

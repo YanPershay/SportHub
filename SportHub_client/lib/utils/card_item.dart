@@ -146,7 +146,7 @@ class _CardItemState extends State<CardItem> {
         future: Future.wait([getSavedPosts()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text("Wait");
+            return Text("");
           } else {
             return Card(
                 child: Container(

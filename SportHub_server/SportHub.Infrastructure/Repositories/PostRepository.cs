@@ -29,13 +29,13 @@ namespace SportHub.Infrastructure.Repositories
             var subscribes = await _context.Subscribes.Where(s => s.SubscriberId.Equals(subscriberId)).ToListAsync();
             foreach (var user in subscribes)
             {
-                var res = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).FirstOrDefaultAsync(u => u.UserId.Equals(user.UserId));
-                posts.Add(res);
+                var res = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).Where(u => u.UserId.Equals(user.UserId)).ToListAsync();
+                posts.AddRange(res);
             }
 
             var userPosts = await _context.Posts.Include(p => p.Likes).Include(p => p.Comments).Include(u => u.User).ThenInclude(u => u.UserInfo).Where(p => p.UserId.Equals(subscriberId)).ToListAsync();
             posts.AddRange(userPosts);
-            return posts;
+            return posts.OrderBy(p => p.DateCreated);
         }
 
         public async Task<IEnumerable<Post>> GetSavedPosts(Guid userId)

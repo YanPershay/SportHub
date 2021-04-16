@@ -71,7 +71,10 @@ class _FeedPageState extends State<FeedPage> {
       //userPosts = (response.data as List).map((x) => Post.fromJson(x)).toList();
 
       await putData(response.data);
-      setState(() {});
+      setState(() {
+        var myMap = box.toMap().values.toList();
+        userPosts = myMap.map((x) => Post.fromJson(x)).toList();
+      });
     } catch (SocketException) {
       Toast.show("No internet", context);
     }

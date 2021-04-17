@@ -65,11 +65,12 @@ namespace SportHub_server
             services.AddMediatR(typeof(SavePostHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(DeleteLikeHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(UnsubscribeHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(UpdateUserInfoHandler).GetTypeInfo().Assembly);
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserInfoRepository, UserInfoRepository>();
+            services.AddScoped<IUserInfoRepository, UserInfoRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IAdminPostRepository, AdminPostRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();

@@ -30,6 +30,9 @@ class LoginScreenState extends State<LoginScreen> {
           margin: EdgeInsets.all(16),
           child: Column(
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
               usernameField(),
               passwordField(),
               Container(

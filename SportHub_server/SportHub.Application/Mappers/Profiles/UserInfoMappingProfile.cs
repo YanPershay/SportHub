@@ -16,6 +16,7 @@ namespace SportHub.Application.Mappers
 
             CreateMap<UserInfo, UserInfoResponse>().ReverseMap();
             CreateMap<UserInfo, CreateUserInfoCommand>().ReverseMap();
+            CreateMap<UserInfo, UpdateUserInfoCommand>().ReverseMap();
         }
     }
 }

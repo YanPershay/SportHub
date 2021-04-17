@@ -3,6 +3,7 @@ import 'package:SportHub_client/entities/subscribe.dart';
 import 'package:SportHub_client/entities/subscriptions.dart';
 import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/entities/user_info.dart';
+import 'package:SportHub_client/screens/edit_profile/edit_screen.dart';
 import 'package:SportHub_client/screens/saved_posts_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/card_item.dart';
@@ -111,6 +112,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
             ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditScreen(user: user)));
+            },
           ),
           SizedBox(width: 6),
           InkWell(

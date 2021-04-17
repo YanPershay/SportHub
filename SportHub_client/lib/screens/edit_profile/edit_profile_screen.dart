@@ -1,28 +1,25 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:SportHub_client/screens/login_screen.dart';
-import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
-import 'package:SportHub_client/entities/user.dart';
+
+import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/user_info.dart';
-import 'package:flutter/material.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RegistrationUserInfoScreen extends StatefulWidget {
-  final User userCredentials;
-  RegistrationUserInfoScreen({Key key, @required this.userCredentials})
-      : super(key: key);
+class EditProfileScreen extends StatefulWidget {
+  final UserInfo userInfo;
+  EditProfileScreen({Key key, @required this.userInfo}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return RegistrationUserInfoScreenState();
+    return EditProfileScreenState();
   }
 }
 
-class RegistrationUserInfoScreenState
-    extends State<RegistrationUserInfoScreen> {
+class EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController firstNameController = new TextEditingController();
   TextEditingController lastNameController = new TextEditingController();
   TextEditingController dateOfBirthController = new TextEditingController();
@@ -34,11 +31,25 @@ class RegistrationUserInfoScreenState
   TextEditingController countryController = new TextEditingController();
   TextEditingController cityController = new TextEditingController();
 
-  final picker = ImagePicker();
-  File _image;
-  String avatarUrl;
+  String dropdownValue;
+  bool isImageSelected = false;
+  bool isImageUploaded = false;
+  @override
+  void initState() {
+    super.initState();
+    firstNameController.text = widget.userInfo.firstName;
+    lastNameController.text = widget.userInfo.lastName;
+    dateOfBirthController.text = widget.userInfo.dateOfBirth;
+    heightController.text = widget.userInfo.height.toString();
+    weightController.text = widget.userInfo.weight.toString();
+    aboutController.text = widget.userInfo.aboutMe;
+    dropdownValue = widget.userInfo.sportLevel;
+    motivationController.text = widget.userInfo.motivation;
+    countryController.text = widget.userInfo.country;
+    cityController.text = widget.userInfo.city;
+  }
 
-  Future<void> sendImage() async {
+  Future<void> updateProfile() async {
     try {
       String filename = _image.path.split('/').last;
 
@@ -49,10 +60,32 @@ class RegistrationUserInfoScreenState
           await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
       if (response.statusCode == 200) {
         avatarUrl = response.data.toString();
+        isImageUploaded = true;
+        setUserInfo();
+        var responseUpd =
+            await Dio().put(ApiEndpoints.userInfoPUT, data: updatedUserInfo);
+        if (responseUpd.statusCode == 200) {
+          _showDialog("Success", "Profile was successful updated!");
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BottomNavScreen()));
+        } else {
+          _showDialog("Error", "Something went wrong, please, try again.");
+        }
       } else {
         _showDialog(
             "Error", "Problems with uploading image, please, try again.");
       }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  final picker = ImagePicker();
+  File _image;
+  String avatarUrl;
+
+  Future<void> sendImage() async {
+    try {
       //return response.data.toString();
     } catch (e) {
       _showDialog("Error", e.toString());
@@ -95,7 +128,9 @@ class RegistrationUserInfoScreenState
         ));
     if (croppedImage != null) {
       _image = croppedImage;
-      setState(() {});
+      setState(() {
+        isImageSelected = true;
+      });
     }
   }
 
@@ -142,35 +177,41 @@ class RegistrationUserInfoScreenState
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: () {
-                      _showPicker(context);
-                    },
-                    child: CircleAvatar(
-                      radius: 53,
-                      backgroundColor: Colors.black,
-                      child: _image != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(55),
-                              child: Image.file(
-                                _image,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.fitHeight,
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(50)),
-                              width: 100,
-                              height: 100,
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.grey[800],
-                              ),
-                            ),
-                    ),
-                  ),
+                      onTap: () {
+                        _showPicker(context);
+                      },
+                      child: isImageSelected
+                          ? CircleAvatar(
+                              radius: 53,
+                              backgroundColor: Colors.black,
+                              child: _image != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: Image.file(
+                                        _image,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    )
+                                  : Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      width: 100,
+                                      height: 100,
+                                      child: Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.grey[800],
+                                      ),
+                                    ))
+                          : CircleAvatar(
+                              radius: 55.0,
+                              backgroundImage:
+                                  NetworkImage(widget.userInfo.avatarUrl),
+                              backgroundColor: Colors.transparent,
+                            )),
                 ),
                 firstNameField(),
                 lastNameField(),
@@ -186,13 +227,9 @@ class RegistrationUserInfoScreenState
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        registrateUser();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
+                        updateProfile();
                       },
-                      child: Text("Registrate"),
+                      child: Text("Update"),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.black,
                           padding: EdgeInsets.symmetric(
@@ -247,7 +284,6 @@ class RegistrationUserInfoScreenState
     );
   }
 
-  String dropdownValue = 'Newbie';
   Widget sportLevelDropdown() {
     return DropdownButton<String>(
       value: dropdownValue,
@@ -261,7 +297,7 @@ class RegistrationUserInfoScreenState
           dropdownValue = newValue;
         });
       },
-      items: <String>['Newbie', 'Middle', 'Advanced']
+      items: <String>['Newer', 'Middle', 'Advanced']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -303,8 +339,9 @@ class RegistrationUserInfoScreenState
     );
   }
 
-  UserInfo createUserInfoObj(String userId) {
-    return new UserInfo(
+  UserInfo updatedUserInfo;
+  void setUserInfo() {
+    updatedUserInfo = new UserInfo(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         country: countryController.text,
@@ -315,8 +352,8 @@ class RegistrationUserInfoScreenState
         weight: double.parse(weightController.text),
         aboutMe: aboutController.text,
         motivation: motivationController.text,
-        avatarUrl: avatarUrl,
-        userId: userId);
+        avatarUrl: isImageUploaded ? avatarUrl : widget.userInfo.avatarUrl,
+        userId: SharedPrefs.userId);
   }
 
   void _showDialog(String title, String message) {
@@ -340,41 +377,5 @@ class RegistrationUserInfoScreenState
         );
       },
     );
-  }
-
-  Future<UserInfo> registrateUser() async {
-    var userJson = widget.userCredentials.toJson();
-
-    userJson.removeWhere((key, value) => key == null || value == null);
-    final userResponse =
-        await http.post(Uri.https(ApiEndpoints.host, ApiEndpoints.userPOST),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(userJson));
-
-    if (userResponse.statusCode == 200) {
-      sendImage();
-      var userInfoJson =
-          createUserInfoObj(User.fromJson(jsonDecode(userResponse.body)).guidId)
-              .toJson();
-      final userInfoResponse = await http.post(
-          Uri.https(ApiEndpoints.host, ApiEndpoints.userInfoPOST),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(userInfoJson));
-
-      if (userInfoResponse.statusCode == 200) {
-        _showDialog("Success", "You has been successfully registered!");
-        return UserInfo.fromJson(jsonDecode(userInfoResponse.body));
-      } else {
-        _showDialog("Failed", "You full user registration failed (");
-        throw Exception('Failed to create user info');
-      }
-    } else {
-      _showDialog("Failed", "You user creds registration failed (");
-      throw Exception('Failed to create user');
-    }
   }
 }

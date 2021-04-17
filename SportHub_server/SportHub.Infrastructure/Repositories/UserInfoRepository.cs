@@ -19,7 +19,9 @@ namespace SportHub.Infrastructure.Repositories
 
         public async Task<UserInfo> GetUserInfoByGuidAsync(Guid id)
         {
-            return await _context.UsersInfo.FirstOrDefaultAsync(u => u.UserId.Equals(id));
+            var userInfo = await _context.UsersInfo.FirstOrDefaultAsync(u => u.UserId.Equals(id));
+            _context.Entry(userInfo).State = EntityState.Detached;
+            return userInfo;
         }
     }
 }

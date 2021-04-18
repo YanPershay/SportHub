@@ -3,8 +3,6 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hive/hive.dart';
 import 'bottom_nav_screen.dart';
 
 Future<void> main() async {

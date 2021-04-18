@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/user_info.dart';
+import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
@@ -51,29 +52,27 @@ class EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> updateProfile() async {
     try {
-      String filename = _image.path.split('/').last;
-
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(_image.path, filename: filename),
-      });
-      var response =
-          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
-      if (response.statusCode == 200) {
-        avatarUrl = response.data.toString();
-        isImageUploaded = true;
-        setUserInfo();
-        var responseUpd =
-            await Dio().put(ApiEndpoints.userInfoPUT, data: updatedUserInfo);
-        if (responseUpd.statusCode == 200) {
-          _showDialog("Success", "Profile was successful updated!");
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => BottomNavScreen()));
+      if (_image != null) {
+        var response = await sendImage();
+        if (response.statusCode == 200) {
+          avatarUrl = response.data.toString();
+          isImageUploaded = true;
         } else {
-          _showDialog("Error", "Something went wrong, please, try again.");
+          _showDialog(
+              "Error", "Problems with uploading image, please, try again.");
         }
+      }
+
+      setUserInfo();
+      var responseUpd =
+          await Dio().put(ApiEndpoints.userInfoPUT, data: updatedUserInfo);
+      if (responseUpd.statusCode == 200) {
+        _showDialog("Success", "Profile was successful updated!");
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => BottomNavScreen()),
+            (Route<dynamic> route) => false);
       } else {
-        _showDialog(
-            "Error", "Problems with uploading image, please, try again.");
+        _showDialog("Error", "Something went wrong, please, try again.");
       }
     } catch (e) {
       print(e);
@@ -84,9 +83,16 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   File _image;
   String avatarUrl;
 
-  Future<void> sendImage() async {
+  Future<Response<dynamic>> sendImage() async {
     try {
-      //return response.data.toString();
+      String filename = _image.path.split('/').last;
+
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(_image.path, filename: filename),
+      });
+      var response =
+          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+      return response;
     } catch (e) {
       _showDialog("Error", e.toString());
     }

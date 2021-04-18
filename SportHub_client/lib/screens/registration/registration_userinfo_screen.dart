@@ -40,18 +40,20 @@ class RegistrationUserInfoScreenState
 
   Future<void> sendImage() async {
     try {
-      String filename = _image.path.split('/').last;
+      if (_image != null) {
+        String filename = _image.path.split('/').last;
 
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(_image.path, filename: filename),
-      });
-      var response =
-          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
-      if (response.statusCode == 200) {
-        avatarUrl = response.data.toString();
-      } else {
-        _showDialog(
-            "Error", "Problems with uploading image, please, try again.");
+        FormData formData = FormData.fromMap({
+          "file": await MultipartFile.fromFile(_image.path, filename: filename),
+        });
+        var response =
+            await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+        if (response.statusCode == 200) {
+          avatarUrl = response.data.toString();
+        } else {
+          _showDialog(
+              "Error", "Problems with uploading image, please, try again.");
+        }
       }
       //return response.data.toString();
     } catch (e) {
@@ -187,10 +189,6 @@ class RegistrationUserInfoScreenState
                     child: ElevatedButton(
                       onPressed: () {
                         registrateUser();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
                       },
                       child: Text("Registrate"),
                       style: ElevatedButton.styleFrom(
@@ -311,8 +309,12 @@ class RegistrationUserInfoScreenState
         city: cityController.text,
         dateOfBirth: dateOfBirthController.text,
         sportLevel: dropdownValue,
-        height: double.parse(heightController.text),
-        weight: double.parse(weightController.text),
+        height: double.tryParse(heightController.text) != null
+            ? double.parse(heightController.text)
+            : 0,
+        weight: double.tryParse(weightController.text) != null
+            ? double.parse(weightController.text)
+            : 0,
         aboutMe: aboutController.text,
         motivation: motivationController.text,
         avatarUrl: avatarUrl,
@@ -342,7 +344,7 @@ class RegistrationUserInfoScreenState
     );
   }
 
-  Future<UserInfo> registrateUser() async {
+  Future<void> registrateUser() async {
     var userJson = widget.userCredentials.toJson();
 
     userJson.removeWhere((key, value) => key == null || value == null);
@@ -354,7 +356,7 @@ class RegistrationUserInfoScreenState
             body: jsonEncode(userJson));
 
     if (userResponse.statusCode == 200) {
-      sendImage();
+      await sendImage();
       var userInfoJson =
           createUserInfoObj(User.fromJson(jsonDecode(userResponse.body)).guidId)
               .toJson();
@@ -366,8 +368,10 @@ class RegistrationUserInfoScreenState
           body: jsonEncode(userInfoJson));
 
       if (userInfoResponse.statusCode == 200) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+            (Route<dynamic> route) => false);
         _showDialog("Success", "You has been successfully registered!");
-        return UserInfo.fromJson(jsonDecode(userInfoResponse.body));
       } else {
         _showDialog("Failed", "You full user registration failed (");
         throw Exception('Failed to create user info');

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/entities/saved_post.dart';
 import 'package:SportHub_client/entities/user_info.dart';
 import 'package:SportHub_client/screens/notifications/notifications_screen.dart';
 import 'package:SportHub_client/utils/card_item.dart';
@@ -64,6 +65,18 @@ class _FeedPageState extends State<FeedPage> {
     }
   }
 
+  List<SavedPost> savedPosts = [];
+  Future<void> getSavedPosts() async {
+    try {
+      var response =
+          await Dio().get(ApiEndpoints.savedPostsListGET + SharedPrefs.userId);
+      savedPosts =
+          (response.data as List).map((x) => SavedPost.fromJson(x)).toList();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> updatePosts() async {
     try {
       var response =
@@ -83,7 +96,7 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.wait([getFeedPosts()]),
+        future: Future.wait([getFeedPosts(), getSavedPosts()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Text("Wait");
@@ -123,6 +136,7 @@ class _FeedPageState extends State<FeedPage> {
                         itemBuilder: (context, index) => CardItem(
                               post: userPosts[index],
                               userInfo: userPosts[index].user.userInfo,
+                              savedPosts: savedPosts,
                             )),
                   ),
                 ));

@@ -1,4 +1,5 @@
 import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/entities/saved_post.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/card_item.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
@@ -24,10 +25,22 @@ class _SavedPostsScreenState extends State<SavedPostsScreen> {
     }
   }
 
+  List<SavedPost> mySavedPosts = [];
+  Future<void> getSavedPosts() async {
+    try {
+      var response =
+          await Dio().get(ApiEndpoints.savedPostsListGET + SharedPrefs.userId);
+      mySavedPosts =
+          (response.data as List).map((x) => SavedPost.fromJson(x)).toList();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.wait([getFeedPosts()]),
+        future: Future.wait([getFeedPosts(), getSavedPosts()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Text("Wait");
@@ -44,6 +57,7 @@ class _SavedPostsScreenState extends State<SavedPostsScreen> {
                     itemBuilder: (context, index) => CardItem(
                           post: savedPosts[index],
                           userInfo: savedPosts[index].user.userInfo,
+                          savedPosts: mySavedPosts,
                         )));
           }
         });

@@ -188,8 +188,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
       appBar: new AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: CircleAvatar(
-          backgroundImage: AssetImage("assets/profile.jpg"),
+        title: Text(
+          "New post",
+          style: TextStyle(color: Colors.black),
         ),
         actions: <Widget>[
           IconButton(

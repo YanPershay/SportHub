@@ -1,4 +1,5 @@
 import 'package:SportHub_client/entities/post.dart';
+import 'package:SportHub_client/entities/saved_post.dart';
 import 'package:SportHub_client/entities/subscribe.dart';
 import 'package:SportHub_client/entities/subscriptions.dart';
 import 'package:SportHub_client/entities/user.dart';
@@ -71,6 +72,18 @@ class UserProfilePageState extends State<UserProfilePage> {
       var response = await Dio().post(ApiEndpoints.subscribeToUserPOST,
           data: new Subscribe(
               userId: widget.userId, subscriberId: SharedPrefs.userId));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  List<SavedPost> savedPosts = [];
+  Future<void> getSavedPosts() async {
+    try {
+      var response =
+          await Dio().get(ApiEndpoints.savedPostsListGET + SharedPrefs.userId);
+      savedPosts =
+          (response.data as List).map((x) => SavedPost.fromJson(x)).toList();
     } catch (e) {
       print(e);
     }
@@ -201,7 +214,8 @@ class UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.wait([getUser(), getUserPosts(), getSubsCount()]),
+        future: Future.wait(
+            [getUser(), getUserPosts(), getSubsCount(), getSavedPosts()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Text("Wait");
@@ -416,6 +430,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                   itemBuilder: (context, index) => CardItem(
                                         post: userPosts[index],
                                         userInfo: user.userInfo,
+                                        savedPosts: savedPosts,
                                       )),
                             )
                           ],

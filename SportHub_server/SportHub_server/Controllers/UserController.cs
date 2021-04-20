@@ -46,6 +46,15 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("usernameCheck")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<bool>> IsUsernameBusy(string username)
+        {
+            var query = new IsUsernameBusyQuery(username);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         [HttpGet("searchUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<UserResponse>>> SearchUser(string searchString)

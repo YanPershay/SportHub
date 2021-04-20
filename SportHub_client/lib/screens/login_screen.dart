@@ -116,8 +116,9 @@ class LoginScreenState extends State<LoginScreen> {
       SharedPrefs.token = authUser.token;
       SharedPrefs.isAdmin = authUser.isAdmin;
 
-      return Navigator.push(
-          context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
+      return Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomNavScreen()),
+          (Route<dynamic> route) => false);
     } else {
       throw Exception('Failed to create user');
     }

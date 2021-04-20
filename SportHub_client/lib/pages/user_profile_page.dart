@@ -121,7 +121,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                       colors: [Color(0xff66D0EB5), Color(0xff4059F1)],
                       begin: Alignment.bottomRight,
                       end: Alignment.centerLeft)),
-              child: Text('Edit',
+              child: Text('Settings',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
             ),

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:SportHub_client/screens/login_screen.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/entities/user_info.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class RegistrationUserInfoScreen extends StatefulWidget {
   final User userCredentials;
@@ -142,7 +145,7 @@ class RegistrationUserInfoScreenState
                 SizedBox(
                   height: 32,
                 ),
-                Center(
+                Container(
                   child: GestureDetector(
                     onTap: () {
                       _showPicker(context);
@@ -176,7 +179,27 @@ class RegistrationUserInfoScreenState
                 ),
                 firstNameField(),
                 lastNameField(),
-                dateOfBirthField(),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text("Your birthday: "),
+                    Text(DateFormat('dd.MM.yyyy')
+                        .format(DateTime.parse(selectedDate.toString()))),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                RaisedButton(
+                  color: Colors.black,
+                  onPressed: () => _selectDate(context),
+                  child: Text(
+                    'Click to select your birthday',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
                 sportLevelDropdown(),
                 heightField(),
                 weightField(),
@@ -236,13 +259,17 @@ class RegistrationUserInfoScreenState
     );
   }
 
-  Widget dateOfBirthField() {
-    return TextFormField(
-      controller: dateOfBirthController,
-      keyboardType: TextInputType.datetime,
-      decoration: InputDecoration(
-          labelText: 'Date of birth', hintText: 'Happy birthday'),
-    );
+  DateTime selectedDate = DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
   }
 
   String dropdownValue = 'Newbie';
@@ -273,6 +300,9 @@ class RegistrationUserInfoScreenState
     return TextFormField(
       controller: heightController,
       keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+      ],
       decoration: InputDecoration(labelText: 'Weight', hintText: 'Your weight'),
     );
   }
@@ -281,6 +311,9 @@ class RegistrationUserInfoScreenState
     return TextFormField(
       controller: weightController,
       keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+      ],
       decoration: InputDecoration(labelText: 'Height', hintText: 'Your height'),
     );
   }
@@ -307,7 +340,10 @@ class RegistrationUserInfoScreenState
         lastName: lastNameController.text,
         country: countryController.text,
         city: cityController.text,
-        dateOfBirth: dateOfBirthController.text,
+        dateOfBirth: DateFormat('dd.MM.yyyy').format(selectedDate) !=
+                DateFormat('dd.MM.yyyy').format(DateTime.now())
+            ? DateFormat('dd.MM.yyyy').format(selectedDate)
+            : null,
         sportLevel: dropdownValue,
         height: double.tryParse(heightController.text) != null
             ? double.parse(heightController.text)

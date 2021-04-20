@@ -23,6 +23,11 @@ namespace SportHub.Infrastructure.Repositories
             return await _context.Users.Include(nameof(UserInfo)).FirstOrDefaultAsync(u => u.GuidId.Equals(id));
         }
 
+        public async Task<bool> IsUsernameBusy(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.Username.Equals(username));
+        }
+
         public async Task<IEnumerable<User>> SearchUserAsync(string searchString)
         {
             var split = searchString.Split();

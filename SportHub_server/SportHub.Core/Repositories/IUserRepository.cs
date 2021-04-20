@@ -12,5 +12,6 @@ namespace SportHub.Core.Repositories
     {
         Task<User> GetUserByGuidAsync(Guid id);
         Task<IEnumerable<User>> SearchUserAsync(string searchString);
+        Task<bool> IsUsernameBusy(string username);
     }
 }

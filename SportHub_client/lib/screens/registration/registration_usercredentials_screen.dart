@@ -1,5 +1,8 @@
 import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/screens/registration/registration_userinfo_screen.dart';
+import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:dio/dio.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationUserCredentialsScreen extends StatefulWidget {
@@ -18,25 +21,22 @@ class RegistartionUserCredentialsScreenState
   TextEditingController emailController = new TextEditingController();
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController confirmPasswordController = new TextEditingController();
 
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Container(
             margin: EdgeInsets.all(16),
             child: Column(children: <Widget>[
+              usernameField(),
               emailField(),
               passwordField(),
-              usernameField(),
+              confirmPasswordField(),
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegistrationUserInfoScreen(
-                                    userCredentials: setUser(),
-                                  )));
+                      validateFields();
                     },
                     child: Text('Next'),
                     style: ElevatedButton.styleFrom(
@@ -49,12 +49,66 @@ class RegistartionUserCredentialsScreenState
             ])));
   }
 
+  Future<void> validateFields() async {
+    try {
+      var response = await Dio()
+          .get(ApiEndpoints.isUsernameBusyGET + usernameController.text);
+      if (response.statusCode == 200) {
+        bool isUsernameBusy = response.data.toString() == "true";
+        if (isUsernameBusy) {
+          _showDialog("Username busy", "Please, choose another username");
+        } else {
+          if (passwordController.text == confirmPasswordController.text) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RegistrationUserInfoScreen(
+                          userCredentials: setUser(),
+                        )));
+          } else {
+            _showDialog("Error", "Password doesn't confirmed.");
+          }
+        }
+      } else {
+        _showDialog("Error", "Troubles with internet.");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _showDialog(String title, String message) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(message),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget emailField() {
     return TextFormField(
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
       decoration:
           InputDecoration(labelText: "Email", hintText: "user@gmail.com"),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+          EmailValidator.validate(value) ? null : "Please enter a valid email",
     );
   }
 
@@ -64,6 +118,16 @@ class RegistartionUserCredentialsScreenState
       obscureText: true,
       decoration: InputDecoration(
           labelText: "Password", hintText: "Enter your password"),
+    );
+  }
+
+  Widget confirmPasswordField() {
+    return TextFormField(
+      controller: confirmPasswordController,
+      obscureText: true,
+      decoration: InputDecoration(
+          labelText: "Confirm password",
+          hintText: "Confirm your your password"),
     );
   }
 

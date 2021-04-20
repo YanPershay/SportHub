@@ -59,4 +59,7 @@ class ApiEndpoints {
   static const String userInfoPUT = baseUrl + "/userinfo";
 
   static const String trainerPostPOST = baseUrl + "/adminPost";
+
+  static const String isUsernameBusyGET =
+      baseUrl + "/user/usernameCheck?username=";
 }

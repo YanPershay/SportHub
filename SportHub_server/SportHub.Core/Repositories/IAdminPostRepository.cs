@@ -9,6 +9,6 @@ namespace SportHub.Core.Repositories
 {
     public interface IAdminPostRepository : IRepository<AdminPost>
     {
-        Task<IEnumerable<AdminPost>> GetAdminPostsByCategoryIdAsync(int id);
+        Task<IEnumerable<AdminPost>> GetAdminPostsAsync();
     }
 }

@@ -1,4 +1,5 @@
 import 'package:SportHub_client/entities/admin_post.dart';
+import 'package:SportHub_client/utils/size_config.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +18,7 @@ class AdminPostScreen extends StatefulWidget {
 class AdminPostScreenState extends State<AdminPostScreen> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
@@ -32,19 +34,25 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(widget.adminPost.title,
+                    Container(
+                      width: SizeConfig.screenWidth * 0.85,
+                      child: Text(
+                        widget.adminPost.title,
                         style: TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black.withOpacity(.8))),
+                            color: Colors.black.withOpacity(.8)),
+                        softWrap: true,
+                      ),
+                    ),
                     Text(
                       DateFormat('dd.MM.yyyy kk:mm')
                           .format(DateTime.parse(widget.adminPost.dateCreated)),
                       style: TextStyle(color: Colors.grey, fontSize: 15),
-                    )
+                    ),
+                    Text("by " + widget.adminPost.user.username)
                   ],
                 ),
-                Text("by " + widget.adminPost.user.username)
               ]),
         ),
         Container(

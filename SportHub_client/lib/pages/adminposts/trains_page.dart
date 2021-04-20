@@ -1,6 +1,8 @@
 import 'package:SportHub_client/entities/admin_post.dart';
+import 'package:SportHub_client/pages/adminposts/add_trainer_post_screen.dart';
 import 'package:SportHub_client/pages/adminposts/admin_post_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,10 +26,37 @@ class TrainsPageState extends State<TrainsPage> {
     }
   }
 
+  Widget addTrainerPostIcon() {
+    return SharedPrefs.isAdmin
+        ? IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 40,
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewTrainerPostScreen()));
+            },
+          )
+        : Icon(null);
+    ;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black, title: Text("Trains")),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text("Trains"),
+        actions: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(right: 18.0),
+              child: addTrainerPostIcon())
+        ],
+      ),
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       body: buildCard(),

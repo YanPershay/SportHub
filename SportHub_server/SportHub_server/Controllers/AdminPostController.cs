@@ -22,9 +22,9 @@ namespace SportHub.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<AdminPostResponse>>> GetPostsByCategoryId(int id)
+        public async Task<ActionResult<IEnumerable<AdminPostResponse>>> GetPostsByCategoryId()
         {
-            var query = new GetAdminPostsByCategoryIdQuery(id);
+            var query = new GetAdminPostsQuery();
             var result = await _mediator.Send(query);
             return Ok(result);
         }

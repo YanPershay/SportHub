@@ -9,6 +9,7 @@ class AdminPost {
   String dateCreated;
   bool isUpdated;
   int categoryId;
+  String userId;
   User user;
 
   AdminPost(
@@ -20,7 +21,8 @@ class AdminPost {
       this.dateCreated,
       this.isUpdated,
       this.categoryId,
-      this.user});
+      this.user,
+      this.userId});
 
   AdminPost.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -44,6 +46,7 @@ class AdminPost {
     data['dateCreated'] = this.dateCreated;
     data['isUpdated'] = this.isUpdated;
     data['categoryId'] = this.categoryId;
+    data['userId'] = this.userId;
     if (this.user != null) {
       data['user'] = this.user.toJson();
     }

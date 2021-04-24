@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewTrainerPostScreen extends StatefulWidget {
   @override
@@ -163,176 +164,190 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: new AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        title: Text(
-          "New trainer post",
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: <Widget>[
-          IconButton(
-              iconSize: 40,
-              icon: const Icon(
-                Icons.clear,
-                color: Colors.black,
-              ),
-              tooltip: 'Show Snackbar',
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 10,
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: new AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.grey[900],
+            title: Text(
+              "New trainer post",
+              style: TextStyle(color: Colors.white),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: titleTextController,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'Title',
-                ),
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Duration: ",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            actions: <Widget>[
+              IconButton(
+                  iconSize: 30.r,
+                  icon: const Icon(
+                    Icons.clear,
+                    color: Colors.white,
                   ),
-                  DropdownButton<String>(
-                    value: durationDropdownValue,
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: 20,
-                    elevation: 16,
-                    style: TextStyle(color: Colors.black),
-                    underline: Container(height: 2, color: Colors.black),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        durationDropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['1', '2', '3', '4', '5']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 20),
+                  tooltip: 'Show Snackbar',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          ),
+          body: Container(
+            color: Colors.white,
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0).copyWith(bottom: 0),
+                    child: TextFormField(
+                      controller: titleTextController,
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        hintText: 'Title',
+                      ),
+                      style: TextStyle(
+                          fontSize: 25.r, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.r),
+                    child: Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Duration: ",
+                              style: TextStyle(
+                                  fontSize: 20.r, fontWeight: FontWeight.bold),
+                            ),
+                            DropdownButton<String>(
+                              value: durationDropdownValue,
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 20.r,
+                              elevation: 1,
+                              style: TextStyle(color: Colors.black),
+                              underline:
+                                  Container(height: 2, color: Colors.white),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  durationDropdownValue = newValue;
+                                });
+                              },
+                              items: <String>[
+                                '1',
+                                '2',
+                                '3',
+                                '4',
+                                '5'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(fontSize: 20.r),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
                         ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Complexity: ",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  DropdownButton<String>(
-                    value: complexityDropdownValue,
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: 20,
-                    elevation: 16,
-                    style: TextStyle(color: Colors.black),
-                    underline: Container(height: 2, color: Colors.black),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        complexityDropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['1', '2', '3', '4', '5']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 20),
+                        Expanded(
+                          child: Container(),
                         ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: GestureDetector(
-                onTap: () {
-                  _showPicker(context);
-                },
-                child: Container(
-                  width: 155,
-                  height: 140,
-                  color: Colors.black,
-                  child: _image != null
-                      ? ClipRRect(
-                          child: Image.file(
-                            _image,
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.fitHeight,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              "Complexity: ",
+                              style: TextStyle(
+                                  fontSize: 20.r, fontWeight: FontWeight.bold),
+                            ),
+                            DropdownButton<String>(
+                              value: complexityDropdownValue,
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 20.r,
+                              elevation: 1,
+                              style: TextStyle(color: Colors.black),
+                              underline:
+                                  Container(height: 2, color: Colors.white),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  complexityDropdownValue = newValue;
+                                });
+                              },
+                              items: <String>[
+                                '1',
+                                '2',
+                                '3',
+                                '4',
+                                '5'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(fontSize: 20.r),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
                         )
-                      : Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            //borderRadius: BorderRadius.circular(50)
-                          ),
-                          width: 100,
-                          height: 100,
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: Colors.grey[800],
-                          ),
-                        ),
-                ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        _showPicker(context);
+                      },
+                      child: Container(
+                        color: Colors.black,
+                        child: _image != null
+                            ? ClipRRect(
+                                child: Image.file(
+                                  _image,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  //borderRadius: BorderRadius.circular(50)
+                                ),
+                                width: 100,
+                                height: 100,
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: postTextController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CupertinoButton.filled(
+                    child: Text("Send"),
+                    onPressed: () {
+                      sendPost();
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
             ),
-            new TextField(
-              controller: postTextController,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CupertinoButton.filled(
-              child: Text("Send"),
-              onPressed: () {
-                sendPost();
-              },
-            )
-          ],
+          ),
         ),
       ),
     );
   }
-
-  // List<DropdownMenuItem> getItems() {
-  //   return files
-  //           .map((e) => DropdownMenuItem(
-  //                 child: Text(e.folder),
-  //                 value: e,
-  //               ))
-  //           .toList() ??
-  //       [];
-  // }
 }

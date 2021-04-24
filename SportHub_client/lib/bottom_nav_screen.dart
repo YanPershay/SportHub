@@ -27,7 +27,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     });
   }
 
-  var currentPage = 0;
+  var currentPage = 4;
 
   var pages = [
     FeedPage(),
@@ -41,40 +41,43 @@ class BottomNavScreenState extends State<BottomNavScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Bottom navigation',
-        home: Scaffold(
-          body: Center(
-            child: pages.elementAt(currentPage),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.black,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-                backgroundColor: Colors.black,
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.people), label: 'Friends'),
-              BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'New'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.accessibility_new_sharp), label: 'Trains'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: 'Profile'),
-            ],
-            currentIndex: currentPage,
-            fixedColor: Colors.red,
-            onTap: (int index) {
-              setState(() {
-                if (index == 2)
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NewPostScreen()));
-                else
-                  currentPage = index;
-              });
-            },
-          ),
-        ));
+    return Scaffold(
+      body: pages.elementAt(currentPage),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.grey[900]),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people),
+              label: 'Friends',
+              backgroundColor: Colors.grey[900]),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_box),
+              label: 'New',
+              backgroundColor: Colors.grey[900]),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.accessibility_new_sharp),
+              label: 'Trains',
+              backgroundColor: Colors.grey[900]),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+              backgroundColor: Colors.grey[900]),
+        ],
+        currentIndex: currentPage,
+        fixedColor: Colors.red,
+        onTap: (int index) {
+          setState(() {
+            if (index == 2)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewPostScreen()));
+            else
+              currentPage = index;
+          });
+        },
+      ),
+    );
   }
 }

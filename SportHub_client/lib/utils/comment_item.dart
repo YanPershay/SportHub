@@ -35,38 +35,40 @@ class CommentItem extends StatelessWidget {
                 SizedBox(
                   width: 8,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        comment.user.username,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        width: 300,
-                        child: Text(
-                          comment.text,
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          comment.user.username,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      Container(
-                        width: 300,
-                        child: Text(
-                          DateFormat('dd.MM.yyyy kk:mm')
-                              .format(DateTime.parse(comment.dateCreated)),
-                          style: TextStyle(color: Colors.grey, fontSize: 15),
+                        SizedBox(
+                          height: 5,
                         ),
-                      )
-                    ],
+                        Container(
+                          width: 300,
+                          child: Text(
+                            comment.text,
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                        ),
+                        Container(
+                          width: 300,
+                          child: Text(
+                            DateFormat('dd.MM.yyyy kk:mm')
+                                .format(DateTime.parse(comment.dateCreated)),
+                            style: TextStyle(color: Colors.grey, fontSize: 15),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

@@ -103,25 +103,6 @@ class _FeedPageState extends State<FeedPage> {
           } else {
             return Scaffold(
                 appBar: AppBar(
-                    actions: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 18.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.notification_important_outlined,
-                            color: Colors.red,
-                            size: 40,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        NotificationsScreen()));
-                          },
-                        ),
-                      )
-                    ],
                     elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(

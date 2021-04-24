@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class AdminPostScreen extends StatefulWidget {
   final AdminPost adminPost;
 
-  AdminPostScreen({Key, key, @required this.adminPost});
+  AdminPostScreen({@required this.adminPost});
 
   @override
   State<StatefulWidget> createState() {

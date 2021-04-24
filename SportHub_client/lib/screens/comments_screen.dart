@@ -46,7 +46,6 @@ class _CommentsScreenState extends State<CommentsScreen> {
 
   Widget showComments() {
     return Container(
-      height: 650,
       child: ListView.builder(
           itemCount: comments.length,
           itemBuilder: (context, index) =>
@@ -56,45 +55,50 @@ class _CommentsScreenState extends State<CommentsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: Future.wait([getComments()]),
-        builder: (context, snapshot) {
-          return Scaffold(
-              appBar: AppBar(
-                title: Text("Comments"),
-                backgroundColor: Colors.black,
-              ),
-              body: LayoutBuilder(builder: (context, constraint) {
-                return SingleChildScrollView(
-                    child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints(minHeight: constraint.maxHeight),
-                        child: IntrinsicHeight(
-                          child: Column(
-                            children: <Widget>[
-                              showComments(),
-                              Divider(),
-                              ListTile(
-                                title: TextFormField(
-                                  controller: commentController,
-                                  decoration: InputDecoration(
-                                      hintText: "Write a comment..."),
-                                ),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.send, color: Colors.black),
-                                  onPressed: () {
-                                    sendComment();
-                                    setState(() {
-                                      commentController.text = "";
-                                      showComments();
-                                    });
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                        )));
-              }));
-        });
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        bottom: true,
+        child: FutureBuilder(
+            future: Future.wait([getComments()]),
+            builder: (context, snapshot) {
+              return Scaffold(
+                  appBar: AppBar(
+                    title: Text("Comments"),
+                    backgroundColor: Colors.grey[900],
+                  ),
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: ListView.builder(
+                              itemCount: comments.length,
+                              itemBuilder: (context, index) =>
+                                  CommentItem(comment: comments[index])),
+                        ),
+                      ),
+                      Divider(),
+                      ListTile(
+                        title: TextFormField(
+                          controller: commentController,
+                          decoration:
+                              InputDecoration(hintText: "Write a comment..."),
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.send, color: Colors.black),
+                          onPressed: () {
+                            sendComment();
+                            setState(() {
+                              commentController.text = "";
+                              showComments();
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ));
+            }),
+      ),
+    );
   }
 }

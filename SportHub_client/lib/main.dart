@@ -1,6 +1,7 @@
 import 'package:SportHub_client/screens/login_screen.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bottom_nav_screen.dart';
@@ -18,5 +19,8 @@ Future<void> main() async {
   }
 
 //делать сразу гет запрос на userinfo и сохранять все в бд
-  runApp(MaterialApp(home: isAuthorized ? BottomNavScreen() : LoginScreen()));
+  runApp(MaterialApp(
+      home: ScreenUtilInit(
+          designSize: Size(360, 690),
+          builder: () => isAuthorized ? BottomNavScreen() : LoginScreen())));
 }

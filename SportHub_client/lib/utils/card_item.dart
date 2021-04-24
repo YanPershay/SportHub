@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardItem extends StatefulWidget {
   final Post post;
@@ -32,7 +33,7 @@ class _CardItemState extends State<CardItem> {
   //bool isLikePressed = false;
   int likesCount;
 
-  List<Like> likes = new List<Like>();
+  List<Like> likes = [];
 
   @override
   void initState() {
@@ -154,101 +155,106 @@ class _CardItemState extends State<CardItem> {
     //     return Text("");
     //   } else {
     return Card(
+        margin: EdgeInsets.zero,
+        elevation: 0,
         child: Container(
-      height: 350,
-      //color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: CachedNetworkImage(
-              imageUrl: widget.userInfo.avatarUrl,
-              imageBuilder: (context, imageProvider) => Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image:
-                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
+          height: 475.r,
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                leading: CachedNetworkImage(
+                  imageUrl: widget.userInfo.avatarUrl,
+                  imageBuilder: (context, imageProvider) => Container(
+                    width: 40.r,
+                    height: 40.r,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
+                    ),
+                  ),
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.red,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+                title: Text(widget.post.user.username),
+                subtitle: Text(widget.userInfo.sportLevel),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfilePage(
+                                userId: widget.post.userId,
+                              )));
+                },
+              ),
+              Expanded(
+                child: Container(
+                  child: CachedNetworkImage(
+                    imageUrl: widget.post.imageUrl,
+                    fit: BoxFit.cover,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
               ),
-              placeholder: (context, url) => CircularProgressIndicator(
-                backgroundColor: Colors.red,
-              ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-            title: Text(widget.post.user.username),
-            subtitle: Text(widget.userInfo.sportLevel),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UserProfilePage(
-                            userId: widget.post.userId,
-                          )));
-            },
-          ),
-          Expanded(
-            child: Container(
-              child: CachedNetworkImage(
-                imageUrl: widget.post.imageUrl,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(value: downloadProgress.progress),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-            ),
-          ),
-          SizedBox(height: 14),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-            SizedBox(width: 10),
-            Text(
-              widget.post.text,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            )
-          ]),
-          SizedBox(height: 14),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 5),
+              SizedBox(height: 14.r),
               Row(
-                children: <Widget>[likeIcon(), Text(likesCount.toString())],
-              ),
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Text(
+                      widget.post.text,
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    )
+                  ]),
+              SizedBox(height: 14),
               Row(
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.comment_rounded),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  CommentsScreen(postId: widget.post.id)));
-                    },
+                  SizedBox(width: 5),
+                  Row(
+                    children: <Widget>[likeIcon(), Text(likesCount.toString())],
                   ),
-                  Text(widget.post.comments.length.toString())
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.comment_rounded),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CommentsScreen(postId: widget.post.id)));
+                        },
+                      ),
+                      Text(widget.post.comments.length.toString())
+                    ],
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  savedPostIcon(),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  SizedBox(width: 200),
-                  savedPostIcon(),
-                  SizedBox(width: 8)
-                ],
-              )
+              Divider()
             ],
           ),
-          SizedBox(height: 12),
-        ],
-      ),
-      decoration: new BoxDecoration(
-        boxShadow: [
-          new BoxShadow(
-            color: Colors.white,
-            blurRadius: 50.0,
+          decoration: new BoxDecoration(
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.white,
+                blurRadius: 50.0,
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 } //);
 // }

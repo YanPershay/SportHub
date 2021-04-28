@@ -40,8 +40,6 @@ class _FeedPageState extends State<FeedPage> {
     try {
       var response =
           await Dio().get(ApiEndpoints.subscribesPostsGET + SharedPrefs.userId);
-      //userPosts = (response.data as List).map((x) => Post.fromJson(x)).toList();
-
       await putData(response.data);
     } catch (SocketException) {
       print("No internet");

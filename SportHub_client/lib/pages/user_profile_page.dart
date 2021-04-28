@@ -34,7 +34,6 @@ class UserProfilePageState extends State<UserProfilePage> {
     try {
       var response = await Dio().get(ApiEndpoints.userGET + widget.userId);
       user = User.fromJson(response.data);
-      //username = user.username;
     } catch (e) {
       print(e);
     }

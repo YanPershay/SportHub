@@ -13,7 +13,7 @@ namespace SportHub.Application.Responses
 
         //[JsonIgnore]
         //public string Password { get; set; }
-        public bool IsOnline { get; set; }
+        //public bool IsOnline { get; set; }
         public bool IsAdmin { get; set; }
         public UserInfoResponse UserInfo { get; set; }
     }

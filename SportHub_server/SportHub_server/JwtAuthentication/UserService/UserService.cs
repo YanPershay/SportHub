@@ -40,7 +40,7 @@ namespace SportHub.API.JwtMiddlewareTest
                 GuidId = user.GuidId,
                 Username = user.Username,
                 IsAdmin = user.IsAdmin,
-                IsOnline = user.IsOnline,
+                //IsOnline = user.IsOnline,
                 Email = user.Email
             };
             // authentication successful so generate jwt token

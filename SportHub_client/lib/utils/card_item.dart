@@ -112,8 +112,13 @@ class _CardItemState extends State<CardItem> {
       }
     }
     return IconButton(
-      icon: Icon(Icons.thumb_up_alt_outlined,
-          color: (isLikePressed) ? Colors.red : Colors.grey),
+      iconSize: 30.r,
+      icon: (isLikePressed)
+          ? Icon(
+              Icons.favorite,
+              color: Colors.red,
+            )
+          : Icon(Icons.favorite_border, color: Colors.black),
       onPressed: () {
         isLikePressed ? deleteLike() : likePost();
         setState(() {
@@ -131,6 +136,7 @@ class _CardItemState extends State<CardItem> {
       }
     }
     return IconButton(
+      iconSize: 30.r,
       icon: setIcon(),
       onPressed: () {
         isSavedPressed ? deleteSavedPost() : savePost();
@@ -148,12 +154,6 @@ class _CardItemState extends State<CardItem> {
 
   @override
   Widget build(BuildContext context) {
-    //return FutureBuilder(
-    //    future: Future.wait([getSavedPosts()]),
-    //  builder: (context, snapshot) {
-    //    if (!snapshot.hasData) {
-    //     return Text("");
-    //   } else {
     return Card(
         margin: EdgeInsets.zero,
         elevation: 0,
@@ -225,6 +225,7 @@ class _CardItemState extends State<CardItem> {
                   Row(
                     children: <Widget>[
                       IconButton(
+                        iconSize: 30.r,
                         icon: Icon(Icons.comment_rounded),
                         onPressed: () {
                           Navigator.push(
@@ -240,10 +241,10 @@ class _CardItemState extends State<CardItem> {
                   Expanded(
                     child: Container(),
                   ),
-                  savedPostIcon(),
+                  savedPostIcon()
                 ],
               ),
-              Divider()
+              Divider(),
             ],
           ),
           decoration: new BoxDecoration(
@@ -256,6 +257,4 @@ class _CardItemState extends State<CardItem> {
           ),
         ));
   }
-} //);
-// }
-//}
+}

@@ -1,6 +1,7 @@
 import 'package:SportHub_client/entities/user.dart';
 import 'package:SportHub_client/screens/registration/registration_userinfo_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,18 @@ class RegistartionUserCredentialsScreenState
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController confirmPasswordController = new TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    usernameController.text = "yan_pershay";
+    emailController.text = "test@gmail.com";
+    passwordController.text = "1234";
+    confirmPasswordController.text = "12345";
+  }
+
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -195,6 +208,7 @@ class RegistartionUserCredentialsScreenState
   // }
 
   Future<void> validateFields() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       if (usernameController.text.length == 0 ||
           emailController.text.length == 0 ||
@@ -206,9 +220,12 @@ class RegistartionUserCredentialsScreenState
         if (response.statusCode == 200) {
           bool isUsernameBusy = response.data.toString() == "true";
           if (isUsernameBusy) {
+            Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
             _showDialog("Username busy", "Please, choose another username");
           } else {
             if (passwordController.text == confirmPasswordController.text) {
+              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                  .pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -216,6 +233,8 @@ class RegistartionUserCredentialsScreenState
                             userCredentials: setUser(),
                           )));
             } else {
+              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                  .pop();
               _showDialog("Error", "Password doesn't confirmed.");
             }
           }

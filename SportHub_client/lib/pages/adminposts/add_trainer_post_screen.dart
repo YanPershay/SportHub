@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/admin_post.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,7 +22,10 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
   TextEditingController titleTextController = new TextEditingController();
   File _image;
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   Future<void> sendPost() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       String filename = _image.path.split('/').last;
 
@@ -56,6 +60,8 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
       }
     } catch (e) {
       _showDialog("Error", e.toString());
+    } finally {
+      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
     }
   }
 

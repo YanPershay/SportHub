@@ -5,6 +5,7 @@ import 'package:SportHub_client/entities/utilsEntities/auth_response.dart';
 import 'package:SportHub_client/entities/utilsEntities/user_credentials.dart';
 import 'package:SportHub_client/screens/registration/registration_usercredentials_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -226,36 +227,49 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<UserCredentials> authorization() async {
-    UserCredentials userCredentials = new UserCredentials(
-        username: usernameController.text, password: passwordController.text);
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
-    final authResponse = await http.post(
-        Uri.https(ApiEndpoints.host, ApiEndpoints.authenticationPOST),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(userCredentials.toJson()));
-
-    if (authResponse.statusCode == 200) {
-      var authUser = AuthResponse.fromJson(jsonDecode(authResponse.body));
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('userId', authUser.guidId);
-      prefs.setString('username', authUser.username);
-      prefs.setString('token', authUser.token);
-      prefs.setBool('isAdmin', authUser.isAdmin);
-
-      SharedPrefs.username = authUser.username;
-      SharedPrefs.userId = authUser.guidId;
-      SharedPrefs.token = authUser.token;
-      SharedPrefs.isAdmin = authUser.isAdmin;
-
-      return Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomNavScreen()),
-          (Route<dynamic> route) => false);
+  Future<void> authorization() async {
+    if (usernameController.text.length == 0 ||
+        passwordController.text.length == 0) {
+      Dialogs.showMyDialog(
+          context, "Empty fields", "Please, enter your credentials.");
     } else {
-      throw Exception('Failed to create user');
+      Dialogs.showLoadingDialog(context, _keyLoader);
+      UserCredentials userCredentials = new UserCredentials(
+          username: usernameController.text, password: passwordController.text);
+
+      final authResponse = await http.post(
+          Uri.https(ApiEndpoints.host, ApiEndpoints.authenticationPOST),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(userCredentials.toJson()));
+
+      if (authResponse.statusCode == 200) {
+        var authUser = AuthResponse.fromJson(jsonDecode(authResponse.body));
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('userId', authUser.guidId);
+        prefs.setString('username', authUser.username);
+        prefs.setString('token', authUser.token);
+        prefs.setBool('isAdmin', authUser.isAdmin);
+
+        SharedPrefs.username = authUser.username;
+        SharedPrefs.userId = authUser.guidId;
+        SharedPrefs.token = authUser.token;
+        SharedPrefs.isAdmin = authUser.isAdmin;
+
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+
+        return Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => BottomNavScreen()),
+            (Route<dynamic> route) => false);
+      } else {
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+        Dialogs.showMyDialog(context, "Incorrect data",
+            "Incorrect credentials. Enter the other.");
+      }
     }
   }
 }

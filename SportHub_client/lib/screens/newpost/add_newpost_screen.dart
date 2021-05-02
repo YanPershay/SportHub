@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
   TextEditingController controller = new TextEditingController();
   File _image;
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   Future<void> sendImage() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
+
     try {
       String filename = _image.path.split('/').last;
 
@@ -63,6 +68,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         _showDialog(
             "Error", "Problems with uploading image, please, try again.");
       }
+      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
       //return response.data.toString();
     } catch (e) {
       _showDialog("Error", e.toString());

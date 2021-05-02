@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:SportHub_client/screens/login_screen.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -678,7 +679,10 @@ class RegistrationUserInfoScreenState
     );
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   Future<void> registrateUser() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
     var userJson = widget.userCredentials.toJson();
 
     userJson.removeWhere((key, value) => key == null || value == null);
@@ -702,15 +706,19 @@ class RegistrationUserInfoScreenState
           body: jsonEncode(userInfoJson));
 
       if (userInfoResponse.statusCode == 200) {
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => LoginScreen()),
             (Route<dynamic> route) => false);
+
         _showDialog("Success", "You has been successfully registered!");
       } else {
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         _showDialog("Failed", "You full user registration failed (");
         throw Exception('Failed to create user info');
       }
     } else {
+      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
       _showDialog("Failed", "You user creds registration failed (");
       throw Exception('Failed to create user');
     }

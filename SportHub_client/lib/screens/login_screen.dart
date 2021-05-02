@@ -9,6 +9,7 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -23,27 +24,161 @@ class LoginScreenState extends State<LoginScreen> {
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Container(
-          padding: EdgeInsets.only(top: 20),
-          margin: EdgeInsets.all(16),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 20,
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 50.0),
+                    child: Text('Sport',
+                        style: TextStyle(
+                            fontSize: 80.0, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(16.0, 195.0, 0.0, 0.0),
+                    child: Text('hub',
+                        style: TextStyle(
+                            fontSize: 80.0, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(145.0, 195.0, 0.0, 0.0),
+                    child: Text('.',
+                        style: TextStyle(
+                            fontSize: 80.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green)),
+                  )
+                ],
               ),
-              usernameField(),
-              passwordField(),
-              Container(
-                margin: EdgeInsets.all(20),
-              ),
-              loginButton(),
-              registrationButton()
-            ],
-          )),
-    );
+            ),
+            Container(
+                padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                          labelText: 'USERNAME',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black))),
+                    ),
+                    SizedBox(height: 20.0),
+                    TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                          labelText: 'PASSWORD',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black))),
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 5.0),
+                    Container(
+                      alignment: Alignment(1.0, 0.0),
+                      padding: EdgeInsets.only(top: 15.0, left: 20.0),
+                      child: InkWell(
+                        child: Text(
+                          'Forgot Password',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40.0),
+                    Container(
+                      height: 40.0,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.black,
+                        color: Colors.black,
+                        elevation: 7.0,
+                        child: GestureDetector(
+                          onTap: () {
+                            authorization();
+                          },
+                          child: Center(
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+            SizedBox(height: 15.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'New to SportHub?',
+                  style: TextStyle(fontFamily: 'Montserrat'),
+                ),
+                SizedBox(width: 5.0),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                RegistrationUserCredentialsScreen()));
+                  },
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
+                  ),
+                )
+              ],
+            )
+          ],
+        ));
   }
+
+  // Widget build(BuildContext context) {
+  //   return new Scaffold(
+  //     body: new Container(
+  //         padding: EdgeInsets.only(top: 20),
+  //         margin: EdgeInsets.all(16),
+  //         child: Column(
+  //           children: <Widget>[
+  //             SizedBox(
+  //               height: 20,
+  //             ),
+  //             usernameField(),
+  //             passwordField(),
+  //             Container(
+  //               margin: EdgeInsets.all(20),
+  //             ),
+  //             loginButton(),
+  //             registrationButton()
+  //           ],
+  //         )),
+  //   );
+  // }
 
   Widget usernameField() {
     return TextFormField(

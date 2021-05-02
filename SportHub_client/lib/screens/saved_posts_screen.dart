@@ -47,12 +47,14 @@ class _SavedPostsScreenState extends State<SavedPostsScreen> {
           } else {
             return Scaffold(
                 appBar: AppBar(
+                    elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(
                       "Saved posts",
                       style: TextStyle(color: Colors.black),
                     )),
                 body: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemCount: savedPosts.length,
                     itemBuilder: (context, index) => CardItem(
                           post: savedPosts[index],

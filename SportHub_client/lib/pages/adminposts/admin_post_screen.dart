@@ -3,6 +3,7 @@ import 'package:SportHub_client/utils/size_config.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminPostScreen extends StatefulWidget {
   final AdminPost adminPost;
@@ -27,23 +28,36 @@ class AdminPostScreenState extends State<AdminPostScreen> {
           height: 24,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsets.only(left: 13, top: 12, bottom: 12),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      width: SizeConfig.screenWidth * 0.85,
-                      child: Text(
-                        widget.adminPost.title,
-                        style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black.withOpacity(.8)),
-                        softWrap: true,
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          width: SizeConfig.screenWidth * 0.80,
+                          child: Text(
+                            widget.adminPost.title,
+                            style: TextStyle(
+                                fontSize: 30.r,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black.withOpacity(.8)),
+                            softWrap: true,
+                          ),
+                        ),
+                        IconButton(
+                            iconSize: 40,
+                            icon: const Icon(
+                              Icons.clear,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                      ],
                     ),
                     Text(
                       DateFormat('dd.MM.yyyy kk:mm')

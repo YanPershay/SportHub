@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserProfilePage extends StatefulWidget {
   final String userId;
@@ -383,7 +384,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                         child: Container(
                                           height: 45.r,
                                           width: 1.r,
-                                          color: Colors.white,
+                                          color: Colors.grey[600],
                                         ),
                                       ),
                                       Container(
@@ -417,45 +418,45 @@ class UserProfilePageState extends State<UserProfilePage> {
                               )
                             ],
                           ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.r, horizontal: 12.r),
-                              child: Container(
-                                child: Text(
-                                  (user.userInfo.sportLevel != ''
-                                          ? ('Level: ' +
-                                              user.userInfo.sportLevel +
-                                              "\n")
-                                          : '') +
-                                      (user.userInfo.aboutMe != ''
-                                          ? ("About: " +
-                                              user.userInfo.aboutMe +
-                                              "\n")
-                                          : '') +
-                                      (user.userInfo.motivation != ''
-                                          ? ("Motivation: " +
-                                              user.userInfo.motivation +
-                                              "\n")
-                                          : '') +
-                                      (user.userInfo.height != 0
-                                          ? ("Height: " +
-                                              user.userInfo.height.toString() +
-                                              ", ")
-                                          : '') +
-                                      (user.userInfo.weight != 0
-                                          ? ("Weight: " +
-                                              user.userInfo.weight.toString() +
-                                              "\n")
-                                          : '') +
-                                      (user.userInfo.dateOfBirth != null
-                                          ? ("Birthday: " +
-                                              user.userInfo.dateOfBirth)
-                                          : ''),
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15.r),
-                                ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.r, horizontal: 1.r),
+                            child: Container(
+                              padding: EdgeInsets.all(10.r),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.r))),
+                              child: Text(
+                                (user.userInfo.sportLevel != ''
+                                        ? (user.userInfo.sportLevel +
+                                            " level \n")
+                                        : '') +
+                                    (user.userInfo.aboutMe != ''
+                                        ? (user.userInfo.aboutMe + "\n")
+                                        : '') +
+                                    (user.userInfo.motivation != ''
+                                        ? ("My motivation is " +
+                                            user.userInfo.motivation +
+                                            "\n")
+                                        : '') +
+                                    (user.userInfo.height != 0
+                                        ? (user.userInfo.height.toString() +
+                                            " sm., ")
+                                        : '') +
+                                    (user.userInfo.weight != 0
+                                        ? (user.userInfo.weight.toString() +
+                                            " kg. \n")
+                                        : '') +
+                                    (user.userInfo.dateOfBirth != null
+                                        ? ("Born " + user.userInfo.dateOfBirth)
+                                        : ''),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.karla(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 20.r,
+                                    fontWeight: FontWeight.w100,
+                                    color: Colors.white),
                               ),
                             ),
                           ),

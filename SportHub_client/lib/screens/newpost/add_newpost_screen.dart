@@ -4,9 +4,11 @@ import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewPostScreen extends StatefulWidget {
   @override
@@ -184,8 +186,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: new AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Text(
@@ -232,7 +236,6 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       : Container(
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
-                            //borderRadius: BorderRadius.circular(50)
                           ),
                           width: 100,
                           height: 100,
@@ -244,64 +247,19 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 ),
               ),
             ),
-            new TextField(
-              controller: controller,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: controller,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                style: TextStyle(fontSize: 20.r),
+              ),
             ),
-            // Row(
-            //   children: <Widget>[
-            //     DropdownButtonHideUnderline(
-            //         child: DropdownButton<FileModel>(
-            //       items: getItems(),
-            //       onChanged: (FileModel d) {
-            //         assert(d.files.length > 0);
-            //         image = d.files[0];
-            //         setState(() {
-            //           selectedModel = d;
-            //         });
-            //       },
-            //       value: selectedModel,
-            //     ))
-            //   ],
-            // ),
-            // Divider(),
-            // Container(
-            //     height: MediaQuery.of(context).size.height * 0.3,
-            //     child: image != null
-            //         ? Image.file(File(image),
-            //             height: MediaQuery.of(context).size.height * 0.45,
-            //             width: MediaQuery.of(context).size.width * 0.45)
-            //         : Container()),
-            // Divider(),
-            // selectedModel == null && selectedModel.files.length < 1
-            //     ? Container()
-            //     : Container(
-            //         height: MediaQuery.of(context).size.height * 0.4,
-            //         child: GridView.builder(
-            //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //               crossAxisCount: 4,
-            //               crossAxisSpacing: 4,
-            //               mainAxisSpacing: 4),
-            //           itemBuilder: (_, i) {
-            //             var file = selectedModel.files[i];
-            //             return GestureDetector(
-            //               child: Image.file(
-            //                 File(file),
-            //                 fit: BoxFit.cover,
-            //               ),
-            //               onTap: () {
-            //                 setState(() {
-            //                   image = file;
-            //                 });
-            //               },
-            //             );
-            //           },
-            //           itemCount: selectedModel.files.length,
-            //         ),
-            //       ),
-            ElevatedButton(
-              child: Text('Bottom'),
+            SizedBox(height: 20),
+            CupertinoButton(
+              color: Colors.grey[900],
+              child: Text("Send"),
               onPressed: () {
                 sendImage();
               },
@@ -311,14 +269,4 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
     );
   }
-
-  // List<DropdownMenuItem> getItems() {
-  //   return files
-  //           .map((e) => DropdownMenuItem(
-  //                 child: Text(e.folder),
-  //                 value: e,
-  //               ))
-  //           .toList() ??
-  //       [];
-  // }
 }

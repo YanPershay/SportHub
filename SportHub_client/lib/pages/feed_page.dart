@@ -9,10 +9,12 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FeedPage extends StatefulWidget {
   @override
@@ -101,16 +103,27 @@ class _FeedPageState extends State<FeedPage> {
           } else {
             return Scaffold(
                 appBar: AppBar(
+                    bottom: PreferredSize(
+                        child: Container(
+                          color: Colors.grey,
+                          height: 0.5,
+                        ),
+                        preferredSize: Size.fromHeight(1.0)),
                     elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Feed",
-                      style: TextStyle(color: Colors.black),
+                      "Sport Hub",
+                      style: GoogleFonts.workSans(
+                          fontStyle: FontStyle.normal,
+                          fontSize: 25.r,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     )),
                 body: Container(
                   child: RefreshIndicator(
                     onRefresh: updatePosts,
                     child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
                         itemCount: userPosts.length,
                         itemBuilder: (context, index) => CardItem(
                               post: userPosts[index],

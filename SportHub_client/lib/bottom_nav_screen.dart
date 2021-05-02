@@ -44,6 +44,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     return Scaffold(
       body: pages.elementAt(currentPage),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -66,8 +67,10 @@ class BottomNavScreenState extends State<BottomNavScreen> {
               label: 'Profile',
               backgroundColor: Colors.grey[900]),
         ],
+        unselectedItemColor: Colors.grey[600],
+        backgroundColor: Colors.grey[900],
         currentIndex: currentPage,
-        fixedColor: Colors.red,
+        fixedColor: Colors.white,
         onTap: (int index) {
           setState(() {
             if (index == 2)

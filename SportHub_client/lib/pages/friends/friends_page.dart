@@ -127,8 +127,8 @@ class FriendsPageState extends State<FriendsPage> {
               appBar: AppBar(
                   bottom: PreferredSize(
                       child: Container(
-                        color: Colors.black,
-                        height: 1.0,
+                        color: Colors.grey,
+                        height: 0.5,
                       ),
                       preferredSize: Size.fromHeight(1.0)),
                   elevation: 0,

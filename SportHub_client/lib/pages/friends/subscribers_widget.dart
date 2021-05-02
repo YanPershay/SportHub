@@ -1,14 +1,6 @@
-import 'dart:convert';
-
-import 'package:SportHub_client/entities/user.dart';
-import 'package:SportHub_client/entities/utilsEntities/my_subs_helper.dart';
-import 'package:SportHub_client/entities/utilsEntities/subs_helper.dart';
-import 'package:SportHub_client/utils/api_endpoints.dart';
-import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../user_profile_page.dart';
 
 class SubscribersWidget extends StatefulWidget {
@@ -40,10 +32,30 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
         elevation: 0,
         toolbarHeight: 40,
         backgroundColor: Colors.white,
-        title: new Text(
-          widget.title,
-          style: TextStyle(color: Colors.black, fontSize: 20),
+        title: Row(
+          children: [
+            widget.title == "My subscribes"
+                ? Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 30.r,
+                  )
+                : Text(""),
+            Text(
+              widget.title,
+              style: TextStyle(color: Colors.black, fontSize: 20),
+            ),
+          ],
         ),
+        actions: <Widget>[
+          widget.title == "Subscribers"
+              ? Icon(
+                  Icons.arrow_forward,
+                  color: Colors.black,
+                  size: 30.r,
+                )
+              : Text("")
+        ],
       ),
       body: Column(children: <Widget>[
         Expanded(

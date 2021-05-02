@@ -171,17 +171,18 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
           backgroundColor: Colors.white,
           appBar: new AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.grey[900],
+            elevation: 0,
+            backgroundColor: Colors.white,
             title: Text(
               "New trainer post",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
             actions: <Widget>[
               IconButton(
                   iconSize: 30.r,
                   icon: const Icon(
                     Icons.clear,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                   tooltip: 'Show Snackbar',
                   onPressed: () {
@@ -333,7 +334,8 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  CupertinoButton.filled(
+                  CupertinoButton(
+                    color: Colors.grey[900],
                     child: Text("Send"),
                     onPressed: () {
                       sendPost();

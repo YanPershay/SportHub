@@ -12,6 +12,7 @@ import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegistrationUserInfoScreen extends StatefulWidget {
   final User userCredentials;
@@ -136,94 +137,388 @@ class RegistrationUserInfoScreenState
 
   Widget build(BuildContext context) {
     return new Scaffold(
-        resizeToAvoidBottomInset: false,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar(
+              // Here we create one to set status bar color
+              backgroundColor: Colors.grey[
+                  200], // Set any color of status bar you want; or it defaults to your theme's primary color
+            )),
         body: SingleChildScrollView(
-          child: new Container(
-              padding: EdgeInsets.only(top: 20),
-              margin: EdgeInsets.all(16),
-              child: Column(children: <Widget>[
-                SizedBox(
-                  height: 32,
-                ),
-                Container(
-                  child: GestureDetector(
-                    onTap: () {
-                      _showPicker(context);
-                    },
-                    child: CircleAvatar(
-                      radius: 53,
-                      backgroundColor: Colors.black,
-                      child: _image != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(55),
-                              child: Image.file(
-                                _image,
+          physics: BouncingScrollPhysics(),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+                  Widget>[
+            Container(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(15.0, 50.0, 0.0, 50.0),
+                    child: Text('Additional',
+                        style: TextStyle(
+                            fontSize: 60.0, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(16.0, 120.0, 0.0, 0.0),
+                    child: Text('info',
+                        style: TextStyle(
+                            fontSize: 60.0, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(120.0, 120.0, 0.0, 0.0),
+                    child: Text('.',
+                        style: TextStyle(
+                            fontSize: 60.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green)),
+                  )
+                ],
+              ),
+            ),
+            Container(
+                padding: EdgeInsets.only(top: 5.0, left: 20.0, right: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        _showPicker(context);
+                      },
+                      child: CircleAvatar(
+                        radius: 53,
+                        backgroundColor: Colors.black,
+                        child: _image != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(55),
+                                child: Image.file(
+                                  _image,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(50)),
                                 width: 100,
                                 height: 100,
-                                fit: BoxFit.fitHeight,
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.grey[800],
+                                ),
                               ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(50)),
-                              width: 100,
-                              height: 100,
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.grey[800],
+                      ),
+                    ),
+                    TextField(
+                      controller: firstNameController,
+                      decoration: InputDecoration(
+                          labelText: 'FIRST NAME',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black))),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: lastNameController,
+                      decoration: InputDecoration(
+                        labelText: 'LAST NAME',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                      ),
+                    ),
+                    SizedBox(height: 15.0),
+                    Row(
+                      children: [
+                        Text(
+                          "DATE OF BIRTH: ",
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              color: Colors.grey),
+                        ),
+                        Text(
+                          DateFormat('dd.MM.yyyy')
+                              .format(DateTime.parse(selectedDate.toString())),
+                          style:
+                              TextStyle(fontFamily: 'Montserrat', fontSize: 17),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed))
+                                return Colors.grey;
+                              return Colors
+                                  .black; // Use the component's default.
+                            },
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.black)))),
+                      onPressed: () => _selectDate(context),
+                      child: Text(
+                        'SELECT DATE',
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    Row(
+                      children: [
+                        Text(
+                          'SPORT LEVEL:  ',
+                          style: TextStyle(
+                              fontSize: 16.r,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                        ),
+                        sportLevelDropdown(),
+                      ],
+                    ),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: heightController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: InputDecoration(
+                            labelText: 'HEIGHT ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: weightController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: InputDecoration(
+                            labelText: 'WEIGHT ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: aboutController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            labelText: 'ABOUT ME ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: motivationController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            labelText: 'MY MOTIVATION ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: countryController,
+                        decoration: InputDecoration(
+                            labelText: 'COUNTRY ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: cityController,
+                        decoration: InputDecoration(
+                            labelText: 'CITY ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    SizedBox(height: 50.0),
+                    Container(
+                        height: 40.0,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.black,
+                          color: Colors.black,
+                          elevation: 7.0,
+                          child: GestureDetector(
+                            onTap: () {
+                              registrateUser();
+                            },
+                            child: Center(
+                              child: Text(
+                                'REGISTRATE',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat'),
                               ),
                             ),
+                          ),
+                        )),
+                    SizedBox(height: 20.0),
+                    Container(
+                      height: 40.0,
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black,
+                                style: BorderStyle.solid,
+                                width: 1.0),
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Center(
+                            child: Text('Go Back',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat')),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                firstNameField(),
-                lastNameField(),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Text("Your birthday: "),
-                    Text(DateFormat('dd.MM.yyyy')
-                        .format(DateTime.parse(selectedDate.toString()))),
                   ],
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  color: Colors.black,
-                  onPressed: () => _selectDate(context),
-                  child: Text(
-                    'Click to select your birthday',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                sportLevelDropdown(),
-                heightField(),
-                weightField(),
-                aboutField(),
-                motivationField(),
-                countryField(),
-                cityField(),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        registrateUser();
-                      },
-                      child: Text("Registrate"),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                          textStyle: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold)),
-                    )),
-              ])),
+                )),
+          ]),
         ));
   }
+
+  // Widget build(BuildContext context) {
+  //   return new Scaffold(
+  //       resizeToAvoidBottomInset: false,
+  //       body: SingleChildScrollView(
+  //         child: new Container(
+  //             padding: EdgeInsets.only(top: 20),
+  //             margin: EdgeInsets.all(16),
+  //             child: Column(children: <Widget>[
+  //               SizedBox(
+  //                 height: 32,
+  //               ),
+  //               Container(
+  //                 child: GestureDetector(
+  //                   onTap: () {
+  //                     _showPicker(context);
+  //                   },
+  //                   child: CircleAvatar(
+  //                     radius: 53,
+  //                     backgroundColor: Colors.black,
+  //                     child: _image != null
+  //                         ? ClipRRect(
+  //                             borderRadius: BorderRadius.circular(55),
+  //                             child: Image.file(
+  //                               _image,
+  //                               width: 100,
+  //                               height: 100,
+  //                               fit: BoxFit.fitHeight,
+  //                             ),
+  //                           )
+  //                         : Container(
+  //                             decoration: BoxDecoration(
+  //                                 color: Colors.grey[200],
+  //                                 borderRadius: BorderRadius.circular(50)),
+  //                             width: 100,
+  //                             height: 100,
+  //                             child: Icon(
+  //                               Icons.camera_alt,
+  //                               color: Colors.grey[800],
+  //                             ),
+  //                           ),
+  //                   ),
+  //                 ),
+  //               ),
+  //               firstNameField(),
+  //               lastNameField(),
+  //               SizedBox(
+  //                 height: 20,
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Text("Your birthday: "),
+  //                   Text(DateFormat('dd.MM.yyyy')
+  //                       .format(DateTime.parse(selectedDate.toString()))),
+  //                 ],
+  //               ),
+  //               SizedBox(
+  //                 height: 20.0,
+  //               ),
+  //               RaisedButton(
+  //                 color: Colors.black,
+  //                 onPressed: () => _selectDate(context),
+  //                 child: Text(
+  //                   'Click to select your birthday',
+  //                   style: TextStyle(color: Colors.white),
+  //                 ),
+  //               ),
+  //               sportLevelDropdown(),
+  //               heightField(),
+  //               weightField(),
+  //               aboutField(),
+  //               motivationField(),
+  //               countryField(),
+  //               cityField(),
+  //               Padding(
+  //                   padding: EdgeInsets.symmetric(vertical: 16.0),
+  //                   child: ElevatedButton(
+  //                     onPressed: () {
+  //                       registrateUser();
+  //                     },
+  //                     child: Text("Registrate"),
+  //                     style: ElevatedButton.styleFrom(
+  //                         primary: Colors.black,
+  //                         padding: EdgeInsets.symmetric(
+  //                             horizontal: 50, vertical: 20),
+  //                         textStyle: TextStyle(
+  //                             fontSize: 30, fontWeight: FontWeight.bold)),
+  //                   )),
+  //             ])),
+  //       ));
+  // }
 
   Widget firstNameField() {
     return TextFormField(
@@ -264,8 +559,8 @@ class RegistrationUserInfoScreenState
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+        firstDate: DateTime(1945, 1),
+        lastDate: DateTime.now());
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
@@ -279,7 +574,10 @@ class RegistrationUserInfoScreenState
       icon: Icon(Icons.arrow_downward),
       iconSize: 20,
       elevation: 16,
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Montserrat'),
       underline: Container(height: 2, color: Colors.black),
       onChanged: (String newValue) {
         setState(() {

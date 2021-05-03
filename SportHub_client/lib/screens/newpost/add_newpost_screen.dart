@@ -59,8 +59,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
         var responsePost =
             await Dio().post(ApiEndpoints.addPostPOST, data: post);
         if (responsePost.statusCode == 200) {
-          return Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => BottomNavScreen()));
+          return Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => BottomNavScreen()),
+              (Route<dynamic> route) => false);
         } else {
           _showDialog("Error", "Problems with adding Post. Try again later.");
         }

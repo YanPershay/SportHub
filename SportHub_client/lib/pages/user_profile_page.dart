@@ -252,7 +252,7 @@ class UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: Future.wait(
-            [getUser(), getUserPosts(), getSubsCount(), getSavedPosts()]),
+            [getUserPosts(), getSavedPosts(), getUser(), getSubsCount()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(child: Text("Wait"));

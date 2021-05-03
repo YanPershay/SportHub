@@ -61,6 +61,14 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<int>> DeletePost([FromBody] DeletePostCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost("blob")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UploadImageToAzureBlob()

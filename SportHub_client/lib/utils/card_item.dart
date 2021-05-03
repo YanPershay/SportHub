@@ -1,3 +1,4 @@
+import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/like.dart';
 import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/entities/saved_post.dart';
@@ -5,6 +6,8 @@ import 'package:SportHub_client/entities/user_info.dart';
 import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/screens/comments_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/constants.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
@@ -84,6 +87,22 @@ class _CardItemState extends State<CardItem> {
     }
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
+  Future<void> deletePost() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
+    try {
+      var response = await Dio()
+          .delete(ApiEndpoints.addPostPOST, data: {"id": widget.post.id});
+      if (response.statusCode == 200) {
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+      }
+    } catch (e) {
+      print(e);
+    }
+    Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+  }
+
   bool isSavedPressed = false;
   SavedPost savedPost;
   Future<void> deleteSavedPost() async {
@@ -152,6 +171,12 @@ class _CardItemState extends State<CardItem> {
         (isSavedPressed) ? Icons.bookmark : Icons.bookmark_border_outlined);
   }
 
+  void choiceAction(String choice) async {
+    if (choice == Constants.delete) {
+      await deletePost();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -190,6 +215,19 @@ class _CardItemState extends State<CardItem> {
                                 userId: widget.post.userId,
                               )));
                 },
+                trailing: (widget.post.userId == SharedPrefs.userId)
+                    ? PopupMenuButton<String>(
+                        onSelected: choiceAction,
+                        itemBuilder: (BuildContext context) {
+                          return Constants.choices.map((String choice) {
+                            return PopupMenuItem<String>(
+                              value: choice,
+                              child: Text(choice),
+                            );
+                          }).toList();
+                        },
+                      )
+                    : Text(""),
               ),
               Expanded(
                 child: Container(

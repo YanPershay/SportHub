@@ -203,7 +203,12 @@ class _CardItemState extends State<CardItem> {
                       backgroundColor: Colors.red,
                     ),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => CircleAvatar(
+                    backgroundImage: AssetImage("assets/icon.jpg"),
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.black,
+                    radius: 20.r,
+                  ),
                 ),
                 title: Text(widget.post.user.username),
                 subtitle: Text(widget.userInfo.sportLevel),

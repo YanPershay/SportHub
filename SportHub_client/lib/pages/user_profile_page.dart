@@ -303,7 +303,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                                 backgroundColor: Colors.red,
                               ),
                               errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                                  CircleAvatar(
+                                backgroundImage: AssetImage("assets/icon.jpg"),
+                                backgroundColor: Colors.black,
+                                foregroundColor: Colors.black,
+                                radius: 45.r,
+                              ),
                             ),
                             Expanded(
                               child: Padding(

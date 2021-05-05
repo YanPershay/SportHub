@@ -77,7 +77,12 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
                   placeholder: (context, url) => CircularProgressIndicator(
                     backgroundColor: Colors.red,
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => CircleAvatar(
+                    backgroundImage: AssetImage("assets/icon.jpg"),
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.black,
+                    radius: 20.r,
+                  ),
                 ),
                 title: Text(widget.subscribes[index].username),
                 subtitle: Text(widget.subscribes[index].userInfo.sportLevel),

@@ -1,6 +1,8 @@
 import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/user.dart';
+import 'package:SportHub_client/entities/utilsEntities/auth_response.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -34,21 +36,36 @@ class EditAccountScreenState extends State<EditAccountScreen> {
     usernameController.text = widget.user.username;
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   Future<void> updateAccount() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
     setUser();
     try {
+      var responseAuth = await Dio().post(ApiEndpoints.checkPass, data: {
+        "username": SharedPrefs.username,
+        "password": oldPasswordController.text
+      });
       var response = await Dio().put(ApiEndpoints.userPUT, data: newUser);
       if (response.statusCode == 200) {
-        _showDialog("Success", "Account data was successful updated!");
+        var authResponse = AuthResponse.fromJson(responseAuth.data);
+
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString("username", usernameController.text);
+        prefs.setString("token", authResponse.token);
+
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => BottomNavScreen()));
+
+        _showDialog("Success", "Account data was successful updated!");
       } else {
         _showDialog("Error", "Something went wrong, please, try again.");
       }
+      //}
     } catch (e) {
-      print(e);
+      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+      _showDialog("Incorrect password", "Old password incorrect.");
     }
   }
 

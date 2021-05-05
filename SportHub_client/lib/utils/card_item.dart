@@ -43,6 +43,14 @@ class _CardItemState extends State<CardItem> {
     super.initState();
     likesCount = widget.post.likes.length;
     likes = widget.post.likes;
+
+    if (widget.post.text.length > 50) {
+      firstHalf = widget.post.text.substring(0, 50);
+      secondHalf = widget.post.text.substring(50, widget.post.text.length);
+    } else {
+      firstHalf = widget.post.text;
+      secondHalf = "";
+    }
   }
 
   Future<void> likePost() async {
@@ -89,18 +97,21 @@ class _CardItemState extends State<CardItem> {
 
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
+  bool isPostDeleted = false;
   Future<void> deletePost() async {
-    Dialogs.showLoadingDialog(context, _keyLoader);
+    //Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       var response = await Dio()
           .delete(ApiEndpoints.addPostPOST, data: {"id": widget.post.id});
       if (response.statusCode == 200) {
-        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+        isPostDeleted = true;
+        //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+        setState(() {});
       }
     } catch (e) {
       print(e);
     }
-    Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+    //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
   }
 
   bool isSavedPressed = false;
@@ -177,127 +188,178 @@ class _CardItemState extends State<CardItem> {
     }
   }
 
+  String firstHalf;
+  String secondHalf;
+
+  bool flag = true;
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-        margin: EdgeInsets.zero,
-        elevation: 0,
-        child: Container(
-          height: 475.r,
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                leading: CachedNetworkImage(
-                  imageUrl: widget.userInfo.avatarUrl,
-                  imageBuilder: (context, imageProvider) => Container(
-                    width: 40.r,
-                    height: 40.r,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.cover),
-                    ),
-                  ),
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.red,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => CircleAvatar(
-                    backgroundImage: AssetImage("assets/icon.jpg"),
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.black,
-                    radius: 20.r,
-                  ),
-                ),
-                title: Text(widget.post.user.username),
-                subtitle: Text(widget.userInfo.sportLevel),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserProfilePage(
-                                userId: widget.post.userId,
-                              )));
-                },
-                trailing: (widget.post.userId == SharedPrefs.userId)
-                    ? PopupMenuButton<String>(
-                        onSelected: choiceAction,
-                        itemBuilder: (BuildContext context) {
-                          return Constants.choices.map((String choice) {
-                            return PopupMenuItem<String>(
-                              value: choice,
-                              child: Text(choice),
-                            );
-                          }).toList();
-                        },
-                      )
-                    : Text(""),
-              ),
-              Expanded(
-                child: Container(
-                  child: CachedNetworkImage(
-                    imageUrl: widget.post.imageUrl,
-                    fit: BoxFit.cover,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ),
-              ),
-              SizedBox(height: 14.r),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(width: 10),
-                    Text(
-                      widget.post.text,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                    )
-                  ]),
-              SizedBox(height: 14),
-              Row(
+    return isPostDeleted
+        ? Container()
+        : Card(
+            margin: EdgeInsets.zero,
+            elevation: 0,
+            child: Container(
+              height: !flag ? (550 + widget.post.text.length / 2).r : 565.r,
+              child: Column(
                 children: <Widget>[
-                  SizedBox(width: 5),
-                  Row(
-                    children: <Widget>[likeIcon(), Text(likesCount.toString())],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                        iconSize: 30.r,
-                        icon: Icon(Icons.comment_rounded),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      CommentsScreen(postId: widget.post.id)));
-                        },
-                      ),
-                      Text(widget.post.comments.length.toString())
-                    ],
+                  ListTile(
+                    leading: widget.userInfo.avatarUrl == null ||
+                            widget.userInfo.avatarUrl == "" ||
+                            !Uri.parse(widget.userInfo.avatarUrl).isAbsolute
+                        ? CircleAvatar(
+                            backgroundImage: AssetImage("assets/icon.jpg"),
+                            backgroundColor: Colors.black,
+                            foregroundColor: Colors.black,
+                            radius: 20.r,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: widget.userInfo.avatarUrl,
+                            imageBuilder: (context, imageProvider) => Container(
+                              width: 40.r,
+                              height: 40.r,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover),
+                              ),
+                            ),
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(
+                                backgroundColor: Colors.red,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => CircleAvatar(
+                              backgroundImage: AssetImage("assets/icon.jpg"),
+                              backgroundColor: Colors.black,
+                              foregroundColor: Colors.black,
+                              radius: 20.r,
+                            ),
+                          ),
+                    title: Text(widget.post.user.username),
+                    subtitle: Text(widget.userInfo.sportLevel),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserProfilePage(
+                                    userId: widget.post.userId,
+                                  )));
+                    },
+                    trailing: (widget.post.userId == SharedPrefs.userId)
+                        ? PopupMenuButton<String>(
+                            onSelected: choiceAction,
+                            itemBuilder: (BuildContext context) {
+                              return Constants.choices.map((String choice) {
+                                return PopupMenuItem<String>(
+                                  value: choice,
+                                  child: Text(choice),
+                                );
+                              }).toList();
+                            },
+                          )
+                        : Text(""),
                   ),
                   Expanded(
-                    child: Container(),
+                    child: Container(
+                      child: CachedNetworkImage(
+                        imageUrl: widget.post.imageUrl,
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
                   ),
-                  savedPostIcon()
+                  SizedBox(height: 14.r),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(width: 10),
+                        Container(
+                          padding: new EdgeInsets.symmetric(horizontal: 10.0),
+                          width: 350.r,
+                          child: secondHalf.isEmpty
+                              ? new Text(firstHalf)
+                              : new Column(
+                                  children: <Widget>[
+                                    new Text(
+                                      flag
+                                          ? (firstHalf + "...")
+                                          : (firstHalf + secondHalf),
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                      textAlign: TextAlign.justify,
+                                      maxLines: null,
+                                    ),
+                                    new InkWell(
+                                      child: new Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          new Text(
+                                            flag ? "show more" : "show less",
+                                            style: new TextStyle(
+                                                color: Colors.blue),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          flag = !flag;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                          // Text(
+                          //   widget.post.text,
+                          //   style: TextStyle(
+                          //       fontSize: 15, fontWeight: FontWeight.w500),
+                          //   textAlign: TextAlign.justify,
+                          //   maxLines: null,
+                          // ),
+                        )
+                      ]),
+                  SizedBox(height: 14),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: 5),
+                      Row(
+                        children: <Widget>[
+                          likeIcon(),
+                          Text(likesCount.toString())
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          IconButton(
+                            iconSize: 30.r,
+                            icon: Icon(Icons.comment_rounded),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CommentsScreen(
+                                          postId: widget.post.id)));
+                            },
+                          ),
+                          Text(widget.post.comments.length.toString())
+                        ],
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      savedPostIcon()
+                    ],
+                  ),
+                  Divider(),
                 ],
               ),
-              Divider(),
-            ],
-          ),
-          decoration: new BoxDecoration(
-            boxShadow: [
-              new BoxShadow(
-                color: Colors.white,
-                blurRadius: 50.0,
-              ),
-            ],
-          ),
-        ));
+            ));
   }
 }

@@ -4,11 +4,13 @@ import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/user_info.dart';
 import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
+import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final UserInfo userInfo;
@@ -50,7 +52,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     cityController.text = widget.userInfo.city;
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   Future<void> updateProfile() async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       if (_image != null) {
         var response = await sendImage();
@@ -58,6 +62,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
           avatarUrl = response.data.toString();
           isImageUploaded = true;
         } else {
+          Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
           _showDialog(
               "Error", "Problems with uploading image, please, try again.");
         }
@@ -67,14 +72,18 @@ class EditProfileScreenState extends State<EditProfileScreen> {
       var responseUpd =
           await Dio().put(ApiEndpoints.userInfoPUT, data: updatedUserInfo);
       if (responseUpd.statusCode == 200) {
-        _showDialog("Success", "Profile was successful updated!");
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => BottomNavScreen()),
             (Route<dynamic> route) => false);
+        _showDialog("Success", "Profile was successful updated!");
       } else {
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         _showDialog("Error", "Something went wrong, please, try again.");
       }
     } catch (e) {
+      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
       print(e);
     }
   }
@@ -212,12 +221,20 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                         color: Colors.grey[800],
                                       ),
                                     ))
-                          : CircleAvatar(
-                              radius: 55.0,
-                              backgroundImage:
-                                  NetworkImage(widget.userInfo.avatarUrl),
-                              backgroundColor: Colors.transparent,
-                            )),
+                          : (Uri.parse(widget.userInfo.avatarUrl).isAbsolute
+                              ? CircleAvatar(
+                                  radius: 55.0,
+                                  backgroundImage:
+                                      NetworkImage(widget.userInfo.avatarUrl),
+                                  backgroundColor: Colors.transparent,
+                                )
+                              : CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage("assets/icon.jpg"),
+                                  backgroundColor: Colors.black,
+                                  foregroundColor: Colors.black,
+                                  radius: 45.r,
+                                ))),
                 ),
                 firstNameField(),
                 lastNameField(),

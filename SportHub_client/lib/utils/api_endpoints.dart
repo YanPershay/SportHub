@@ -2,7 +2,7 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 
 class ApiEndpoints {
   static const String protocol = "https://";
-  static const String host = "cac71574e2fc.ngrok.io";
+  static const String host = "f2562f40cd73.ngrok.io";
   static const String basePath = "/api/v1";
 
   static const String userPOST = basePath + "/user";
@@ -62,4 +62,6 @@ class ApiEndpoints {
 
   static const String isUsernameBusyGET =
       baseUrl + "/user/usernameCheck?username=";
+
+  static const String checkPass = baseUrl + "/user/authenticate";
 }

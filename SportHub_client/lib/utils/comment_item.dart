@@ -2,6 +2,7 @@ import 'package:SportHub_client/entities/comment.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommentItem extends StatelessWidget {
   final Comment comment;
@@ -30,7 +31,12 @@ class CommentItem extends StatelessWidget {
                   placeholder: (context, url) => CircularProgressIndicator(
                     backgroundColor: Colors.red,
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => CircleAvatar(
+                    backgroundImage: AssetImage("assets/icon.jpg"),
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.black,
+                    radius: 20.r,
+                  ),
                 ),
                 SizedBox(
                   width: 8,

@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TrainsPage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class TrainsPage extends StatefulWidget {
 }
 
 class TrainsPageState extends State<TrainsPage> {
-  List<AdminPost> adminPosts;
+  List<AdminPost> adminPosts = [];
 
   Future<void> getAdminPosts() async {
     try {
@@ -52,7 +53,14 @@ class TrainsPageState extends State<TrainsPage> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.grey[900],
-          title: Text("Trains"),
+          title: Text(
+            "Trains",
+            style: GoogleFonts.workSans(
+                fontStyle: FontStyle.normal,
+                fontSize: 25.r,
+                fontWeight: FontWeight.w500,
+                color: Colors.white),
+          ),
           actions: <Widget>[
             addTrainerPostIcon(),
             Container(
@@ -73,120 +81,130 @@ class TrainsPageState extends State<TrainsPage> {
           future: Future.wait([getAdminPosts()]),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Text("Wait");
+              return Center(
+                child: CircularProgressIndicator(backgroundColor: Colors.white),
+              );
             } else {
-              return SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(children: [
-                    for (var adminPost in adminPosts)
-                      GestureDetector(
-                          onTap: () => {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AdminPostScreen(
-                                              adminPost: adminPost,
-                                            )))
-                              },
-                          child: Card(
-                            clipBehavior: Clip.antiAlias,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Stack(
+              return adminPosts.isEmpty
+                  ? Center(
+                      child: Text("Sorry, something went wrong :(",
+                          style: TextStyle(color: Colors.white)))
+                  : SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: Column(children: [
+                        for (var adminPost in adminPosts)
+                          GestureDetector(
+                              onTap: () => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AdminPostScreen(
+                                                  adminPost: adminPost,
+                                                )))
+                                  },
+                              child: Card(
+                                clipBehavior: Clip.antiAlias,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      CachedNetworkImage(
-                                        imageUrl: adminPost.imageUrl,
-                                        imageBuilder: (context, provider) =>
-                                            Container(
-                                          height: 200.r,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: provider,
-                                                fit: BoxFit.cover),
+                                      Stack(
+                                        children: [
+                                          CachedNetworkImage(
+                                            imageUrl: adminPost.imageUrl,
+                                            imageBuilder: (context, provider) =>
+                                                Container(
+                                              height: 200.r,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: provider,
+                                                    fit: BoxFit.cover),
+                                              ),
+                                            ),
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Icon(Icons.error),
                                           ),
-                                        ),
-                                        progressIndicatorBuilder: (context, url,
-                                                downloadProgress) =>
-                                            CircularProgressIndicator(
-                                                value:
-                                                    downloadProgress.progress),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(Icons.error),
+                                          Positioned(
+                                            bottom: 16,
+                                            right: 16,
+                                            left: 16,
+                                            child: Text(
+                                              adminPost.title,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontSize: 25.r),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      Positioned(
-                                        bottom: 16,
-                                        right: 16,
-                                        left: 16,
-                                        child: Text(
-                                          adminPost.title,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 25.r),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Container(
-                                              child: RichText(
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  fontSize: 15.r,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black),
-                                              children: [
-                                                TextSpan(
-                                                    text: 'Duration: ' +
-                                                        adminPost.duration
-                                                            .toString() +
-                                                        '/5'),
-                                              ],
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Container(
+                                                  child: RichText(
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                      fontSize: 15.r,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black),
+                                                  children: [
+                                                    TextSpan(
+                                                        text: 'Duration: ' +
+                                                            adminPost.duration
+                                                                .toString() +
+                                                            '/5'),
+                                                  ],
+                                                ),
+                                              )),
                                             ),
-                                          )),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0)
-                                        .copyWith(top: 0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Container(
-                                              child: RichText(
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  fontSize: 15.r,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black),
-                                              children: [
-                                                TextSpan(
-                                                    text: 'Complexity: ' +
-                                                        adminPost.complexity
-                                                            .toString() +
-                                                        '/5'),
-                                              ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0)
+                                            .copyWith(top: 0),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Container(
+                                                  child: RichText(
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                      fontSize: 15.r,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black),
+                                                  children: [
+                                                    TextSpan(
+                                                        text: 'Complexity: ' +
+                                                            adminPost.complexity
+                                                                .toString() +
+                                                            '/5'),
+                                                  ],
+                                                ),
+                                              )),
                                             ),
-                                          )),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ]),
-                          ))
-                  ]));
+                                      ),
+                                    ]),
+                              ))
+                      ]));
             }
           }),
     );

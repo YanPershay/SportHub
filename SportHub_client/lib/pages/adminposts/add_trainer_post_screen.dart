@@ -25,7 +25,6 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   Future<void> sendPost() async {
-    Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       String filename = _image.path.split('/').last;
 
@@ -34,6 +33,9 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
       });
       var response =
           await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+
+      Dialogs.showLoadingDialog(
+          context, _keyLoader); //??????????????????????????????????????
       if (response.statusCode == 200) {
         AdminPost post = new AdminPost(
             title: titleTextController.text,

@@ -8,6 +8,8 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FriendsPage extends StatefulWidget {
   @override
@@ -121,7 +123,28 @@ class FriendsPageState extends State<FriendsPage> {
         future: Future.wait([getMySubscribes(), getSubscribers()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text("Wait");
+            return Scaffold(
+                appBar: AppBar(
+                    bottom: PreferredSize(
+                        child: Container(
+                          color: Colors.grey,
+                          height: 0.5,
+                        ),
+                        preferredSize: Size.fromHeight(1.0)),
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    title: Text(
+                      "Friends",
+                      style: GoogleFonts.workSans(
+                          fontStyle: FontStyle.normal,
+                          fontSize: 25.r,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    )),
+                body: Center(
+                  child:
+                      CircularProgressIndicator(backgroundColor: Colors.white),
+                ));
           } else {
             return Scaffold(
               appBar: AppBar(
@@ -135,7 +158,11 @@ class FriendsPageState extends State<FriendsPage> {
                   backgroundColor: Colors.white,
                   title: Text(
                     "Friends",
-                    style: TextStyle(color: Colors.black),
+                    style: GoogleFonts.workSans(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 25.r,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
                   )),
               body: Column(
                 children: [

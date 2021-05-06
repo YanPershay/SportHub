@@ -1,6 +1,7 @@
 import 'package:SportHub_client/entities/user.dart';
 
 class AdminPost {
+  int id;
   String title;
   String text;
   int duration;
@@ -13,7 +14,8 @@ class AdminPost {
   User user;
 
   AdminPost(
-      {this.title,
+      {this.id,
+      this.title,
       this.text,
       this.duration,
       this.complexity,
@@ -25,6 +27,7 @@ class AdminPost {
       this.userId});
 
   AdminPost.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     title = json['title'];
     text = json['text'];
     duration = json['duration'];
@@ -38,6 +41,7 @@ class AdminPost {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['title'] = this.title;
     data['text'] = this.text;
     data['duration'] = this.duration;

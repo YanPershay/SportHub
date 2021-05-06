@@ -8,9 +8,12 @@ import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final UserInfo userInfo;
@@ -37,12 +40,14 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   String dropdownValue;
   bool isImageSelected = false;
   bool isImageUploaded = false;
+  String date;
   @override
   void initState() {
     super.initState();
     firstNameController.text = widget.userInfo.firstName;
     lastNameController.text = widget.userInfo.lastName;
     dateOfBirthController.text = widget.userInfo.dateOfBirth;
+    date = widget.userInfo.dateOfBirth;
     heightController.text = widget.userInfo.height.toString();
     weightController.text = widget.userInfo.weight.toString();
     aboutController.text = widget.userInfo.aboutMe;
@@ -181,87 +186,299 @@ class EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
-        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+            backgroundColor: Colors.grey[900],
+            title: Text(
+              "Edit profile",
+              style: GoogleFonts.workSans(
+                  fontStyle: FontStyle.normal,
+                  fontSize: 25.r,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white),
+            )),
         body: SingleChildScrollView(
-          child: new Container(
-              padding: EdgeInsets.only(top: 20),
-              margin: EdgeInsets.all(16),
-              child: Column(children: <Widget>[
-                SizedBox(
-                  height: 32,
-                ),
-                Center(
-                  child: GestureDetector(
-                      onTap: () {
-                        _showPicker(context);
-                      },
-                      child: isImageSelected
-                          ? CircleAvatar(
-                              radius: 53,
-                              backgroundColor: Colors.black,
-                              child: _image != null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: Image.file(
-                                        _image,
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.fitHeight,
-                                      ),
-                                    )
-                                  : Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      width: 100,
-                                      height: 100,
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.grey[800],
-                                      ),
-                                    ))
-                          : (Uri.parse(widget.userInfo.avatarUrl).isAbsolute
+            physics: BouncingScrollPhysics(),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+                    Widget>[
+              SizedBox(height: 20.r),
+              Container(
+                  padding: EdgeInsets.only(top: 5.0, left: 20.0, right: 20.0),
+                  child: Column(children: <Widget>[
+                    Center(
+                      child: GestureDetector(
+                          onTap: () {
+                            _showPicker(context);
+                          },
+                          child: isImageSelected
                               ? CircleAvatar(
-                                  radius: 55.0,
-                                  backgroundImage:
-                                      NetworkImage(widget.userInfo.avatarUrl),
-                                  backgroundColor: Colors.transparent,
-                                )
-                              : CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage("assets/icon.jpg"),
+                                  radius: 53,
                                   backgroundColor: Colors.black,
-                                  foregroundColor: Colors.black,
-                                  radius: 45.r,
-                                ))),
-                ),
-                firstNameField(),
-                lastNameField(),
-                dateOfBirthField(),
-                sportLevelDropdown(),
-                heightField(),
-                weightField(),
-                aboutField(),
-                motivationField(),
-                countryField(),
-                cityField(),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        updateProfile();
-                      },
-                      child: Text("Update"),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                          textStyle: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold)),
-                    )),
-              ])),
-        ));
+                                  child: _image != null
+                                      ? ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Image.file(
+                                            _image,
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              borderRadius:
+                                                  BorderRadius.circular(50)),
+                                          width: 100,
+                                          height: 100,
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.grey[800],
+                                          ),
+                                        ))
+                              : (Uri.parse(widget.userInfo.avatarUrl).isAbsolute
+                                  ? CircleAvatar(
+                                      radius: 55.0,
+                                      backgroundImage: NetworkImage(
+                                          widget.userInfo.avatarUrl),
+                                      backgroundColor: Colors.transparent,
+                                    )
+                                  : CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage("assets/icon.jpg"),
+                                      backgroundColor: Colors.black,
+                                      foregroundColor: Colors.black,
+                                      radius: 45.r,
+                                    ))),
+                    ),
+                    TextField(
+                      controller: firstNameController,
+                      decoration: InputDecoration(
+                          labelText: 'FIRST NAME',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black))),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: lastNameController,
+                      decoration: InputDecoration(
+                        labelText: 'LAST NAME',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                      ),
+                    ),
+                    SizedBox(height: 15.0),
+
+                    dateOfBirthField(),
+                    SizedBox(height: 10.0),
+                    Row(
+                      children: [
+                        Text(
+                          'SPORT LEVEL:  ',
+                          style: TextStyle(
+                              fontSize: 16.r,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                        ),
+                        sportLevelDropdown(),
+                      ],
+                    ),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: heightController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: InputDecoration(
+                            labelText: 'HEIGHT ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: weightController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: InputDecoration(
+                            labelText: 'WEIGHT ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: aboutController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            labelText: 'ABOUT ME ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: motivationController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            labelText: 'MY MOTIVATION ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: countryController,
+                        decoration: InputDecoration(
+                            labelText: 'COUNTRY ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    TextField(
+                        controller: cityController,
+                        decoration: InputDecoration(
+                            labelText: 'CITY ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)))),
+                    SizedBox(height: 10.0),
+                    SizedBox(height: 50.0),
+                    Container(
+                        height: 40.0,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.black,
+                          color: Colors.black,
+                          elevation: 7.0,
+                          child: GestureDetector(
+                            onTap: () {
+                              updateProfile();
+                            },
+                            child: Center(
+                              child: Text(
+                                'UPDATE',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat'),
+                              ),
+                            ),
+                          ),
+                        )),
+                    // SingleChildScrollView(
+                    //   child: new Container(
+                    //       padding: EdgeInsets.only(top: 20),
+                    //       margin: EdgeInsets.all(16),
+                    //       child: Column(children: <Widget>[
+                    //         SizedBox(
+                    //           height: 32,
+                    //         ),
+                    //         Center(
+                    //           child: GestureDetector(
+                    //               onTap: () {
+                    //                 _showPicker(context);
+                    //               },
+                    //               child: isImageSelected
+                    //                   ? CircleAvatar(
+                    //                       radius: 53,
+                    //                       backgroundColor: Colors.black,
+                    //                       child: _image != null
+                    //                           ? ClipRRect(
+                    //                               borderRadius: BorderRadius.circular(50),
+                    //                               child: Image.file(
+                    //                                 _image,
+                    //                                 width: 100,
+                    //                                 height: 100,
+                    //                                 fit: BoxFit.fitHeight,
+                    //                               ),
+                    //                             )
+                    //                           : Container(
+                    //                               decoration: BoxDecoration(
+                    //                                   color: Colors.grey[200],
+                    //                                   borderRadius:
+                    //                                       BorderRadius.circular(50)),
+                    //                               width: 100,
+                    //                               height: 100,
+                    //                               child: Icon(
+                    //                                 Icons.camera_alt,
+                    //                                 color: Colors.grey[800],
+                    //                               ),
+                    //                             ))
+                    //                   : (Uri.parse(widget.userInfo.avatarUrl).isAbsolute
+                    //                       ? CircleAvatar(
+                    //                           radius: 55.0,
+                    //                           backgroundImage:
+                    //                               NetworkImage(widget.userInfo.avatarUrl),
+                    //                           backgroundColor: Colors.transparent,
+                    //                         )
+                    //                       : CircleAvatar(
+                    //                           backgroundImage:
+                    //                               AssetImage("assets/icon.jpg"),
+                    //                           backgroundColor: Colors.black,
+                    //                           foregroundColor: Colors.black,
+                    //                           radius: 45.r,
+                    //                         ))),
+                    //         ),
+                    //         firstNameField(),
+                    //         lastNameField(),
+                    //         dateOfBirthField(),
+                    //         sportLevelDropdown(),
+                    //         heightField(),
+                    //         weightField(),
+                    //         aboutField(),
+                    //         motivationField(),
+                    //         countryField(),
+                    //         cityField(),
+                    //         Padding(
+                    //             padding: EdgeInsets.symmetric(vertical: 16.0),
+                    //             child: ElevatedButton(
+                    //               onPressed: () {
+                    //                 updateProfile();
+                    //               },
+                    //               child: Text("Update"),
+                    //               style: ElevatedButton.styleFrom(
+                    //                   primary: Colors.black,
+                    //                   padding: EdgeInsets.symmetric(
+                    //                       horizontal: 50, vertical: 20),
+                    //                   textStyle: TextStyle(
+                    //                       fontSize: 30, fontWeight: FontWeight.bold)),
+                    //             )),
+                    //       ])),
+                    // )
+                  ]))
+            ])));
   }
 
   Widget firstNameField() {
@@ -300,11 +517,16 @@ class EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget dateOfBirthField() {
     return TextFormField(
-      controller: dateOfBirthController,
-      keyboardType: TextInputType.datetime,
-      decoration: InputDecoration(
-          labelText: 'Date of birth', hintText: 'Happy birthday'),
-    );
+        controller: dateOfBirthController,
+        keyboardType: TextInputType.datetime,
+        decoration: InputDecoration(
+            labelText: 'DATE OF BIRTH',
+            labelStyle: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                color: Colors.grey),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black))));
   }
 
   Widget sportLevelDropdown() {

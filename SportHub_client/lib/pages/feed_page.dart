@@ -99,7 +99,24 @@ class _FeedPageState extends State<FeedPage> {
         future: Future.wait([getFeedPosts(), getSavedPosts()]),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text("Wait");
+            return Scaffold(
+                resizeToAvoidBottomInset: false,
+                appBar: AppBar(
+                    shadowColor: Colors.transparent,
+                    backgroundColor: Colors.white,
+                    title: Text(
+                      "Sport Hub",
+                      style: GoogleFonts.workSans(
+                          fontStyle: FontStyle.normal,
+                          fontSize: 25.r,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    )),
+                backgroundColor: Colors.white,
+                body: Center(
+                  child:
+                      CircularProgressIndicator(backgroundColor: Colors.white),
+                ));
           } else {
             return Scaffold(
                 appBar: AppBar(
@@ -119,19 +136,23 @@ class _FeedPageState extends State<FeedPage> {
                           fontWeight: FontWeight.w500,
                           color: Colors.black),
                     )),
-                body: Container(
-                  child: RefreshIndicator(
-                    onRefresh: updatePosts,
-                    child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: userPosts.length,
-                        itemBuilder: (context, index) => CardItem(
-                              post: userPosts[index],
-                              userInfo: userPosts[index].user.userInfo,
-                              savedPosts: savedPosts,
-                            )),
-                  ),
-                ));
+                body: userPosts.isEmpty
+                    ? Center(
+                        child: Text("Sorry, something went wrong :(",
+                            style: TextStyle(color: Colors.black)))
+                    : Container(
+                        child: RefreshIndicator(
+                          onRefresh: updatePosts,
+                          child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemCount: userPosts.length,
+                              itemBuilder: (context, index) => CardItem(
+                                    post: userPosts[index],
+                                    userInfo: userPosts[index].user.userInfo,
+                                    savedPosts: savedPosts,
+                                  )),
+                        ),
+                      ));
           }
         });
   }

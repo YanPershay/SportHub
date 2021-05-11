@@ -27,6 +27,9 @@ class AdminPostScreenState extends State<AdminPostScreen> {
   Future<void> deleteTrainerPost() async {
     Dialogs.showLoadingDialog(context, _keyLoader);
     try {
+      var imgName = widget.adminPost.imageUrl.split("/").last;
+      var deleteImgResponse = await Dio()
+          .delete(ApiEndpoints.imageToBlobPOST + "?imgName=" + imgName);
       var deleteResponse = await Dio().delete(
           ApiEndpoints.deleteTrainPostDELETE,
           data: {"id": widget.adminPost.id});

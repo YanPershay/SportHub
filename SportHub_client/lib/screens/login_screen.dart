@@ -7,6 +7,7 @@ import 'package:SportHub_client/screens/registration/registration_usercredential
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +25,15 @@ class LoginScreenState extends State<LoginScreen> {
 
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+
+  bool _obscureText = true;
+
+  // Toggles the password show status
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,17 +84,32 @@ class LoginScreenState extends State<LoginScreen> {
                               borderSide: BorderSide(color: Colors.black))),
                     ),
                     SizedBox(height: 20.0),
-                    TextField(
+                    TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
-                          labelText: 'PASSWORD',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black))),
-                      obscureText: true,
+                        labelText: 'PASSWORD',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        suffixIcon: GestureDetector(
+                          dragStartBehavior: DragStartBehavior.down,
+                          onTap: () {
+                            _toggle();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Icon(
+                                _obscureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      obscureText: _obscureText,
                     ),
                     SizedBox(height: 5.0),
                     Container(
@@ -158,28 +183,6 @@ class LoginScreenState extends State<LoginScreen> {
           ],
         ));
   }
-
-  // Widget build(BuildContext context) {
-  //   return new Scaffold(
-  //     body: new Container(
-  //         padding: EdgeInsets.only(top: 20),
-  //         margin: EdgeInsets.all(16),
-  //         child: Column(
-  //           children: <Widget>[
-  //             SizedBox(
-  //               height: 20,
-  //             ),
-  //             usernameField(),
-  //             passwordField(),
-  //             Container(
-  //               margin: EdgeInsets.all(20),
-  //             ),
-  //             loginButton(),
-  //             registrationButton()
-  //           ],
-  //         )),
-  //   );
-  // }
 
   Widget usernameField() {
     return TextFormField(

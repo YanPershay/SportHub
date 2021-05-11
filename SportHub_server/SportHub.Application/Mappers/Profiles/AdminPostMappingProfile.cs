@@ -15,6 +15,7 @@ namespace SportHub.Application.Mappers.Profiles
             CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<AdminPost, AdminPostResponse>().ReverseMap();
             CreateMap<AdminPost, CreateAdminPostCommand>().ReverseMap();
+            CreateMap<AdminPost, DeleteTrainerPostCommand>().ReverseMap();
         }
     }
 }

@@ -4,6 +4,7 @@ import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationUserCredentialsScreen extends StatefulWidget {
@@ -32,6 +33,15 @@ class RegistartionUserCredentialsScreenState
     emailController.text = "test@gmail.com";
     passwordController.text = "1234";
     confirmPasswordController.text = "12345";
+  }
+
+  bool _obscureText = true;
+
+  // Toggles the password show status
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
   }
 
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
@@ -102,17 +112,34 @@ class RegistartionUserCredentialsScreenState
                         ),
                       ),
                       SizedBox(height: 10.0),
-                      TextField(
+                      TextFormField(
                         controller: passwordController,
                         decoration: InputDecoration(
-                            labelText: 'PASSWORD ',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black))),
-                        obscureText: true,
+                          labelText: 'PASSWORD',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          suffixIcon: GestureDetector(
+                            dragStartBehavior: DragStartBehavior.down,
+                            onTap: () {
+                              _toggle();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 18.0),
+                              child: Icon(
+                                  _obscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        obscureText: _obscureText,
+                        validator: (val) =>
+                            val.length < 6 ? 'Password too short.' : null,
                       ),
                       SizedBox(height: 10.0),
                       TextField(

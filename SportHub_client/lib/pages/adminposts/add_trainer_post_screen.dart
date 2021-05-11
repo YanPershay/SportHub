@@ -26,44 +26,56 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
 
   Future<void> sendPost() async {
     try {
-      String filename = _image.path.split('/').last;
-
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(_image.path, filename: filename),
-      });
-      var response =
-          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
-
-      Dialogs.showLoadingDialog(
-          context, _keyLoader); //??????????????????????????????????????
-      if (response.statusCode == 200) {
-        AdminPost post = new AdminPost(
-            title: titleTextController.text,
-            text: postTextController.text,
-            imageUrl: response.data.toString(),
-            dateCreated: DateTime.now().toString(),
-            categoryId: 3,
-            duration: int.parse(durationDropdownValue),
-            complexity: int.parse(complexityDropdownValue),
-            isUpdated: false,
-            userId: SharedPrefs.userId);
-        var responsePost =
-            await Dio().post(ApiEndpoints.trainerPostPOST, data: post);
-        if (responsePost.statusCode == 200) {
-          return Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => BottomNavScreen()),
-              (Route<dynamic> route) => false);
-        } else {
-          _showDialog("Error", "Problems with adding Post. Try again later.");
-        }
+      if (_image == null) {
+        Dialogs.showMyDialog(context, "Error", "Please, select image.");
       } else {
-        _showDialog(
-            "Error", "Problems with uploading image, please, try again.");
+        Dialogs.showLoadingDialog(context, _keyLoader);
+        if (titleTextController.text == "" || postTextController.text == "") {
+          Dialogs.showMyDialog(context, "Error", "Please, fill all fields.");
+        } else {
+          String filename = _image.path.split('/').last;
+
+          FormData formData = FormData.fromMap({
+            "file":
+                await MultipartFile.fromFile(_image.path, filename: filename),
+          });
+          var response =
+              await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+
+          if (response.statusCode == 200) {
+            AdminPost post = new AdminPost(
+                title: titleTextController.text,
+                text: postTextController.text,
+                imageUrl: response.data.toString(),
+                dateCreated: DateTime.now().toString(),
+                categoryId: 3,
+                duration: int.parse(durationDropdownValue),
+                complexity: int.parse(complexityDropdownValue),
+                isUpdated: false,
+                userId: SharedPrefs.userId);
+            var responsePost =
+                await Dio().post(ApiEndpoints.trainerPostPOST, data: post);
+            if (responsePost.statusCode == 200) {
+              return Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => BottomNavScreen()),
+                  (Route<dynamic> route) => false);
+            } else {
+              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                  .pop();
+              _showDialog(
+                  "Error", "Problems with adding Post. Try again later.");
+            }
+          } else {
+            Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+            _showDialog(
+                "Error", "Problems with uploading image, please, try again.");
+          }
+          Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+        }
       }
     } catch (e) {
-      _showDialog("Error", e.toString());
-    } finally {
       Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+      _showDialog("Error", e.toString());
     }
   }
 

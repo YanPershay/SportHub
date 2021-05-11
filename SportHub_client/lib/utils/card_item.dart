@@ -101,6 +101,9 @@ class _CardItemState extends State<CardItem> {
   Future<void> deletePost() async {
     //Dialogs.showLoadingDialog(context, _keyLoader);
     try {
+      var imgName = widget.post.imageUrl.split("/").last;
+      var deleteImgResponse = await Dio()
+          .delete(ApiEndpoints.imageToBlobPOST + "?imgName=" + imgName);
       var response = await Dio()
           .delete(ApiEndpoints.addPostPOST, data: {"id": widget.post.id});
       if (response.statusCode == 200) {
@@ -316,13 +319,6 @@ class _CardItemState extends State<CardItem> {
                                     ),
                                   ],
                                 ),
-                          // Text(
-                          //   widget.post.text,
-                          //   style: TextStyle(
-                          //       fontSize: 15, fontWeight: FontWeight.w500),
-                          //   textAlign: TextAlign.justify,
-                          //   maxLines: null,
-                          // ),
                         )
                       ]),
                   SizedBox(height: 14),
@@ -345,7 +341,9 @@ class _CardItemState extends State<CardItem> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => CommentsScreen(
-                                          postId: widget.post.id)));
+                                            postId: widget.post.id,
+                                            postUserId: widget.post.userId,
+                                          )));
                             },
                           ),
                           Text(widget.post.comments.length.toString())

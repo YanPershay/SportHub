@@ -259,12 +259,9 @@ class UserProfilePageState extends State<UserProfilePage> {
             return Scaffold(
                 resizeToAvoidBottomInset: false,
                 appBar: AppBar(
-                    shadowColor: Colors.transparent,
-                    backgroundColor: Colors.grey[900],
-                    title: Text(
-                      SharedPrefs.username,
-                      style: TextStyle(color: Colors.white),
-                    )),
+                  shadowColor: Colors.transparent,
+                  backgroundColor: Colors.grey[900],
+                ),
                 backgroundColor: Colors.grey[900],
                 body: Center(
                   child:
@@ -533,6 +530,13 @@ class UserProfilePageState extends State<UserProfilePage> {
                                   ),
                                   Column(
                                     children: posts,
+                                    //List.generate(userPosts.length, (index) {
+                                    //return CardItem(
+                                    //  post: userPosts[index],
+                                    //  userInfo: user.userInfo,
+                                    //savedPosts: savedPosts,
+                                    //);
+                                    //}
                                   ),
                                   Container(
                                     height: 40.r,

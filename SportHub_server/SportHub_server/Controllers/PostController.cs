@@ -105,5 +105,30 @@ namespace SportHub.API.Controllers
                 return StatusCode(500, $"Azure blob error: {ex}");
             }
         }
+    
+
+    [HttpDelete("blob")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteImageFromAzureBlob(string imgName)
+    {
+        try
+        {
+            var container = new BlobContainerClient(_azureConnectionString, "sporthubpostsimages");
+            var createResponse = await container.CreateIfNotExistsAsync();
+            if (createResponse != null && createResponse.GetRawResponse().Status == 201)
+            {
+                await container.SetAccessPolicyAsync(PublicAccessType.Blob);
+            }
+
+            var blob = container.GetBlobClient(imgName);
+            await blob.DeleteIfExistsAsync();
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Azure blob error: {ex}");
+        }
     }
+}
 }

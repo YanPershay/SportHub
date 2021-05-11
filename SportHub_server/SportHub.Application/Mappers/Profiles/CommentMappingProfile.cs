@@ -14,6 +14,7 @@ namespace SportHub.Application.Mappers.Profiles
 
             CreateMap<Comment, CommentResponse>().ReverseMap();
             CreateMap<Comment, CreateCommentCommand>().ReverseMap();
+            CreateMap<Comment, DeleteCommentCommand>().ReverseMap();
         }
     }
 }

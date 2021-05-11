@@ -42,35 +42,39 @@ class _NewPostScreenState extends State<NewPostScreen> {
     Dialogs.showLoadingDialog(context, _keyLoader);
 
     try {
-      String filename = _image.path.split('/').last;
-
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(_image.path, filename: filename),
-      });
-      var response =
-          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
-      if (response.statusCode == 200) {
-        Post post = new Post(
-            text: controller.text,
-            imageUrl: response.data.toString(),
-            dateCreated: DateTime.now().toString(),
-            isUpdated: false,
-            userId: SharedPrefs.userId);
-        var responsePost =
-            await Dio().post(ApiEndpoints.addPostPOST, data: post);
-        if (responsePost.statusCode == 200) {
-          return Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => BottomNavScreen()),
-              (Route<dynamic> route) => false);
-        } else {
-          _showDialog("Error", "Problems with adding Post. Try again later.");
-        }
+      if (_image == null) {
+        Dialogs.showMyDialog(context, "Error", "Please, select photo");
       } else {
-        _showDialog(
-            "Error", "Problems with uploading image, please, try again.");
+        String filename = _image.path.split('/').last;
+
+        FormData formData = FormData.fromMap({
+          "file": await MultipartFile.fromFile(_image.path, filename: filename),
+        });
+        var response =
+            await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+        if (response.statusCode == 200) {
+          Post post = new Post(
+              text: controller.text,
+              imageUrl: response.data.toString(),
+              dateCreated: DateTime.now().toString(),
+              isUpdated: false,
+              userId: SharedPrefs.userId);
+          var responsePost =
+              await Dio().post(ApiEndpoints.addPostPOST, data: post);
+          if (responsePost.statusCode == 200) {
+            return Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => BottomNavScreen()),
+                (Route<dynamic> route) => false);
+          } else {
+            _showDialog("Error", "Problems with adding Post. Try again later.");
+          }
+        } else {
+          _showDialog(
+              "Error", "Problems with uploading image, please, try again.");
+        }
+        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+        //return response.data.toString();
       }
-      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-      //return response.data.toString();
     } catch (e) {
       _showDialog("Error", e.toString());
     }

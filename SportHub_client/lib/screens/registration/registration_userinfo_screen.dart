@@ -213,7 +213,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                          labelText: 'FIRST NAME',
+                          labelText: 'FIRST NAME*',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -227,7 +227,7 @@ class RegistrationUserInfoScreenState
                     TextFormField(
                       controller: lastNameController,
                       decoration: InputDecoration(
-                        labelText: 'LAST NAME',
+                        labelText: 'LAST NAME*',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -357,7 +357,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                         controller: countryController,
                         decoration: InputDecoration(
-                            labelText: 'COUNTRY ',
+                            labelText: 'COUNTRY* ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -682,45 +682,51 @@ class RegistrationUserInfoScreenState
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   Future<void> registrateUser() async {
-    Dialogs.showLoadingDialog(context, _keyLoader);
-    var userJson = widget.userCredentials.toJson();
+    if (firstNameController.text == "" ||
+        lastNameController.text == "" ||
+        countryController.text == "") {
+      _showDialog("Error", "Please, fill fields with *.");
+    } else {
+      Dialogs.showLoadingDialog(context, _keyLoader);
+      var userJson = widget.userCredentials.toJson();
 
-    userJson.removeWhere((key, value) => key == null || value == null);
-    final userResponse =
-        await http.post(Uri.https(ApiEndpoints.host, ApiEndpoints.userPOST),
+      userJson.removeWhere((key, value) => key == null || value == null);
+      final userResponse =
+          await http.post(Uri.https(ApiEndpoints.host, ApiEndpoints.userPOST),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: jsonEncode(userJson));
+
+      if (userResponse.statusCode == 200) {
+        await sendImage();
+        var userInfoJson = createUserInfoObj(
+                User.fromJson(jsonDecode(userResponse.body)).guidId)
+            .toJson();
+        final userInfoResponse = await http.post(
+            Uri.https(ApiEndpoints.host, ApiEndpoints.userInfoPOST),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
-            body: jsonEncode(userJson));
+            body: jsonEncode(userInfoJson));
 
-    if (userResponse.statusCode == 200) {
-      await sendImage();
-      var userInfoJson =
-          createUserInfoObj(User.fromJson(jsonDecode(userResponse.body)).guidId)
-              .toJson();
-      final userInfoResponse = await http.post(
-          Uri.https(ApiEndpoints.host, ApiEndpoints.userInfoPOST),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(userInfoJson));
+        if (userInfoResponse.statusCode == 200) {
+          Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+              (Route<dynamic> route) => false);
 
-      if (userInfoResponse.statusCode == 200) {
-        Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-            (Route<dynamic> route) => false);
-
-        _showDialog("Success", "You has been successfully registered!");
+          _showDialog("Success", "You has been successfully registered!");
+        } else {
+          Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+          _showDialog("Failed", "You full user registration failed (");
+          throw Exception('Failed to create user info');
+        }
       } else {
         Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-        _showDialog("Failed", "You full user registration failed (");
-        throw Exception('Failed to create user info');
+        _showDialog("Failed", "You user creds registration failed (");
+        throw Exception('Failed to create user');
       }
-    } else {
-      Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-      _showDialog("Failed", "You user creds registration failed (");
-      throw Exception('Failed to create user');
     }
   }
 }

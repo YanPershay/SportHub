@@ -2,6 +2,7 @@
 using SportHub.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SportHub.Infrastructure.Data
@@ -25,6 +26,12 @@ namespace SportHub.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            //{
+            //    relationship.DeleteBehavior = DeleteBehavior.Cascade;
+            //}
+
             modelBuilder.Entity<User>()
                 .HasKey(u => u.GuidId)
                 .HasName("PrimaryKey_GuidId");
@@ -35,87 +42,60 @@ namespace SportHub.Infrastructure.Data
             .HasPrincipalKey<User>(x => x.GuidId)
             .HasForeignKey<UserInfo>(c => c.UserId).IsRequired();
 
-            modelBuilder.Entity<User>()
-            .HasMany(a => a.Posts)
-            .WithOne(a => a.User)
-            .HasPrincipalKey(x => x.GuidId)
-            .HasForeignKey(c => c.UserId).IsRequired();
-
-            modelBuilder.Entity<PostCategory>()
-            .HasMany(c => c.AdminPosts)
-            .WithOne(p => p.PostCategory)
-            .HasForeignKey(p => p.CategoryId)
-            .IsRequired();
+            modelBuilder.Entity<Post>()
+            .HasOne(a => a.User)
+            .WithMany(a => a.Posts)
+            .HasForeignKey(c => c.UserId);
 
             modelBuilder.Entity<User>()
             .HasMany(a => a.AdminPosts)
             .WithOne(a => a.User)
             .HasPrincipalKey(x => x.GuidId)
-            .HasForeignKey(c => c.UserId).IsRequired();
+            .HasForeignKey(c => c.UserId);
 
-            modelBuilder.Entity<Post>()
-            .HasMany(c => c.Comments)
-            .WithOne(p => p.Post)
-            .HasForeignKey(p => p.PostId)
+            modelBuilder.Entity<Comment>()
+            .HasOne(a => a.User)
+            .WithMany(a => a.Comments)
+            .HasPrincipalKey(x => x.GuidId)
             .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
+            .HasForeignKey(c => c.UserId);
 
-            modelBuilder.Entity<User>()
-            .HasMany(a => a.Comments)
-            .WithOne(a => a.User)
-            .HasPrincipalKey(x => x.GuidId)
-            .HasForeignKey(c => c.UserId)
-            .IsRequired();
-
-          //  modelBuilder.Entity<Post>()
-          //  .HasMany(c => c.Likes)
-          //  .WithOne(p => p.Post)
-          //  .HasForeignKey(p => p.PostId)
-          //  .OnDelete(DeleteBehavior.Restrict)
-          //  .IsRequired();
-
-          //  modelBuilder.Entity<Like>()
-          //.HasOne(p => p.User)
-          //.WithMany(c => c.Likes)
-          //.HasForeignKey(p => p.UserId);
-
-            //TODO: Настроить уникальность лайков путем миграции БД
-
-            //modelBuilder.Entity<Like>()
-            //.HasOne(a => a.User)
-            //.WithMany(a => a.Likes)
-            //.HasPrincipalKey(x => x.GuidId)
-            //.HasForeignKey(c => c.UserId).IsRequired();
-
-            //modelBuilder.Entity<Like>()
-            //.HasOne(a => a.Post)
-            //.WithMany(a => a.Likes)
+            modelBuilder.Entity<Comment>()
+            .HasOne(a => a.Post)
+            .WithMany(a => a.Comments)
             //.OnDelete(DeleteBehavior.Restrict)
-            //.HasForeignKey(c => c.PostId).IsRequired();
+            .HasForeignKey(c => c.PostId);//.IsRequired();
 
-            //modelBuilder.Entity<Like>()
-            //.HasIndex(p => new { p.UserId, p.PostId })
-            //.IsUnique(true);
-
-            modelBuilder.Entity<User>()
-            .HasMany(a => a.Likes)
-            .WithOne(a => a.User)
+            modelBuilder.Entity<Like>()
+            .HasOne(a => a.User)
+            .WithMany(a => a.Likes)
+            .OnDelete(DeleteBehavior.Restrict)
             .HasPrincipalKey(x => x.GuidId)
-            .HasForeignKey(c => c.UserId)
-            .IsRequired();
+            .HasForeignKey(c => c.UserId);//.IsRequired();
+
+            modelBuilder.Entity<Like>()
+            .HasOne(a => a.Post)
+            .WithMany(a => a.Likes)
+            //.OnDelete(DeleteBehavior.Restrict)
+            .HasForeignKey(c => c.PostId);//.IsRequired();
+
+            modelBuilder.Entity<Like>()
+            .HasIndex(p => new { p.UserId, p.PostId })
+            .IsUnique(true);
 
             modelBuilder.Entity<Subscribe>()
             .HasOne(a => a.Subscriber)
             .WithMany(a => a.Subscribers)
             .HasPrincipalKey(x => x.GuidId)
-            .HasForeignKey(c => c.SubscriberId).IsRequired();
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasForeignKey(c => c.SubscriberId);//.IsRequired();
 
             modelBuilder.Entity<Subscribe>()
             .HasOne(a => a.User)
             .WithMany(a => a.Subscribes)
-            .HasPrincipalKey(x => x.GuidId)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasForeignKey(c => c.UserId).IsRequired();
+            .HasPrincipalKey(x => x.GuidId);
+            //.OnDelete(DeleteBehavior.Restrict)
+            //.HasForeignKey(c => c.UserId);//.IsRequired();
 
             modelBuilder.Entity<Subscribe>()
             .HasIndex(p => new { p.SubscriberId, p.UserId })
@@ -124,17 +104,17 @@ namespace SportHub.Infrastructure.Data
             modelBuilder.Entity<User>()
             .HasMany(c => c.SavedPosts)
             .WithOne(p => p.User)
-            .HasForeignKey(p => p.UserId)
-            .HasPrincipalKey(x => x.GuidId)
             .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
+            .HasForeignKey(p => p.UserId)
+            .HasPrincipalKey(x => x.GuidId);
+            //.IsRequired();
 
             modelBuilder.Entity<Post>()
             .HasMany(a => a.SavedPosts)
             .WithOne(a => a.Post)
-            .HasForeignKey(c => c.PostId)
-            .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
+            //.OnDelete(DeleteBehavior.Restrict)
+            .HasForeignKey(c => c.PostId);
+            //.IsRequired();
 
             modelBuilder.Entity<SavedPost>()
             .HasIndex(p => new { p.UserId, p.PostId })

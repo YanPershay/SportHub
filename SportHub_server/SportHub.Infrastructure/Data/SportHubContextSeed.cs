@@ -3,8 +3,7 @@ using Microsoft.Extensions.Logging;
 using SportHub.Core.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using BC = BCrypt.Net.BCrypt;
 using System.Threading.Tasks;
 
 namespace SportHub.Infrastructure.Data
@@ -37,15 +36,9 @@ namespace SportHub.Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (!await context.PostCategories.AnyAsync())
+                if (!await context.TrainerPosts.AnyAsync())
                 {
-                    await context.PostCategories.AddRangeAsync(GetPostCategories());
-                    await context.SaveChangesAsync();
-                }
-
-                if (!await context.AdminPosts.AnyAsync())
-                {
-                    await context.AdminPosts.AddRangeAsync(GetAdminPosts());
+                    await context.TrainerPosts.AddRangeAsync(GetTrainerPosts());
                     await context.SaveChangesAsync();
                 }
 
@@ -89,13 +82,14 @@ namespace SportHub.Infrastructure.Data
         private static Guid guid2 = Guid.Parse("aa3cca72-8fac-4e55-b2ac-d0f59f6a1d7e");
 
         private const int postId = 1;
+        private const int postId2 = 2;
 
         private static IEnumerable<User> GetUsers()
         {
             return new List<User>()
             {
-                new User(guid, "yan_pershay", "yanpershay@gmail.com", "12345678", false, true),
-                new User(guid2, "semenomin", "semenomin@gmail.com", "12345678", false, true)
+                new User(guid, "yan_pershay", "yanpershay@gmail.com", BC.HashPassword("12345678"), true),
+                new User(guid2, "semenomin", "semenomin@gmail.com", BC.HashPassword("12345678"), true)
             };
         }
 
@@ -121,33 +115,20 @@ namespace SportHub.Infrastructure.Data
         {
             return new List<Post>()
             {
-                new Post("My first train!", "http://the-runners.com/wp-content/uploads/2017/02/62144-1024x682.jpg",
-                DateTime.Now, false, guid),
+                new Post("My first train!", "https://sun1.dataix-by-minsk.userapi.com/impg/VIWGCAkv3MbHRH2nxLCjApCLpIDvhonvfhW6LQ/0ViatiAspkU.jpg?size=1080x1080&quality=96&sign=319717f69260eb5678a1154d61f718bf&type=album",
+                DateTime.Now, guid),
                 new Post("My second train!", "https://freehealthnewz.com/wp-content/uploads/2018/10/eb02e74720dd9168d7b3ff86716de02a.jpg",
-                DateTime.Now, false, guid2)
+                DateTime.Now, guid2)
             };
         }
 
-        private static IEnumerable<PostCategory> GetPostCategories()
+        private static IEnumerable<TrainerPost> GetTrainerPosts()
         {
-            return new List<PostCategory>()
+            return new List<TrainerPost>()
             {
-                new PostCategory("Trains"),
-                new PostCategory("Exercises"),
-                new PostCategory("Food"),
-                new PostCategory("Motivation"),
-                new PostCategory("Medicine"),
-                new PostCategory("Other")
-            };
-        }
-
-        private static IEnumerable<AdminPost> GetAdminPosts()
-        {
-            return new List<AdminPost>()
-            {
-                new AdminPost(3, "Healthy food", "Eat healthy food please!!!", 3, 3,
+                new TrainerPost("Healthy food", "Eat healthy food please!!!", 3, 4,
                 "https://fathom-news.com/wp-content/uploads/2021/03/02-Blog-Healthy-Food-L-1000x530.jpg",
-                DateTime.Now, true, guid)
+                DateTime.Now, guid)
             };
         }
 
@@ -155,7 +136,8 @@ namespace SportHub.Infrastructure.Data
         {
             return new List<Comment>()
             {
-                new Comment("Nice train dude!", DateTime.Now, true, guid, postId)
+                new Comment("Nice train dude!", DateTime.Now, guid, postId),
+                 new Comment("Nice train dude!", DateTime.Now, guid2, postId2)
             };
         }
 
@@ -163,7 +145,8 @@ namespace SportHub.Infrastructure.Data
         {
             return new List<Like>()
             {
-                new Like(guid, postId)
+                new Like(guid, postId),
+                new Like(guid2, postId2)
             };
         }
 
@@ -179,7 +162,8 @@ namespace SportHub.Infrastructure.Data
         {
             return new List<SavedPost>()
             {
-                new SavedPost(guid, postId)
+                new SavedPost(guid, postId),
+                new SavedPost(guid2, postId2)
             };
         }
     }

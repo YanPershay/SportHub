@@ -96,3 +96,4 @@ D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\Micro
 D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
 D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\Thesis\SportHUB\SportHub_server\SportHub_server\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll

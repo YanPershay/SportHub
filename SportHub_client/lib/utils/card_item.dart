@@ -14,6 +14,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CardItem extends StatefulWidget {
   final Post post;
@@ -102,9 +103,11 @@ class _CardItemState extends State<CardItem> {
     //Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       var imgName = widget.post.imageUrl.split("/").last;
-      var deleteImgResponse = await Dio()
+      Dio dio = new Dio();
+      dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
+      var deleteImgResponse = await dio
           .delete(ApiEndpoints.imageToBlobPOST + "?imgName=" + imgName);
-      var response = await Dio()
+      var response = await dio
           .delete(ApiEndpoints.addPostPOST, data: {"id": widget.post.id});
       if (response.statusCode == 200) {
         isPostDeleted = true;
@@ -286,16 +289,27 @@ class _CardItemState extends State<CardItem> {
                           padding: new EdgeInsets.symmetric(horizontal: 10.0),
                           width: 350.r,
                           child: secondHalf.isEmpty
-                              ? new Text(firstHalf)
+                              ? new Text(
+                                  firstHalf,
+                                  style: GoogleFonts.workSans(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 15.r,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                )
                               : new Column(
                                   children: <Widget>[
                                     new Text(
                                       flag
                                           ? (firstHalf + "...")
                                           : (firstHalf + secondHalf),
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                      style: GoogleFonts.workSans(
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 15.r,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
                                       textAlign: TextAlign.justify,
                                       maxLines: null,
                                     ),

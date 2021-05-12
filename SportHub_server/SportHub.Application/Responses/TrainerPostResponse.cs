@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SportHub.Application.Responses
 {
-    public class AdminPostResponse
+    public class TrainerPostResponse
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -13,9 +13,6 @@ namespace SportHub.Application.Responses
         public int Complexity { get; set; }
         public string ImageUrl { get; set; }
         public DateTime DateCreated { get; set; }
-        public bool IsUpdated { get; set; }
-
-        public int CategoryId { get; set; }
 
         public UserResponse User { get; set; }
     }

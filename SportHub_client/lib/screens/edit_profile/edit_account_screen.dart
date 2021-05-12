@@ -44,6 +44,8 @@ class EditAccountScreenState extends State<EditAccountScreen> {
     Dialogs.showLoadingDialog(context, _keyLoader);
     setUser();
     try {
+      Dio dio = new Dio();
+      dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
       if (usernameController.text != SharedPrefs.username) {
         var response = await Dio()
             .get(ApiEndpoints.isUsernameBusyGET + usernameController.text);
@@ -59,7 +61,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
           "username": SharedPrefs.username,
           "password": oldPasswordController.text
         });
-        var response = await Dio().put(ApiEndpoints.userPUT, data: newUser);
+        var response = await dio.put(ApiEndpoints.userPUT, data: newUser);
         if (response.statusCode == 200) {
           var newToken = await Dio().post(ApiEndpoints.checkPass, data: {
             "username": SharedPrefs.username,

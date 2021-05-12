@@ -8,14 +8,14 @@ using System.Text;
 
 namespace SportHub.Application.Mappers.Profiles
 {
-    class AdminPostMappingProfile : Profile
+    class TrainerPostMappingProfile : Profile
     {
-        public AdminPostMappingProfile()
+        public TrainerPostMappingProfile()
         {
             CreateMap<User, UserResponse>().ReverseMap();
-            CreateMap<AdminPost, AdminPostResponse>().ReverseMap();
-            CreateMap<AdminPost, CreateAdminPostCommand>().ReverseMap();
-            CreateMap<AdminPost, DeleteTrainerPostCommand>().ReverseMap();
+            CreateMap<TrainerPost, TrainerPostResponse>().ReverseMap();
+            CreateMap<TrainerPost, CreateTrainerPostCommand>().ReverseMap();
+            CreateMap<TrainerPost, DeleteTrainerPostCommand>().ReverseMap();
         }
     }
 }

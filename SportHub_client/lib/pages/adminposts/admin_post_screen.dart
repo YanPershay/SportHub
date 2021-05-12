@@ -1,3 +1,4 @@
+import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/admin_post.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/dialogs.dart';
@@ -7,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toast/toast.dart';
@@ -28,15 +30,20 @@ class AdminPostScreenState extends State<AdminPostScreen> {
     Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       var imgName = widget.adminPost.imageUrl.split("/").last;
-      var deleteImgResponse = await Dio()
+      Dio dio = new Dio();
+      dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
+      var deleteImgResponse = await dio
           .delete(ApiEndpoints.imageToBlobPOST + "?imgName=" + imgName);
-      var deleteResponse = await Dio().delete(
-          ApiEndpoints.deleteTrainPostDELETE,
+
+      var deleteResponse = await dio.delete(ApiEndpoints.deleteTrainPostDELETE,
           data: {"id": widget.adminPost.id});
       Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
       if (deleteResponse.statusCode == 200) {
         Toast.show("Successfully deleted", context);
-        Navigator.of(context).pop();
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => BottomNavScreen()),
+            (Route<dynamic> route) => false);
+        //Navigator.of(context).pop();
       }
     } catch (e) {
       Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
@@ -104,10 +111,12 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                                   width: SizeConfig.screenWidth * 0.80,
                                   child: Text(
                                     widget.adminPost.title,
-                                    style: TextStyle(
-                                        fontSize: 30.r,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black.withOpacity(.8)),
+                                    style: GoogleFonts.workSans(
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 30.r,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black.withOpacity(.9),
+                                    ),
                                     softWrap: true,
                                   ),
                                 ),
@@ -125,10 +134,21 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                             Text(
                               DateFormat('dd.MM.yyyy kk:mm').format(
                                   DateTime.parse(widget.adminPost.dateCreated)),
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 15),
+                              style: GoogleFonts.workSans(
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.r,
+                                color: Colors.grey,
+                              ),
                             ),
-                            Text("by " + widget.adminPost.user.username)
+                            Text(
+                              "by " + widget.adminPost.user.username,
+                              style: GoogleFonts.workSans(
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.r,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
                           ],
                         ),
                       ]),
@@ -154,10 +174,16 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: new Text(
                     widget.adminPost.text,
-                    style: TextStyle(fontSize: 20),
+                    style: GoogleFonts.workSans(
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20.r,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.justify,
+                    maxLines: null,
                   ),
                 ),
                 SharedPrefs.isAdmin

@@ -4,8 +4,7 @@ SELECT * FROM Posts
 SELECT * FROM SavedPosts
 SELECT * FROM Users
 SELECT * FROM Usersinfo
-SELECT * FROM PostCategories
-SELECT * FROM AdminPosts
+SELECT * FROM TrainerPosts
 SELECT * FROM Comments
 SELECT * FROM Likes
 SELECT * FROM Subscribes

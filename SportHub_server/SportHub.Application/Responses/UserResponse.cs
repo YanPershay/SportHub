@@ -10,11 +10,7 @@ namespace SportHub.Application.Responses
         public Guid GuidId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-
-        //[JsonIgnore]
-        //public string Password { get; set; }
-        //public bool IsOnline { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool IsTrainer { get; set; }
         public UserInfoResponse UserInfo { get; set; }
     }
 }

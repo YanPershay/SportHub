@@ -33,6 +33,7 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "Azure.Storage.Blobs": "12.8.1",
+          "BCrypt.Net-Next": "4.0.2",
           "MediatR": "9.0.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "9.0.0",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
@@ -400,6 +401,17 @@
         },
         "compile": {
           "lib/netstandard2.0/Azure.Storage.Common.dll": {}
+        }
+      },
+      "BCrypt.Net-Next/4.0.2": {
+        "runtime": {
+          "lib/netcoreapp3.1/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/BCrypt.Net-Next.dll": {}
         }
       },
       "FluentValidation/9.5.2": {
@@ -1832,6 +1844,7 @@
       "SportHub.Application/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
+          "BCrypt.Net-Next": "4.0.2",
           "FluentValidation": "9.5.2",
           "MediatR": "9.0.0",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
@@ -1849,6 +1862,7 @@
       },
       "SportHub.Core/1.0.0": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.2",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.Extensions.Configuration.CommandLine": "5.0.0",
           "Newtonsoft.Json": "12.0.2",
@@ -1863,6 +1877,7 @@
       },
       "SportHub.Infrastructure/1.0.0": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.2",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.EntityFrameworkCore": "5.0.4",
           "Microsoft.EntityFrameworkCore.InMemory": "5.0.4",
@@ -3492,6 +3507,13 @@
       "sha512": "sha512-3f5auvdpx3LZpQq/bdqVurxuoaoIjnupefmBdDuOF7K70XFB2mTLLcx4erzZnUK7X82GKh/qkJGb5lyQFPgDVg==",
       "path": "azure.storage.common/12.7.1",
       "hashPath": "azure.storage.common.12.7.1.nupkg.sha512"
+    },
+    "BCrypt.Net-Next/4.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LyNKpIpr4GraRD9+xlTviyxxbZpF6J4xJf7DvraC1mR8PSN/KonGc4rt8C/fjkD3vaEvgA7BcvsbHFCOjgczyQ==",
+      "path": "bcrypt.net-next/4.0.2",
+      "hashPath": "bcrypt.net-next.4.0.2.nupkg.sha512"
     },
     "FluentValidation/9.5.2": {
       "type": "package",

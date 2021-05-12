@@ -13,11 +13,10 @@ namespace SportHub.Core.Entities
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool IsOnline { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool IsTrainer { get; set; }
         public virtual UserInfo UserInfo { get; set; }
         public List<Post> Posts { get; set; }
-        public List<AdminPost> AdminPosts { get; set; }
+        public List<TrainerPost> TrainerPosts { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Like> Likes { get; set; }
         public List<Subscribe> Subscribes { get; set; }
@@ -27,14 +26,13 @@ namespace SportHub.Core.Entities
 
         public User() { }
 
-        public User(Guid guidId, string username, string email, string password, bool isOnline, bool isAdmin)
+        public User(Guid guidId, string username, string email, string password, bool isTrainer)
         {
             GuidId = guidId;
             Username = username;
             Email = email;
             Password = password;
-            IsOnline = isOnline;
-            IsAdmin = isAdmin;
+            IsTrainer = isTrainer;
         }
     }
 }

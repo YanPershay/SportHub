@@ -139,10 +139,12 @@ class TrainsPageState extends State<TrainsPage> {
                                             left: 16,
                                             child: Text(
                                               adminPost.title,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                  fontSize: 25.r),
+                                              style: GoogleFonts.workSans(
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 25.r,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -156,11 +158,12 @@ class TrainsPageState extends State<TrainsPage> {
                                               child: Container(
                                                   child: RichText(
                                                 text: TextSpan(
-                                                  style: TextStyle(
-                                                      fontSize: 15.r,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black),
+                                                  style: GoogleFonts.workSans(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 15.r,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black,
+                                                  ),
                                                   children: [
                                                     TextSpan(
                                                         text: 'Duration: ' +
@@ -184,11 +187,12 @@ class TrainsPageState extends State<TrainsPage> {
                                               child: Container(
                                                   child: RichText(
                                                 text: TextSpan(
-                                                  style: TextStyle(
-                                                      fontSize: 15.r,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black),
+                                                  style: GoogleFonts.workSans(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 15.r,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black,
+                                                  ),
                                                   children: [
                                                     TextSpan(
                                                         text: 'Complexity: ' +

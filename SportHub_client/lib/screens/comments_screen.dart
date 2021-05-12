@@ -47,9 +47,9 @@ class _CommentsScreenState extends State<CommentsScreen> {
         var response =
             await Dio().post(ApiEndpoints.commentPOST, data: comment);
         comments.add(comment);
-        setState() {
+        setState(() {
           showComments();
-        }
+        });
       }
     } catch (e) {
       print(e);

@@ -17,8 +17,7 @@ namespace SportHub.Infrastructure.Data
         public DbSet<User> Users { get; set; }
         public DbSet<UserInfo> UsersInfo { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<PostCategory> PostCategories { get; set; }
-        public DbSet<AdminPost> AdminPosts { get; set; }
+        public DbSet<TrainerPost> TrainerPosts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
@@ -48,7 +47,7 @@ namespace SportHub.Infrastructure.Data
             .HasForeignKey(c => c.UserId);
 
             modelBuilder.Entity<User>()
-            .HasMany(a => a.AdminPosts)
+            .HasMany(a => a.TrainerPosts)
             .WithOne(a => a.User)
             .HasPrincipalKey(x => x.GuidId)
             .HasForeignKey(c => c.UserId);
@@ -87,14 +86,14 @@ namespace SportHub.Infrastructure.Data
             .HasOne(a => a.Subscriber)
             .WithMany(a => a.Subscribers)
             .HasPrincipalKey(x => x.GuidId)
-            .OnDelete(DeleteBehavior.Restrict)
+            //.OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(c => c.SubscriberId);//.IsRequired();
 
             modelBuilder.Entity<Subscribe>()
             .HasOne(a => a.User)
             .WithMany(a => a.Subscribes)
-            .HasPrincipalKey(x => x.GuidId);
-            //.OnDelete(DeleteBehavior.Restrict)
+            .HasPrincipalKey(x => x.GuidId)
+            .OnDelete(DeleteBehavior.Restrict);
             //.HasForeignKey(c => c.UserId);//.IsRequired();
 
             modelBuilder.Entity<Subscribe>()

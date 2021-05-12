@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SportHub.API.JwtMiddlewareTest;
 using SportHub.Application.Commands;
 using SportHub.Application.Queries;
 using SportHub.Application.Queries.PostQueries;
@@ -53,6 +54,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [JwtAuthorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PostResponse>> CreatePost([FromBody] CreatePostCommand command)
@@ -61,6 +63,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [JwtAuthorize]
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<int>> DeletePost([FromBody] DeletePostCommand command)
@@ -69,6 +72,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [JwtAuthorize]
         [HttpPost("blob")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UploadImageToAzureBlob()
@@ -106,7 +110,7 @@ namespace SportHub.API.Controllers
             }
         }
     
-
+    [JwtAuthorize]
     [HttpDelete("blob")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteImageFromAzureBlob(string imgName)

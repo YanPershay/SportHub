@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AGR/P5Wpxzt6UTqVdo38+CjkoPEvM3f4Zo2lYGhva89/NkVkYDaEJrbSCuOiRZ0onMs+XdFG0oLApmHLJhw4Jw==",
+  "dgSpecHash": "UsHi2nsUIc7L0tZRqM2o+87KZjF6FhZk/6fHhY0R8PPGW8CDNpivGZPvguFHVYdFbACHJCKqDQFHFJKh7p+hbQ==",
   "success": true,
   "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Yan\\.nuget\\packages\\azure.core\\1.8.1\\azure.core.1.8.1.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\azure.storage.blobs\\12.8.1\\azure.storage.blobs.12.8.1.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\azure.storage.common\\12.7.1\\azure.storage.common.12.7.1.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\fluentvalidation\\9.5.2\\fluentvalidation.9.5.2.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",

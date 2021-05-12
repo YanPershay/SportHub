@@ -11,9 +11,9 @@ namespace SportHub.Application.Handlers
 {
     public class DeleteTrainerPostHandler : IRequestHandler<DeleteTrainerPostCommand, int>
     {
-        private readonly IAdminPostRepository _postRepository;
+        private readonly ITrainerPostRepository _postRepository;
 
-        public DeleteTrainerPostHandler(IAdminPostRepository postRepository)
+        public DeleteTrainerPostHandler(ITrainerPostRepository postRepository)
         {
             _postRepository = postRepository;
         }

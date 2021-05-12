@@ -74,8 +74,10 @@ class EditProfileScreenState extends State<EditProfileScreen> {
       }
 
       setUserInfo();
+      Dio dio = new Dio();
+      dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
       var responseUpd =
-          await Dio().put(ApiEndpoints.userInfoPUT, data: updatedUserInfo);
+          await dio.put(ApiEndpoints.userInfoPUT, data: updatedUserInfo);
       if (responseUpd.statusCode == 200) {
         Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
 
@@ -104,8 +106,10 @@ class EditProfileScreenState extends State<EditProfileScreen> {
       FormData formData = FormData.fromMap({
         "file": await MultipartFile.fromFile(_image.path, filename: filename),
       });
+      Dio dio = new Dio();
+      dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
       var response =
-          await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+          await dio.post(ApiEndpoints.imageToBlobPOST, data: formData);
       return response;
     } catch (e) {
       _showDialog("Error", e.toString());

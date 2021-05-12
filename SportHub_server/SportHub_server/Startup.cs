@@ -58,7 +58,7 @@ namespace SportHub_server
             services.AddMediatR(typeof(CreateUserHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(CreateUserInfoHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(CreatePostHandler).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(CreateAdminPostHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(CreateTrainerPostHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(CreateCommentHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(AddLikeHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(SubscribeToUserHandler).GetTypeInfo().Assembly);
@@ -69,14 +69,14 @@ namespace SportHub_server
             services.AddMediatR(typeof(DeletePostHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(DeleteTrainerPostHandler).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(DeleteCommentHandler).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(DeleteUserHandler).GetTypeInfo().Assembly);
+            //services.AddMediatR(typeof(DeleteUserHandler).GetTypeInfo().Assembly);
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddScoped<IUserInfoRepository, UserInfoRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
-            services.AddTransient<IAdminPostRepository, AdminPostRepository>();
+            services.AddTransient<ITrainerPostRepository, TrainerPostRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<ILikeRepository, LikeRepository>();
             services.AddTransient<ISubscribeRepository, SubscribeRepository>();

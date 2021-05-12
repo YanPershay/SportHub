@@ -11,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace SportHub.Infrastructure.Repositories
 {
-    public class AdminPostRepository : Repository<AdminPost>, IAdminPostRepository
+    public class TrainerPostRepository : Repository<TrainerPost>, ITrainerPostRepository
     {
-        public AdminPostRepository(SportHubContext context) : base(context)
+        public TrainerPostRepository(SportHubContext context) : base(context)
         {
 
         }
 
-        public async Task<IEnumerable<AdminPost>> GetAdminPostsAsync()
+        public async Task<IEnumerable<TrainerPost>> GetTrainerPostsAsync()
         {
-            return await _context.AdminPosts.Include(p => p.User).OrderByDescending(p => p.DateCreated).ToListAsync();
+            return await _context.TrainerPosts.Include(p => p.User).OrderByDescending(p => p.DateCreated).ToListAsync();
         }
     }
 }

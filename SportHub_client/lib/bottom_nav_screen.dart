@@ -27,7 +27,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     });
   }
 
-  var currentPage = 1;
+  var currentPage = 3;
 
   var pages = [
     FeedPage(),

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SportHub.Core.Repositories
 {
-    public interface IAdminPostRepository : IRepository<AdminPost>
+    public interface ITrainerPostRepository : IRepository<TrainerPost>
     {
-        Task<IEnumerable<AdminPost>> GetAdminPostsAsync();
+        Task<IEnumerable<TrainerPost>> GetTrainerPostsAsync();
     }
 }

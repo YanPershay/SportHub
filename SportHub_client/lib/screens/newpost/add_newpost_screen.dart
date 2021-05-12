@@ -7,6 +7,7 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,8 +51,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         FormData formData = FormData.fromMap({
           "file": await MultipartFile.fromFile(_image.path, filename: filename),
         });
+        Dio dio = new Dio();
+        dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
         var response =
-            await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
+            await dio.post(ApiEndpoints.imageToBlobPOST, data: formData);
         if (response.statusCode == 200) {
           Post post = new Post(
               text: controller.text,
@@ -60,7 +63,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
               isUpdated: false,
               userId: SharedPrefs.userId);
           var responsePost =
-              await Dio().post(ApiEndpoints.addPostPOST, data: post);
+              await dio.post(ApiEndpoints.addPostPOST, data: post);
           if (responsePost.statusCode == 200) {
             return Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => BottomNavScreen()),
@@ -205,7 +208,12 @@ class _NewPostScreenState extends State<NewPostScreen> {
         backgroundColor: Colors.white,
         title: Text(
           "New post",
-          style: TextStyle(color: Colors.black),
+          style: GoogleFonts.workSans(
+            fontStyle: FontStyle.normal,
+            fontSize: 25.r,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
         ),
         actions: <Widget>[
           IconButton(

@@ -73,7 +73,9 @@ class UserProfilePageState extends State<UserProfilePage> {
   Future<void> subscribeToUser() async {
     Dialogs.showLoadingDialog(context, _keyLoader);
     try {
-      var response = await Dio().post(ApiEndpoints.subscribeToUserPOST,
+      Dio dio = new Dio();
+      dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
+      var response = await dio.post(ApiEndpoints.subscribeToUserPOST,
           data: new Subscribe(
               userId: widget.userId, subscriberId: SharedPrefs.userId));
     } catch (e) {
@@ -101,8 +103,10 @@ class UserProfilePageState extends State<UserProfilePage> {
       var response =
           await Dio().get(ApiEndpoints.getSubscribeObjGET + widget.userId);
       if (response.statusCode == 200) {
-        var deleteResponse = await Dio()
-            .delete(ApiEndpoints.unsubscribeDELETE, data: response.data);
+        Dio dio = new Dio();
+        dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
+        var deleteResponse = await dio.delete(ApiEndpoints.unsubscribeDELETE,
+            data: response.data);
       }
     } catch (e) {
       print(e);

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SportHub.API.JwtMiddlewareTest;
 using SportHub.Application.Commands;
 using SportHub.Application.Queries;
 using SportHub.Application.Responses;
@@ -38,6 +39,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [JwtAuthorize]
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<UserInfoResponse>> UpdateUserInfo([FromBody] UpdateUserInfoCommand command)

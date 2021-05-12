@@ -9,7 +9,6 @@ namespace SportHub.Application.Responses
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTime DateCreated { get; set; }
-        public bool IsUpdated { get; set; }
 
         public Guid UserId { get; set; }
         public int PostId { get; set; }

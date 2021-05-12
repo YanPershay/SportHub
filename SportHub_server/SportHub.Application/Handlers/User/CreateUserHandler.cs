@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace SportHub.Application.Handlers
 {
@@ -29,6 +30,8 @@ namespace SportHub.Application.Handlers
             {
                 throw new ApplicationException("There is an issue with mapping");
             }
+
+            userEntity.Password = BC.HashPassword(request.Password);
 
             var newUser = await _userRepository.AddAsync(userEntity);
             var userResponse = UserMapper.Mapper.Map<UserResponse>(newUser);

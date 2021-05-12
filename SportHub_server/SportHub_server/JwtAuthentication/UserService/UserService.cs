@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace SportHub.API.JwtMiddlewareTest
 {
@@ -30,17 +31,16 @@ namespace SportHub.API.JwtMiddlewareTest
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+            var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
 
             // return null if user not found
-            if (user == null) return null;
+            if (user == null || !BC.Verify(model.Password, user.Password)) return null;
 
             var userResponse = new UserResponse
             {
                 GuidId = user.GuidId,
                 Username = user.Username,
-                IsAdmin = user.IsAdmin,
-                //IsOnline = user.IsOnline,
+                IsTrainer = user.IsTrainer,
                 Email = user.Email
             };
             // authentication successful so generate jwt token
@@ -65,7 +65,7 @@ namespace SportHub.API.JwtMiddlewareTest
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("guidId", user.GuidId.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(90),
+                Expires = DateTime.UtcNow.AddDays(900),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

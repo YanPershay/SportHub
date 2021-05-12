@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "+yyV5eLGAD8rPnDkKWe3rmuTILNQh2PkZ7lMXuUFHAlZgCZd4CoGfqVXEiJS4xg8Uuc0wUdPnz0/eT3g+MtnPA==",
+  "dgSpecHash": "n5GrZYFlMlJaW8xIw0Kefldf/xf0i8UCcl1gcbdGyeNdYlifQuy+mOBA84Y4ru307Rv22MGTTp7FyyL6PW1/Ng==",
   "success": true,
   "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yan\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\fluentvalidation\\9.5.2\\fluentvalidation.9.5.2.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

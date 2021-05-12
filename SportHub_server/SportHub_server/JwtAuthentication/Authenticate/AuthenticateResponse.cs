@@ -18,7 +18,7 @@ namespace SportHub.API.JwtMiddlewareTest
         {
             GuidId = user.GuidId;
             Username = user.Username;
-            IsAdmin = user.IsAdmin;
+            IsAdmin = user.IsTrainer;
             Token = token;
         }
     }

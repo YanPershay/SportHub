@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SportHub.API.JwtMiddlewareTest;
 using SportHub.Application.Commands;
 using SportHub.Application.Queries;
 using SportHub.Application.Queries.SubscribesQueries;
@@ -31,15 +32,6 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("getmysubscount")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<ActionResult<int>> GetMySubscribesCountByUserId(Guid subscriberId)
-        //{
-        //    var query = new GetMySubscribesCountByUserIdQuery(subscriberId);
-        //    var result = await _mediator.Send(query);
-        //    return Ok(result);
-        //}
-
         [HttpGet("subsCount")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<SubscriptionsCountResponse>> GetSubscriptionsCountByUserId(Guid userId)
@@ -57,15 +49,6 @@ namespace SportHub.API.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
-
-        //[HttpGet("getsubscount")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<ActionResult<int>> GetSubscribersCountByUserId(Guid userId)
-        //{
-        //    var query = new GetSubscribersCountByUserIdQuery(userId);
-        //    var result = await _mediator.Send(query);
-        //    return Ok(result);
-        //}
 
         [HttpGet("getmysubs")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -85,6 +68,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [JwtAuthorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<SubscribeResponse>> SubscribeToUser([FromBody] SubscribeToUserCommand command)
@@ -93,6 +77,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
+        [JwtAuthorize]
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<int>> Unsubscribe([FromBody] UnsubscribeCommand command)

@@ -131,18 +131,18 @@ class _EditScreenState extends State<EditScreen> {
                     (Route<dynamic> route) => false);
               },
             ),
-            new ListTile(
-              leading: new Icon(Icons.warning, color: Colors.red),
-              title: new Text('Delete your account',
-                  style: TextStyle(color: Colors.red)),
-              onTap: () {
-                //clearSharedPrefs();
-                _displayDialog(context);
-                //Navigator.of(context).pushAndRemoveUntil(
-                //    MaterialPageRoute(builder: (context) => LoginScreen()),
-                //  (Route<dynamic> route) => false);
-              },
-            ),
+            // new ListTile(
+            //   leading: new Icon(Icons.warning, color: Colors.red),
+            //   title: new Text('Delete your account',
+            //       style: TextStyle(color: Colors.red)),
+            //   onTap: () {
+            //     //clearSharedPrefs();
+            //     _displayDialog(context);
+            //     //Navigator.of(context).pushAndRemoveUntil(
+            //     //    MaterialPageRoute(builder: (context) => LoginScreen()),
+            //     //  (Route<dynamic> route) => false);
+            //   },
+            // ),
           ],
         ),
       ),

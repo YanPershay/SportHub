@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SportHub.Application.Commands
 {
-    public class CreateAdminPostCommand : IRequest<AdminPostResponse>
+    public class CreateTrainerPostCommand : IRequest<TrainerPostResponse>
     {
         public string Title { get; set; }
         public string Text { get; set; }

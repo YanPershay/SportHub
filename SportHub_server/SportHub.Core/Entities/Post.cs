@@ -10,7 +10,6 @@ namespace SportHub.Core.Entities
         public string Text { get; set; }
         public string ImageUrl { get; set; }
         public DateTime DateCreated { get; set; }
-        public bool IsUpdated { get; set; }
 
         public Guid UserId { get; set; }
         public User User { get; set; }
@@ -19,12 +18,11 @@ namespace SportHub.Core.Entities
         public List<Like> Likes { get; set; }
         public List<SavedPost> SavedPosts { get; set; }
 
-        public Post(string text, string imageUrl, DateTime dateCreated, bool isUpdated, Guid userId)
+        public Post(string text, string imageUrl, DateTime dateCreated, Guid userId)
         {
             Text = text;
             ImageUrl = imageUrl;
             DateCreated = dateCreated;
-            IsUpdated = isUpdated;
             UserId = userId;
         }
     }

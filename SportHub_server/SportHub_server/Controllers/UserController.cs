@@ -79,5 +79,13 @@ namespace SportHub.API.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<bool>> DeleteUser([FromBody] DeleteUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

@@ -97,15 +97,15 @@ namespace SportHub.Infrastructure.Data
         {
             return new List<UserInfo>()
             {
-                new UserInfo("Yan", "Pershay", "Belarus", "Minsk", "27.01.2000", "Newer", 178, 75,
-                "I like sport! I train every day!",
-                "Up to 85kg",
+                new UserInfo("Yan", "Pershay", "Belarus", "Minsk", "27.01.2000", "Новичок", 178, 75,
+                "Люблю спорт. Тренируюсь ежедневно!",
+                "набрать массу до 85кг.",
                 "https://sun9-52.userapi.com/impg/dGpjgpkRRVUZeKb8NCjJDkwjoVI_vSxj2WeDuQ/frO2qVmmqxk.jpg?size=960x1280&quality=96&sign=03354df4b6a772466325e5926f835506&type=album",
                 guid),
 
-                new UserInfo("Semen", "Pilik", "Belarus", "Minsk", "09.12.1999", "Newer", 178, 75,
-                "I like sport! I train every day!",
-                "Up to 55kg",
+                new UserInfo("Semen", "Pilik", "Belarus", "Minsk", "09.12.1999", "Новичок", 178, 75,
+                "Люблю спорт. Тренируюсь ежедневно!",
+                "набрать массу до 65кг.",
                 "https://sun9-51.userapi.com/impf/c851224/v851224926/2c9bd/HxYwQOl1Wv4.jpg?size=1728x2160&quality=96&sign=38505411f40b2ce859a2d163946dec11&type=album",
                 guid2)
             };
@@ -115,9 +115,9 @@ namespace SportHub.Infrastructure.Data
         {
             return new List<Post>()
             {
-                new Post("My first train!", "https://sun1.dataix-by-minsk.userapi.com/impg/VIWGCAkv3MbHRH2nxLCjApCLpIDvhonvfhW6LQ/0ViatiAspkU.jpg?size=1080x1080&quality=96&sign=319717f69260eb5678a1154d61f718bf&type=album",
+                new Post("Сегодня я потренировался первый раз!!!", "https://sun1.dataix-by-minsk.userapi.com/impg/VIWGCAkv3MbHRH2nxLCjApCLpIDvhonvfhW6LQ/0ViatiAspkU.jpg?size=1080x1080&quality=96&sign=319717f69260eb5678a1154d61f718bf&type=album",
                 DateTime.Now, guid),
-                new Post("My second train!", "https://freehealthnewz.com/wp-content/uploads/2018/10/eb02e74720dd9168d7b3ff86716de02a.jpg",
+                new Post("Сегодня я потренировался первый раз!!!", "https://freehealthnewz.com/wp-content/uploads/2018/10/eb02e74720dd9168d7b3ff86716de02a.jpg",
                 DateTime.Now, guid2)
             };
         }

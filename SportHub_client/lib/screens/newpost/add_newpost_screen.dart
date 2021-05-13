@@ -54,7 +54,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         Dio dio = new Dio();
         dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
         var response =
-            await dio.post(ApiEndpoints.imageToBlobPOST, data: formData);
+            await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
         if (response.statusCode == 200) {
           Post post = new Post(
               text: controller.text,
@@ -154,14 +154,14 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Галерея'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('Камера'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -207,7 +207,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Text(
-          "New post",
+          "Создать",
           style: GoogleFonts.workSans(
             fontStyle: FontStyle.normal,
             fontSize: 25.r,
@@ -278,7 +278,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
             SizedBox(height: 20),
             CupertinoButton(
               color: Colors.grey[900],
-              child: Text("Send"),
+              child: Text("Отправить"),
               onPressed: () {
                 sendImage();
               },

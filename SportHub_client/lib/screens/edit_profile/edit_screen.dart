@@ -88,7 +88,7 @@ class _EditScreenState extends State<EditScreen> {
       appBar: AppBar(
           backgroundColor: Colors.grey[900],
           title: Text(
-            "Settings",
+            "Настройки",
             style: GoogleFonts.workSans(
                 fontStyle: FontStyle.normal,
                 fontSize: 25.r,
@@ -100,7 +100,7 @@ class _EditScreenState extends State<EditScreen> {
           children: <Widget>[
             new ListTile(
                 leading: new Icon(Icons.person),
-                title: new Text('Edit account'),
+                title: new Text('Редактировать аккаунт'),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -111,7 +111,7 @@ class _EditScreenState extends State<EditScreen> {
                 }),
             new ListTile(
               leading: new Icon(Icons.photo_camera),
-              title: new Text('Edit profile'),
+              title: new Text('Редактировать профиль'),
               onTap: () {
                 Navigator.push(
                     context,
@@ -123,7 +123,7 @@ class _EditScreenState extends State<EditScreen> {
             ),
             new ListTile(
               leading: new Icon(Icons.exit_to_app),
-              title: new Text('Sign out'),
+              title: new Text('Выйти'),
               onTap: () {
                 clearSharedPrefs();
                 Navigator.of(context).pushAndRemoveUntil(

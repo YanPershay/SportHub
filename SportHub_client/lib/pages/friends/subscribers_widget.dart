@@ -48,7 +48,7 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
               backgroundColor: Colors.white,
               title: Row(
                 children: [
-                  widget.title == "My subscribes"
+                  widget.title == "Мои подписки"
                       ? Icon(
                           Icons.arrow_back,
                           color: Colors.black,
@@ -62,7 +62,7 @@ class SubscribersWidgetState extends State<SubscribersWidget> {
                 ],
               ),
               actions: <Widget>[
-                widget.title == "Subscribers"
+                widget.title == "Подписчики"
                     ? Icon(
                         Icons.arrow_forward,
                         color: Colors.black,

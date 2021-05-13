@@ -189,7 +189,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                 begin: Alignment.bottomRight,
                                 end: Alignment.centerLeft)),
                         child: Center(
-                          child: Text('Unsubscribe',
+                          child: Text('Отписаться',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12.r,
@@ -226,7 +226,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                 begin: Alignment.bottomRight,
                                 end: Alignment.centerLeft)),
                         child: Center(
-                          child: Text('Subscribe',
+                          child: Text('Подписаться',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12.r,
@@ -272,7 +272,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                       CircularProgressIndicator(backgroundColor: Colors.white),
                 ));
           } else {
-            userPosts.isEmpty || user == null
+            user == null
                 ? Center(
                     child: Text("Sorry, something went wrong :(",
                         style: TextStyle(color: Colors.white)))
@@ -421,7 +421,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                                             FontWeight.bold,
                                                         fontSize: 25.r)),
                                                 Text(
-                                                  'followers',
+                                                  'подписчики',
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
@@ -451,7 +451,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                                             FontWeight.bold,
                                                         fontSize: 25.r)),
                                                 Text(
-                                                  'following',
+                                                  'подписки',
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
@@ -479,26 +479,26 @@ class UserProfilePageState extends State<UserProfilePage> {
                                 child: Text(
                                   (user.userInfo.sportLevel != ''
                                           ? (user.userInfo.sportLevel +
-                                              " level \n")
+                                              " уровень \n")
                                           : '') +
                                       (user.userInfo.aboutMe != ''
                                           ? (user.userInfo.aboutMe + "\n")
                                           : '') +
                                       (user.userInfo.motivation != ''
-                                          ? ("My motivation is " +
+                                          ? ("Моя мотивация " +
                                               user.userInfo.motivation +
                                               "\n")
                                           : '') +
                                       (user.userInfo.height != 0
                                           ? (user.userInfo.height.toString() +
-                                              " sm., ")
+                                              " см., ")
                                           : '') +
                                       (user.userInfo.weight != 0
                                           ? (user.userInfo.weight.toString() +
-                                              " kg. \n")
+                                              " кг. \n")
                                           : '') +
                                       (user.userInfo.dateOfBirth != null
-                                          ? ("Born " +
+                                          ? ("Родился " +
                                               user.userInfo.dateOfBirth)
                                           : ''),
                                   textAlign: TextAlign.center,
@@ -525,7 +525,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                     padding: EdgeInsets.all(10.r),
                                     child: Center(
                                       child: Text(
-                                        'Publications',
+                                        'Публикации',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 30.r),
@@ -534,13 +534,6 @@ class UserProfilePageState extends State<UserProfilePage> {
                                   ),
                                   Column(
                                     children: posts,
-                                    //List.generate(userPosts.length, (index) {
-                                    //return CardItem(
-                                    //  post: userPosts[index],
-                                    //  userInfo: user.userInfo,
-                                    //savedPosts: savedPosts,
-                                    //);
-                                    //}
                                   ),
                                   Container(
                                     height: 40.r,

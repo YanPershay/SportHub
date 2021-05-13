@@ -54,11 +54,11 @@ class TrainsPageState extends State<TrainsPage> {
           elevation: 0,
           backgroundColor: Colors.grey[900],
           title: Text(
-            "Trains",
+            "Блог",
             style: GoogleFonts.workSans(
                 fontStyle: FontStyle.normal,
                 fontSize: 25.r,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 color: Colors.white),
           ),
           actions: <Widget>[
@@ -166,7 +166,7 @@ class TrainsPageState extends State<TrainsPage> {
                                                   ),
                                                   children: [
                                                     TextSpan(
-                                                        text: 'Duration: ' +
+                                                        text: 'Длительность: ' +
                                                             adminPost.duration
                                                                 .toString() +
                                                             '/5'),
@@ -195,7 +195,7 @@ class TrainsPageState extends State<TrainsPage> {
                                                   ),
                                                   children: [
                                                     TextSpan(
-                                                        text: 'Complexity: ' +
+                                                        text: 'Сложность: ' +
                                                             adminPost.complexity
                                                                 .toString() +
                                                             '/5'),

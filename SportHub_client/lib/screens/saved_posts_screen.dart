@@ -73,7 +73,7 @@ class _SavedPostsScreenState extends State<SavedPostsScreen> {
                     elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Saved posts",
+                      "Сохранено",
                       style: GoogleFonts.workSans(
                           fontStyle: FontStyle.normal,
                           fontSize: 25.r,

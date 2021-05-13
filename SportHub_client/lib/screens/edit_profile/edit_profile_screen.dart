@@ -84,7 +84,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => BottomNavScreen()),
             (Route<dynamic> route) => false);
-        _showDialog("Success", "Profile was successful updated!");
+        _showDialog("Готово", "Профиль успешно обновлён!");
       } else {
         Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         _showDialog("Error", "Something went wrong, please, try again.");
@@ -168,14 +168,14 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Галерея'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('Камера'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -193,7 +193,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         appBar: AppBar(
             backgroundColor: Colors.grey[900],
             title: Text(
-              "Edit profile",
+              "Ред. профиль",
               style: GoogleFonts.workSans(
                   fontStyle: FontStyle.normal,
                   fontSize: 25.r,
@@ -259,7 +259,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                          labelText: 'FIRST NAME',
+                          labelText: 'ИМЯ',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -273,7 +273,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextFormField(
                       controller: lastNameController,
                       decoration: InputDecoration(
-                        labelText: 'LAST NAME',
+                        labelText: 'ФАМИЛИЯ',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -283,13 +283,12 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     SizedBox(height: 15.0),
-
                     dateOfBirthField(),
                     SizedBox(height: 10.0),
                     Row(
                       children: [
                         Text(
-                          'SPORT LEVEL:  ',
+                          'СПОРТИВНЫЙ УРОВЕНЬ:  ',
                           style: TextStyle(
                               fontSize: 16.r,
                               fontFamily: 'Montserrat',
@@ -307,7 +306,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'HEIGHT ',
+                            labelText: 'РОСТ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -322,7 +321,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'WEIGHT ',
+                            labelText: 'ВЕС ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -335,7 +334,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'ABOUT ME ',
+                            labelText: 'О СЕБЕ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -348,7 +347,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'MY MOTIVATION ',
+                            labelText: 'МОТИВАЦИЯ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -359,7 +358,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextField(
                         controller: countryController,
                         decoration: InputDecoration(
-                            labelText: 'COUNTRY ',
+                            labelText: 'СТРАНА ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -370,7 +369,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextField(
                         controller: cityController,
                         decoration: InputDecoration(
-                            labelText: 'CITY ',
+                            labelText: 'ГОРОД ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -392,7 +391,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                             },
                             child: Center(
                               child: Text(
-                                'UPDATE',
+                                'ОБНОВИТЬ',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -401,122 +400,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
                         )),
-                    // SingleChildScrollView(
-                    //   child: new Container(
-                    //       padding: EdgeInsets.only(top: 20),
-                    //       margin: EdgeInsets.all(16),
-                    //       child: Column(children: <Widget>[
-                    //         SizedBox(
-                    //           height: 32,
-                    //         ),
-                    //         Center(
-                    //           child: GestureDetector(
-                    //               onTap: () {
-                    //                 _showPicker(context);
-                    //               },
-                    //               child: isImageSelected
-                    //                   ? CircleAvatar(
-                    //                       radius: 53,
-                    //                       backgroundColor: Colors.black,
-                    //                       child: _image != null
-                    //                           ? ClipRRect(
-                    //                               borderRadius: BorderRadius.circular(50),
-                    //                               child: Image.file(
-                    //                                 _image,
-                    //                                 width: 100,
-                    //                                 height: 100,
-                    //                                 fit: BoxFit.fitHeight,
-                    //                               ),
-                    //                             )
-                    //                           : Container(
-                    //                               decoration: BoxDecoration(
-                    //                                   color: Colors.grey[200],
-                    //                                   borderRadius:
-                    //                                       BorderRadius.circular(50)),
-                    //                               width: 100,
-                    //                               height: 100,
-                    //                               child: Icon(
-                    //                                 Icons.camera_alt,
-                    //                                 color: Colors.grey[800],
-                    //                               ),
-                    //                             ))
-                    //                   : (Uri.parse(widget.userInfo.avatarUrl).isAbsolute
-                    //                       ? CircleAvatar(
-                    //                           radius: 55.0,
-                    //                           backgroundImage:
-                    //                               NetworkImage(widget.userInfo.avatarUrl),
-                    //                           backgroundColor: Colors.transparent,
-                    //                         )
-                    //                       : CircleAvatar(
-                    //                           backgroundImage:
-                    //                               AssetImage("assets/icon.jpg"),
-                    //                           backgroundColor: Colors.black,
-                    //                           foregroundColor: Colors.black,
-                    //                           radius: 45.r,
-                    //                         ))),
-                    //         ),
-                    //         firstNameField(),
-                    //         lastNameField(),
-                    //         dateOfBirthField(),
-                    //         sportLevelDropdown(),
-                    //         heightField(),
-                    //         weightField(),
-                    //         aboutField(),
-                    //         motivationField(),
-                    //         countryField(),
-                    //         cityField(),
-                    //         Padding(
-                    //             padding: EdgeInsets.symmetric(vertical: 16.0),
-                    //             child: ElevatedButton(
-                    //               onPressed: () {
-                    //                 updateProfile();
-                    //               },
-                    //               child: Text("Update"),
-                    //               style: ElevatedButton.styleFrom(
-                    //                   primary: Colors.black,
-                    //                   padding: EdgeInsets.symmetric(
-                    //                       horizontal: 50, vertical: 20),
-                    //                   textStyle: TextStyle(
-                    //                       fontSize: 30, fontWeight: FontWeight.bold)),
-                    //             )),
-                    //       ])),
-                    // )
                   ]))
             ])));
-  }
-
-  Widget firstNameField() {
-    return TextFormField(
-      controller: firstNameController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-          labelText: 'First name', hintText: 'Enter your name...'),
-    );
-  }
-
-  Widget lastNameField() {
-    return TextFormField(
-      controller: lastNameController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-          labelText: 'Last name', hintText: "Enter your surname..."),
-    );
-  }
-
-  Widget countryField() {
-    return TextFormField(
-      controller: countryController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(labelText: 'Country', hintText: "Belarus"),
-    );
-  }
-
-  Widget cityField() {
-    return TextFormField(
-      controller: cityController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(labelText: 'City', hintText: "Minsk"),
-    );
   }
 
   Widget dateOfBirthField() {
@@ -524,7 +409,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         controller: dateOfBirthController,
         keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
-            labelText: 'DATE OF BIRTH',
+            labelText: 'ДАТА РОЖДЕНИЯ',
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
@@ -546,45 +431,13 @@ class EditProfileScreenState extends State<EditProfileScreen> {
           dropdownValue = newValue;
         });
       },
-      items: <String>['Newer', 'Middle', 'Advanced']
+      items: <String>['Новичок', 'Средний', 'Продвинутый']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
         );
       }).toList(),
-    );
-  }
-
-  Widget heightField() {
-    return TextFormField(
-      controller: heightController,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'Weight', hintText: 'Your weight'),
-    );
-  }
-
-  Widget weightField() {
-    return TextFormField(
-      controller: weightController,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'Height', hintText: 'Your height'),
-    );
-  }
-
-  Widget aboutField() {
-    return TextFormField(
-      controller: aboutController,
-      decoration: InputDecoration(
-          labelText: 'About me', hintText: 'Tell about you if you want.'),
-    );
-  }
-
-  Widget motivationField() {
-    return TextFormField(
-      controller: motivationController,
-      decoration: InputDecoration(
-          labelText: 'Motivation', hintText: 'Tell us what you want.'),
     );
   }
 

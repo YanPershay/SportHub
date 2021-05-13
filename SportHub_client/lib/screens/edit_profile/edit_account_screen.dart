@@ -53,7 +53,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
           bool isUsernameBusy = response.data.toString() == "true";
           if (isUsernameBusy) {
             Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-            _showDialog("Username busy", "Please, choose another username");
+            _showDialog("Занято", "Пожалуйста, выберите другое имя.");
           }
         }
       } else {
@@ -81,14 +81,14 @@ class EditAccountScreenState extends State<EditAccountScreen> {
               MaterialPageRoute(builder: (context) => BottomNavScreen()),
               (Route<dynamic> route) => false);
 
-          _showDialog("Success", "Account data was successful updated!");
+          _showDialog("Отлично!", "Данные успешно обновлены!");
         } else {
           _showDialog("Error", "Something went wrong, please, try again.");
         }
       }
     } catch (e) {
       Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-      _showDialog("Incorrect password", "Old password incorrect.");
+      _showDialog("Неправильный пароль", "Старый пароль введен неверно.");
     }
   }
 
@@ -97,7 +97,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
         appBar: AppBar(
             backgroundColor: Colors.grey[900],
             title: Text(
-              "Edit account",
+              "Ред. аккаунт",
               style: GoogleFonts.workSans(
                   fontStyle: FontStyle.normal,
                   fontSize: 25.r,
@@ -110,7 +110,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
               TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
-                    labelText: 'USERNAME',
+                    labelText: 'ИМЯ ПОЛЬЗОВАТЕЛЯ',
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
@@ -127,7 +127,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) => EmailValidator.validate(value)
                     ? null
-                    : "Please enter a valid email",
+                    : "Пожалуйста, введите правильный email",
                 decoration: InputDecoration(
                   labelText: 'EMAIL ',
                   labelStyle: TextStyle(
@@ -142,7 +142,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
               TextField(
                 controller: oldPasswordController,
                 decoration: InputDecoration(
-                    labelText: 'PASSWORD ',
+                    labelText: 'СТАРЫЙ ПАРОЛЬ ',
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
@@ -155,7 +155,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
               TextField(
                 controller: newPasswordController,
                 decoration: InputDecoration(
-                    labelText: 'NEW PASSWORD ',
+                    labelText: 'НОВЫЙ ПАРОЛЬ ',
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
@@ -178,7 +178,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
                       },
                       child: Center(
                         child: Text(
-                          'UPDATE',
+                          'ОБНОВИТЬ',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -189,29 +189,6 @@ class EditAccountScreenState extends State<EditAccountScreen> {
                   )),
               SizedBox(height: 20.0)
             ])));
-    // body: new Container(
-    //     margin: EdgeInsets.all(16),
-    //     child: Column(children: <Widget>[
-    //       emailField(),
-    //       usernameField(),
-    //       oldPasswordField(),
-    //       newPasswordField(),
-    //       Padding(
-    //           padding: EdgeInsets.symmetric(vertical: 16.0),
-    //           child: ElevatedButton(
-    //             onPressed: () {
-    //               //не забыть закинуть обновленное имя в шаред префс но только в случае успешного обновления
-    //               updateAccount();
-    //             },
-    //             child: Text('Update'),
-    //             style: ElevatedButton.styleFrom(
-    //                 primary: Colors.black,
-    //                 padding:
-    //                     EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-    //                 textStyle: TextStyle(
-    //                     fontSize: 30, fontWeight: FontWeight.bold)),
-    //           )),
-    //     ])));
   }
 
   Future<void> validateFields() async {
@@ -224,7 +201,8 @@ class EditAccountScreenState extends State<EditAccountScreen> {
           bool isUsernameBusy = response.data.toString() == "true";
           if (isUsernameBusy) {
             //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-            _showDialog("Username busy", "Please, choose another username");
+            _showDialog(
+                "Занято", "Пожалуйста, выберите другое имя пользователя.");
           } else {
             //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
             await updateAccount();

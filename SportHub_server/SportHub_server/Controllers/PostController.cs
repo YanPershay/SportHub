@@ -72,7 +72,7 @@ namespace SportHub.API.Controllers
             return Ok(result);
         }
 
-        [JwtAuthorize]
+        //[JwtAuthorize]
         [HttpPost("blob")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UploadImageToAzureBlob()

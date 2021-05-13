@@ -36,7 +36,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
   Future<void> sendComment() async {
     try {
       if (commentController.text == "") {
-        Dialogs.showMyDialog(context, "Error", "Please, enter comment.");
+        Dialogs.showMyDialog(
+            context, "Нет", "Мы не можем отправить пустой комментарий");
       } else {
         Comment comment = new Comment(
             userId: SharedPrefs.userId,
@@ -82,7 +83,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     iconTheme: IconThemeData(color: Colors.black),
                     elevation: 0,
                     title: Text(
-                      "Comments",
+                      "Комментарии",
                       style: GoogleFonts.workSans(
                         fontStyle: FontStyle.normal,
                         fontSize: 25.r,
@@ -109,8 +110,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       ListTile(
                         title: TextFormField(
                           controller: commentController,
-                          decoration:
-                              InputDecoration(hintText: "Write a comment..."),
+                          decoration: InputDecoration(
+                              hintText: "Напишите комментарий..."),
                         ),
                         trailing: IconButton(
                           icon: Icon(Icons.send, color: Colors.black),

@@ -48,23 +48,23 @@ class BottomNavScreenState extends State<BottomNavScreen> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: 'Домой',
               backgroundColor: Colors.grey[900]),
           BottomNavigationBarItem(
               icon: Icon(Icons.people),
-              label: 'Friends',
+              label: 'Друзья',
               backgroundColor: Colors.grey[900]),
           BottomNavigationBarItem(
               icon: Icon(Icons.add_box),
-              label: 'New',
+              label: 'Создать',
               backgroundColor: Colors.grey[900]),
           BottomNavigationBarItem(
               icon: Icon(Icons.accessibility_new_sharp),
-              label: 'Trains',
+              label: 'Блог',
               backgroundColor: Colors.grey[900]),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Profile',
+              label: 'Профиль',
               backgroundColor: Colors.grey[900]),
         ],
         unselectedItemColor: Colors.grey[600],

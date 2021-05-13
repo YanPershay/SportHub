@@ -189,7 +189,7 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                 SharedPrefs.isAdmin
                     ? CupertinoButton(
                         color: Colors.grey[900],
-                        child: Text("Delete"),
+                        child: Text("Удалить"),
                         onPressed: () {
                           showAlertDialog(context);
                         },

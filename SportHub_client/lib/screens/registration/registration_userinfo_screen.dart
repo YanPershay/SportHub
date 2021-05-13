@@ -56,8 +56,8 @@ class RegistrationUserInfoScreenState
         if (response.statusCode == 200) {
           avatarUrl = response.data.toString();
         } else {
-          _showDialog(
-              "Error", "Problems with uploading image, please, try again.");
+          _showDialog("Ошибка",
+              "Проблемы с загрузко фото, пожалуйста, попробуйте еще раз.");
         }
       }
       //return response.data.toString();
@@ -116,14 +116,14 @@ class RegistrationUserInfoScreenState
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Галерея'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('Камера'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -213,7 +213,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                          labelText: 'FIRST NAME*',
+                          labelText: 'ИМЯ*',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -227,7 +227,7 @@ class RegistrationUserInfoScreenState
                     TextFormField(
                       controller: lastNameController,
                       decoration: InputDecoration(
-                        labelText: 'LAST NAME*',
+                        labelText: 'ФАМИЛИЯ*',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -240,7 +240,7 @@ class RegistrationUserInfoScreenState
                     Row(
                       children: [
                         Text(
-                          "DATE OF BIRTH: ",
+                          "ДАТА РОЖДЕНИЯ: ",
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -276,7 +276,7 @@ class RegistrationUserInfoScreenState
                                       side: BorderSide(color: Colors.black)))),
                       onPressed: () => _selectDate(context),
                       child: Text(
-                        'SELECT DATE',
+                        'ВЫБЕРИТЕ ДАТУ',
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -287,7 +287,7 @@ class RegistrationUserInfoScreenState
                     Row(
                       children: [
                         Text(
-                          'SPORT LEVEL:  ',
+                          'СПОРТИВНЫЙ УРОВЕНЬ:  ',
                           style: TextStyle(
                               fontSize: 16.r,
                               fontFamily: 'Montserrat',
@@ -305,7 +305,7 @@ class RegistrationUserInfoScreenState
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'HEIGHT ',
+                            labelText: 'РОСТ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -320,7 +320,7 @@ class RegistrationUserInfoScreenState
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'WEIGHT ',
+                            labelText: 'ВЕС ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -333,7 +333,7 @@ class RegistrationUserInfoScreenState
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'ABOUT ME ',
+                            labelText: 'О СЕБЕ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -346,7 +346,7 @@ class RegistrationUserInfoScreenState
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'MY MOTIVATION ',
+                            labelText: 'МОТИВАЦИЯ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -357,7 +357,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                         controller: countryController,
                         decoration: InputDecoration(
-                            labelText: 'COUNTRY* ',
+                            labelText: 'СТРАНА* ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -368,7 +368,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                         controller: cityController,
                         decoration: InputDecoration(
-                            labelText: 'CITY ',
+                            labelText: 'ГОРОД ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -390,7 +390,7 @@ class RegistrationUserInfoScreenState
                             },
                             child: Center(
                               child: Text(
-                                'REGISTRATE',
+                                'ЗАРЕГИСТРИРОВАТЬСЯ',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -416,7 +416,7 @@ class RegistrationUserInfoScreenState
                             Navigator.of(context).pop();
                           },
                           child: Center(
-                            child: Text('Go Back',
+                            child: Text('НАЗАД',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Montserrat')),
@@ -428,131 +428,6 @@ class RegistrationUserInfoScreenState
                 )),
           ]),
         ));
-  }
-
-  // Widget build(BuildContext context) {
-  //   return new Scaffold(
-  //       resizeToAvoidBottomInset: false,
-  //       body: SingleChildScrollView(
-  //         child: new Container(
-  //             padding: EdgeInsets.only(top: 20),
-  //             margin: EdgeInsets.all(16),
-  //             child: Column(children: <Widget>[
-  //               SizedBox(
-  //                 height: 32,
-  //               ),
-  //               Container(
-  //                 child: GestureDetector(
-  //                   onTap: () {
-  //                     _showPicker(context);
-  //                   },
-  //                   child: CircleAvatar(
-  //                     radius: 53,
-  //                     backgroundColor: Colors.black,
-  //                     child: _image != null
-  //                         ? ClipRRect(
-  //                             borderRadius: BorderRadius.circular(55),
-  //                             child: Image.file(
-  //                               _image,
-  //                               width: 100,
-  //                               height: 100,
-  //                               fit: BoxFit.fitHeight,
-  //                             ),
-  //                           )
-  //                         : Container(
-  //                             decoration: BoxDecoration(
-  //                                 color: Colors.grey[200],
-  //                                 borderRadius: BorderRadius.circular(50)),
-  //                             width: 100,
-  //                             height: 100,
-  //                             child: Icon(
-  //                               Icons.camera_alt,
-  //                               color: Colors.grey[800],
-  //                             ),
-  //                           ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               firstNameField(),
-  //               lastNameField(),
-  //               SizedBox(
-  //                 height: 20,
-  //               ),
-  //               Row(
-  //                 children: [
-  //                   Text("Your birthday: "),
-  //                   Text(DateFormat('dd.MM.yyyy')
-  //                       .format(DateTime.parse(selectedDate.toString()))),
-  //                 ],
-  //               ),
-  //               SizedBox(
-  //                 height: 20.0,
-  //               ),
-  //               RaisedButton(
-  //                 color: Colors.black,
-  //                 onPressed: () => _selectDate(context),
-  //                 child: Text(
-  //                   'Click to select your birthday',
-  //                   style: TextStyle(color: Colors.white),
-  //                 ),
-  //               ),
-  //               sportLevelDropdown(),
-  //               heightField(),
-  //               weightField(),
-  //               aboutField(),
-  //               motivationField(),
-  //               countryField(),
-  //               cityField(),
-  //               Padding(
-  //                   padding: EdgeInsets.symmetric(vertical: 16.0),
-  //                   child: ElevatedButton(
-  //                     onPressed: () {
-  //                       registrateUser();
-  //                     },
-  //                     child: Text("Registrate"),
-  //                     style: ElevatedButton.styleFrom(
-  //                         primary: Colors.black,
-  //                         padding: EdgeInsets.symmetric(
-  //                             horizontal: 50, vertical: 20),
-  //                         textStyle: TextStyle(
-  //                             fontSize: 30, fontWeight: FontWeight.bold)),
-  //                   )),
-  //             ])),
-  //       ));
-  // }
-
-  Widget firstNameField() {
-    return TextFormField(
-      controller: firstNameController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-          labelText: 'First name', hintText: 'Enter your name...'),
-    );
-  }
-
-  Widget lastNameField() {
-    return TextFormField(
-      controller: lastNameController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-          labelText: 'Last name', hintText: "Enter your surname..."),
-    );
-  }
-
-  Widget countryField() {
-    return TextFormField(
-      controller: countryController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(labelText: 'Country', hintText: "Belarus"),
-    );
-  }
-
-  Widget cityField() {
-    return TextFormField(
-      controller: cityController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(labelText: 'City', hintText: "Minsk"),
-    );
   }
 
   DateTime selectedDate = DateTime.now();
@@ -568,7 +443,7 @@ class RegistrationUserInfoScreenState
       });
   }
 
-  String dropdownValue = 'Newbie';
+  String dropdownValue = 'Новичок';
   Widget sportLevelDropdown() {
     return DropdownButton<String>(
       value: dropdownValue,
@@ -585,51 +460,13 @@ class RegistrationUserInfoScreenState
           dropdownValue = newValue;
         });
       },
-      items: <String>['Newbie', 'Middle', 'Advanced']
+      items: <String>['Новичок', 'Средний', 'Продвинутый']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
         );
       }).toList(),
-    );
-  }
-
-  Widget heightField() {
-    return TextFormField(
-      controller: heightController,
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-      ],
-      decoration: InputDecoration(labelText: 'Weight', hintText: 'Your weight'),
-    );
-  }
-
-  Widget weightField() {
-    return TextFormField(
-      controller: weightController,
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-      ],
-      decoration: InputDecoration(labelText: 'Height', hintText: 'Your height'),
-    );
-  }
-
-  Widget aboutField() {
-    return TextFormField(
-      controller: aboutController,
-      decoration: InputDecoration(
-          labelText: 'About me', hintText: 'Tell about you if you want.'),
-    );
-  }
-
-  Widget motivationField() {
-    return TextFormField(
-      controller: motivationController,
-      decoration: InputDecoration(
-          labelText: 'Motivation', hintText: 'Tell us what you want.'),
     );
   }
 
@@ -668,7 +505,7 @@ class RegistrationUserInfoScreenState
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new TextButton(
-              child: new Text("Close"),
+              child: new Text("Закрыть"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

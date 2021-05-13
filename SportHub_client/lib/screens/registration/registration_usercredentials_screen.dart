@@ -83,7 +83,7 @@ class RegistartionUserCredentialsScreenState
                       TextField(
                         controller: usernameController,
                         decoration: InputDecoration(
-                            labelText: 'USERNAME',
+                            labelText: 'ИМЯ ПОЛЬЗОВАТЕЛЯ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class RegistartionUserCredentialsScreenState
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) => EmailValidator.validate(value)
                             ? null
-                            : "Please enter a valid email",
+                            : "Пожалуйста, введите корректный email.",
                         decoration: InputDecoration(
                           labelText: 'EMAIL ',
                           labelStyle: TextStyle(
@@ -115,7 +115,7 @@ class RegistartionUserCredentialsScreenState
                       TextFormField(
                         controller: passwordController,
                         decoration: InputDecoration(
-                          labelText: 'PASSWORD',
+                          labelText: 'ПАРОЛЬ',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -138,14 +138,12 @@ class RegistartionUserCredentialsScreenState
                           ),
                         ),
                         obscureText: _obscureText,
-                        validator: (val) =>
-                            val.length < 6 ? 'Password too short.' : null,
                       ),
                       SizedBox(height: 10.0),
                       TextField(
                         controller: confirmPasswordController,
                         decoration: InputDecoration(
-                            labelText: 'CONFIRM PASSWORD ',
+                            labelText: 'ПОДТВЕРИТЕ ПАРОЛЬ ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -169,7 +167,7 @@ class RegistartionUserCredentialsScreenState
                               },
                               child: Center(
                                 child: Text(
-                                  'NEXT',
+                                  'ДАЛЕЕ',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -195,7 +193,7 @@ class RegistartionUserCredentialsScreenState
                                 color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(20.0)),
                             child: Center(
-                              child: Text('Go Back',
+                              child: Text('НАЗАД',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Montserrat')),
@@ -208,65 +206,49 @@ class RegistartionUserCredentialsScreenState
             ]));
   }
 
-  // Widget build(BuildContext context) {
-  //   return new Scaffold(
-  //       body: new Container(
-  //           margin: EdgeInsets.all(16),
-  //           child: Column(children: <Widget>[
-  //             usernameField(),
-  //             emailField(),
-  //             passwordField(),
-  //             confirmPasswordField(),
-  //             Padding(
-  //                 padding: EdgeInsets.symmetric(vertical: 16.0),
-  //                 child: ElevatedButton(
-  //                   onPressed: () {
-  //                     validateFields();
-  //                   },
-  //                   child: Text('Next'),
-  //                   style: ElevatedButton.styleFrom(
-  //                       primary: Colors.black,
-  //                       padding:
-  //                           EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-  //                       textStyle: TextStyle(
-  //                           fontSize: 30, fontWeight: FontWeight.bold)),
-  //                 )),
-  //           ])));
-  // }
-
   Future<void> validateFields() async {
-    Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       if (usernameController.text.length == 0 ||
           emailController.text.length == 0 ||
           passwordController.text.length == 0) {
-        _showDialog("Empty fields", "Please, enter data to fields.");
+        //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+        _showDialog("Пусто", "Пожалуйста, заполните пустые поля");
       } else {
-        var response = await Dio()
-            .get(ApiEndpoints.isUsernameBusyGET + usernameController.text);
-        if (response.statusCode == 200) {
-          bool isUsernameBusy = response.data.toString() == "true";
-          if (isUsernameBusy) {
-            Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-            _showDialog("Username busy", "Please, choose another username");
-          } else {
-            if (passwordController.text == confirmPasswordController.text) {
-              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
-                  .pop();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RegistrationUserInfoScreen(
-                            userCredentials: setUser(),
-                          )));
-            } else {
-              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
-                  .pop();
-              _showDialog("Error", "Password doesn't confirmed.");
-            }
-          }
+        if (passwordController.text.length < 8) {
+          //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+          _showDialog(
+              "Слабый пароль", "Пароль должен содержать не менее 8 символов.");
+          //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         } else {
-          _showDialog("Error", "Troubles with internet.");
+          Dialogs.showLoadingDialog(context, _keyLoader);
+          var response = await Dio()
+              .get(ApiEndpoints.isUsernameBusyGET + usernameController.text);
+          if (response.statusCode == 200) {
+            bool isUsernameBusy = response.data.toString() == "true";
+            if (isUsernameBusy) {
+              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                  .pop();
+              _showDialog(
+                  "Занято", "Пожалуйста, выберите другое имя пользователя.");
+            } else {
+              if (passwordController.text == confirmPasswordController.text) {
+                Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                    .pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegistrationUserInfoScreen(
+                              userCredentials: setUser(),
+                            )));
+              } else {
+                Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                    .pop();
+                _showDialog("Error", "Password doesn't confirmed.");
+              }
+            }
+          } else {
+            _showDialog("Error", "Troubles with internet.");
+          }
         }
       }
     } catch (e) {

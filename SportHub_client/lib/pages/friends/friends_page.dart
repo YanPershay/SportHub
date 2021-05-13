@@ -157,7 +157,7 @@ class FriendsPageState extends State<FriendsPage> {
                   elevation: 0,
                   backgroundColor: Colors.white,
                   title: Text(
-                    "Friends",
+                    "Друзья",
                     style: GoogleFonts.workSans(
                         fontStyle: FontStyle.normal,
                         fontSize: 25.r,
@@ -174,7 +174,7 @@ class FriendsPageState extends State<FriendsPage> {
                     child: TextFormField(
                         controller: searchController,
                         textInputAction: TextInputAction.search,
-                        decoration: InputDecoration(hintText: "Search..."),
+                        decoration: InputDecoration(hintText: "Найти..."),
                         onChanged: (term) {
                           searchUser();
                           setState(() {
@@ -190,11 +190,11 @@ class FriendsPageState extends State<FriendsPage> {
                         controller: controller,
                         children: <Widget>[
                           SubscribersWidget(
-                            title: "Subscribers",
+                            title: "Подписчики",
                             subscribes: subscribers,
                           ),
                           SubscribersWidget(
-                            title: "My subscribes",
+                            title: "Мои подписки",
                             subscribes: mySubscribes,
                           ),
                         ],

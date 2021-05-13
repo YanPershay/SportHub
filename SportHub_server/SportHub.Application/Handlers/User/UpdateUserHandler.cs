@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace SportHub.Application.Handlers
 {
@@ -35,7 +36,7 @@ namespace SportHub.Application.Handlers
             user.Email = userEntity.Email;
             if(userEntity.Password != null)
             {
-                user.Password = userEntity.Password;
+                user.Password = BC.HashPassword(userEntity.Password);
             }
 
             await _userRepository.UpdateAsync(user);

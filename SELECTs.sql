@@ -8,6 +8,7 @@ SELECT * FROM TrainerPosts
 SELECT * FROM Comments
 SELECT * FROM Likes
 SELECT * FROM Subscribes
+
 --https://sporthubimages.blob.core.windows.net/sporthubpostsimages/image_cropper_1618774689360.jpg
 --https://sun9-51.userapi.com/impf/c851224/v851224926/2c9bd/HxYwQOl1Wv4.jpg?size=1728x2160&quality=96&sign=38505411f40b2ce859a2d163946dec11&type=album
 --delete from likes where postId=2

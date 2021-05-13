@@ -137,7 +137,7 @@ class _CommentItemState extends State<CommentItem> {
                                             deleteComment();
                                           },
                                           child: Text(
-                                            "Delete",
+                                            "Удалить",
                                             style: GoogleFonts.workSans(
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 15.r,

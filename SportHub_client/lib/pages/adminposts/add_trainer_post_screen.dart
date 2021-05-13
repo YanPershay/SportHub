@@ -43,7 +43,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
           Dio dio = new Dio();
           dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
           var response =
-              await dio.post(ApiEndpoints.imageToBlobPOST, data: formData);
+              await Dio().post(ApiEndpoints.imageToBlobPOST, data: formData);
 
           if (response.statusCode == 200) {
             AdminPost post = new AdminPost(
@@ -140,14 +140,14 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Галерея'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('Камера'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -198,7 +198,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
             elevation: 0,
             backgroundColor: Colors.white,
             title: Text(
-              "New trainer post",
+              "Создать",
               style: GoogleFonts.workSans(
                 fontStyle: FontStyle.normal,
                 fontSize: 25.r,
@@ -231,7 +231,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                       controller: titleTextController,
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(),
-                        hintText: 'Title',
+                        hintText: 'Заголовок',
                       ),
                       style: GoogleFonts.workSans(
                         fontStyle: FontStyle.normal,
@@ -248,7 +248,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                         Row(
                           children: [
                             Text(
-                              "Duration: ",
+                              "Длительность: ",
                               style: GoogleFonts.workSans(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 20.r,
@@ -293,7 +293,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                         Row(
                           children: [
                             Text(
-                              "Complexity: ",
+                              "Сложность: ",
                               style: GoogleFonts.workSans(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 20.r,
@@ -377,7 +377,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                   ),
                   CupertinoButton(
                     color: Colors.grey[900],
-                    child: Text("Send"),
+                    child: Text("Отправить"),
                     onPressed: () {
                       sendPost();
                     },

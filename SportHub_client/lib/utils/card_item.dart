@@ -207,7 +207,7 @@ class _CardItemState extends State<CardItem> {
             margin: EdgeInsets.zero,
             elevation: 0,
             child: Container(
-              height: !flag ? (550 + widget.post.text.length / 2).r : 565.r,
+              height: !flag ? (550 + widget.post.text.length / 1.5).r : 565.r,
               child: Column(
                 children: <Widget>[
                   ListTile(
@@ -319,9 +319,15 @@ class _CardItemState extends State<CardItem> {
                                             MainAxisAlignment.end,
                                         children: <Widget>[
                                           new Text(
-                                            flag ? "show more" : "show less",
-                                            style: new TextStyle(
-                                                color: Colors.blue),
+                                            flag
+                                                ? "Показать полностью"
+                                                : "Скрыть",
+                                            style: GoogleFonts.workSans(
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 15.r,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.blue[400],
+                                            ),
                                           ),
                                         ],
                                       ),

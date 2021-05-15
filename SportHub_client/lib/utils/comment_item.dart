@@ -41,7 +41,7 @@ class _CommentItemState extends State<CommentItem> {
 
   @override
   Widget build(BuildContext context) {
-    return isCommentDeleted
+    return isCommentDeleted || widget.comment.user == null
         ? Container()
         : Card(
             child: Container(

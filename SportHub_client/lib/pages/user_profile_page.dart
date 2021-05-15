@@ -478,8 +478,9 @@ class UserProfilePageState extends State<UserProfilePage> {
                                         Radius.circular(10.r))),
                                 child: Text(
                                   (user.userInfo.sportLevel != ''
-                                          ? (user.userInfo.sportLevel +
-                                              " уровень \n")
+                                          ? ("Уровень " +
+                                              user.userInfo.sportLevel +
+                                              " \n")
                                           : '') +
                                       (user.userInfo.aboutMe != ''
                                           ? (user.userInfo.aboutMe + "\n")

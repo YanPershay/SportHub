@@ -134,7 +134,7 @@ class FriendsPageState extends State<FriendsPage> {
                     elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Friends",
+                      "Друзья",
                       style: GoogleFonts.workSans(
                           fontStyle: FontStyle.normal,
                           fontSize: 25.r,

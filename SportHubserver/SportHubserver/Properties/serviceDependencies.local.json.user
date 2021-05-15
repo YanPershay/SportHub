@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2021-05-14T08:45:39.6181907Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-05-14T08:51:35.9654468Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "3d99071d-16ec-412e-b919-add3346fc9e4"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "sporthubapp"
+    }
+  }
+}

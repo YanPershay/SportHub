@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-05-14T08:56:38.0409569Z"
+    },
+    "apis1": {
+      "restored": true,
+      "restoreTime": "2021-05-14T08:44:00.9439859Z"
+    }
+  },
+  "parameters": {
+    "apis1.resourceGroupName": {
+      "Name": "apis1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "0804poibmsMyExample20210221160315ResourceGroup"
+    },
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "3d99071d-16ec-412e-b919-add3346fc9e4"
+    },
+    "apis1.subscriptionId": {
+      "Name": "apis1.subscriptionId",
+      "Type": "subscription",
+      "Value": "3d99071d-16ec-412e-b919-add3346fc9e4"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "sporthubapp"
+    }
+  }
+}

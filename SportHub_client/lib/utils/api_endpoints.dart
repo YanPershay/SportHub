@@ -2,7 +2,7 @@ import 'package:SportHub_client/utils/shared_prefs.dart';
 
 class ApiEndpoints {
   static const String protocol = "https://";
-  static const String host = "sporthubapi20210514114037.azurewebsites.net";
+  static const String host = "ea17ca188347.ngrok.io";
   static const String basePath = "/api/v1";
 
   static const String userPOST = basePath + "/user";

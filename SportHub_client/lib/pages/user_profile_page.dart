@@ -478,9 +478,9 @@ class UserProfilePageState extends State<UserProfilePage> {
                                         Radius.circular(10.r))),
                                 child: Text(
                                   (user.userInfo.sportLevel != ''
-                                          ? ("Уровень " +
+                                          ? ("Уровень спорта " +
                                               user.userInfo.sportLevel +
-                                              " \n")
+                                              "\n")
                                           : '') +
                                       (user.userInfo.aboutMe != ''
                                           ? (user.userInfo.aboutMe + "\n")
@@ -499,7 +499,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                                               " кг. \n")
                                           : '') +
                                       (user.userInfo.dateOfBirth != null
-                                          ? ("Родился " +
+                                          ? ("Родился(ась) " +
                                               user.userInfo.dateOfBirth)
                                           : ''),
                                   textAlign: TextAlign.center,

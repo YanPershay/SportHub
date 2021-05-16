@@ -355,7 +355,7 @@ class _CardItemState extends State<CardItem> {
                         children: <Widget>[
                           IconButton(
                             iconSize: 30.r,
-                            icon: Icon(Icons.comment_rounded),
+                            icon: Icon(Icons.chat_bubble_outline_rounded),
                             onPressed: () {
                               Navigator.push(
                                   context,

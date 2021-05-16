@@ -138,7 +138,8 @@ class _FeedPageState extends State<FeedPage> {
                     )),
                 body: userPosts.isEmpty
                     ? Center(
-                        child: Text("Sorry, something went wrong :(",
+                        child: Text(
+                            "Пока нет публикаций. Подпишитесь на кого-нибудь.",
                             style: TextStyle(color: Colors.black)))
                     : Container(
                         child: RefreshIndicator(

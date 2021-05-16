@@ -84,34 +84,36 @@ class FriendsPageState extends State<FriendsPage> {
       child: ListView.builder(
         itemCount: searchResult.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: CachedNetworkImage(
-              imageUrl: searchResult[index].userInfo.avatarUrl,
-              imageBuilder: (context, imageProvider) => Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image:
-                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                ),
-              ),
-              placeholder: (context, url) => CircularProgressIndicator(
-                backgroundColor: Colors.red,
-              ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-            title: Text(searchResult[index].username),
-            subtitle: Text(searchResult[index].userInfo.sportLevel),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UserProfilePage(
-                            userId: searchResult[index].guidId,
-                          )));
-            },
-          );
+          return searchResult[index].userInfo == null
+              ? Text("")
+              : ListTile(
+                  leading: CachedNetworkImage(
+                    imageUrl: searchResult[index].userInfo.avatarUrl,
+                    imageBuilder: (context, imageProvider) => Container(
+                      width: 40.0,
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover),
+                      ),
+                    ),
+                    placeholder: (context, url) => CircularProgressIndicator(
+                      backgroundColor: Colors.red,
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  title: Text(searchResult[index].username),
+                  subtitle: Text(searchResult[index].userInfo.sportLevel),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserProfilePage(
+                                  userId: searchResult[index].guidId,
+                                )));
+                  },
+                );
         },
       ),
     );

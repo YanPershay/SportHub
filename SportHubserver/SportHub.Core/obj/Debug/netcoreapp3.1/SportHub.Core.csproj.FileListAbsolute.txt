@@ -1,9 +1,0 @@
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\bin\Debug\netcoreapp3.1\SportHub.Core.deps.json
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\bin\Debug\netcoreapp3.1\SportHub.Core.dll
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\bin\Debug\netcoreapp3.1\SportHub.Core.pdb
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\obj\Debug\netcoreapp3.1\SportHub.Core.csprojAssemblyReference.cache
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\obj\Debug\netcoreapp3.1\SportHub.Core.AssemblyInfoInputs.cache
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\obj\Debug\netcoreapp3.1\SportHub.Core.AssemblyInfo.cs
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\obj\Debug\netcoreapp3.1\SportHub.Core.csproj.CoreCompileInputs.cache
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\obj\Debug\netcoreapp3.1\SportHub.Core.dll
-D:\Thesis\SportHUB\SportHub_server\SportHub.Core\obj\Debug\netcoreapp3.1\SportHub.Core.pdb

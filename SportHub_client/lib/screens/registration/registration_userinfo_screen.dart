@@ -553,7 +553,7 @@ class RegistrationUserInfoScreenState
               MaterialPageRoute(builder: (context) => LoginScreen()),
               (Route<dynamic> route) => false);
 
-          _showDialog("Success", "You has been successfully registered!");
+          _showDialog("Успешно", "Вы успешно зарегестрировались!");
         } else {
           Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
           _showDialog("Failed", "You full user registration failed (");

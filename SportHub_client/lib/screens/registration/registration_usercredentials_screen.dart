@@ -243,7 +243,7 @@ class RegistartionUserCredentialsScreenState
               } else {
                 Navigator.of(_keyLoader.currentContext, rootNavigator: true)
                     .pop();
-                _showDialog("Error", "Password doesn't confirmed.");
+                _showDialog("Ошибка", "Пароль не подтверждён.");
               }
             }
           } else {
@@ -268,7 +268,7 @@ class RegistartionUserCredentialsScreenState
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new TextButton(
-              child: new Text("Close"),
+              child: new Text("Закрыть"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

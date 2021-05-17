@@ -1,0 +1,1073 @@
+{
+	"info": {
+		"_postman_id": "f921480e-0131-46b0-96bd-64ac763543c8",
+		"name": "SportHub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "POST User Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"jwtToken\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"yan_pershay\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/user/authenticate",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User by GUID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/user?guid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "guid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Is Username Free",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/user/usernameCheck?username=yan_pershay",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user",
+								"usernameCheck"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "yan_pershay"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User Search",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/user/searchUser?searchString=yan_pershay",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user",
+								"searchUser"
+							],
+							"query": [
+								{
+									"key": "searchString",
+									"value": "yan_pershay"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"userId\", pm.response.json().guidId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"vint_crewk\",\r\n  \"email\": \"vitaly@gmail.com\",\r\n  \"password\": \"0987654321\",\r\n  \"isAdmin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/user",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT User Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"userId\", pm.response.json().guidId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkSWQiOiIzZmE4NWY2NC01NzE3LTQ1NjItYjNmYy0yYzk2M2Y2NmFmYTYiLCJuYmYiOjE2MjA4NTEyMTUsImV4cCI6MTYyODYyNzIxNSwiaWF0IjoxNjIwODUxMjE1fQ.j7iGtGlapo_Ur09E5X8ZWU5lqWA6IDrmfESyu21weVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"yan_pershay1\",\r\n  \"email\": \"yanpershay@gmail.com\",\r\n  \"password\" : \"123456789\",\r\n  \"guidId\" : \"3FA85F64-5717-4562-B3FC-2C963F66AFA6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/user",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserInfo",
+			"item": [
+				{
+					"name": "GET UserInfo by GUID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/userinfo?guid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"userinfo"
+							],
+							"query": [
+								{
+									"key": "guid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST UserInfo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Vitaliy\",\r\n  \"lastName\": \"Filippov\",\r\n  \"country\": \"Belarus\",\r\n  \"city\": \"Minsk\",\r\n  \"dateOfBirth\": \"23.02.2000\",\r\n  \"sportLevel\": \"Professional\",\r\n  \"height\": 179,\r\n  \"weight\": 80,\r\n  \"aboutMe\": \"I'm from Sam solutions\",\r\n  \"motivation\": \"To be a sportsman\",\r\n  \"avatarUrl\": \"https://sun9-39.userapi.com/impf/c849128/v849128146/176b49/4cNFRXIkGwo.jpg?size=1280x1920&quality=96&sign=5244b30433f82d429d64bea8d8a5846c&type=album\",\r\n  \"userId\": {{userId}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/userinfo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"userinfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT UserInfo Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Vitalik\",\r\n  \"lastName\": \"Filippovk\",\r\n  \"country\": \"Belarus\",\r\n  \"city\": \"Minsk\",\r\n  \"dateOfBirth\": \"23.02.2000\",\r\n  \"sportLevel\": \"Professional\",\r\n  \"height\": 179,\r\n  \"weight\": 80,\r\n  \"aboutMe\": \"I'm from Sam solutions\",\r\n  \"motivation\": \"To be a good sportsman\",\r\n  \"avatarUrl\": \"https://sun9-39.userapi.com/impf/c849128/v849128146/176b49/4cNFRXIkGwo.jpg?size=1280x1920&quality=96&sign=5244b30433f82d429d64bea8d8a5846c&type=album\",\r\n  \"userId\": \"990A0DED-2E61-4330-B4BB-FEF5BC75C78F\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/userinfo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"userinfo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "GET Posts by GUID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/post/postsbyguid?guid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post",
+								"postsbyguid"
+							],
+							"query": [
+								{
+									"key": "guid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Subscribes Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/post/subsPosts?subscriberId=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post",
+								"subsPosts"
+							],
+							"query": [
+								{
+									"key": "subscriberId",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Saved Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/post/savedPosts?userId=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post",
+								"savedPosts"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"Vitaliy's aaaaaaaaaaaaaaaaaaaa post\",\r\n  \"imageUrl\": \"https://freehealthnewz.com/wp-content/uploads/2018/10/eb02e74720dd9168d7b3ff86716de02a.jpg\",\r\n  \"dateCreated\": \"2021-04-18T20:45:53.481Z\",\r\n  \"isUpdated\": false,\r\n  \"userId\": \"AA3CCA72-8FAC-4E55-B2AC-D0F59F6A1D7E\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/post",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/post/blob?imgName=image_cropper_1620577487228.jpg",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post",
+								"blob"
+							],
+							"query": [
+								{
+									"key": "imgName",
+									"value": "image_cropper_1620577487228.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\" : 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/post",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Post Blob",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/Фильмы/Картинки/9b6b6168b1f2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/post/blob",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"post",
+								"blob"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdminPost",
+			"item": [
+				{
+					"name": "GET AdminPosts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/trainerpost",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"trainerpost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST AdminPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkSWQiOiIzZmE4NWY2NC01NzE3LTQ1NjItYjNmYy0yYzk2M2Y2NmFmYTYiLCJuYmYiOjE2MjA4NTEyMTUsImV4cCI6MTYyODYyNzIxNSwiaWF0IjoxNjIwODUxMjE1fQ.j7iGtGlapo_Ur09E5X8ZWU5lqWA6IDrmfESyu21weVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Morning run\",\r\n  \"text\": \"Is there a best time to run? Besides the most obvious answer of “yes, whenever you can” there’s a little more nuance to it. Perhaps even some science! If morning running is one of your goals, find out how to make the switch…or, more importantly, if you really need to switch from your evening run! Morning run? Evening run? Runch? Does one specific time result in the best workout? Do you burn more fat by doing that fasted morning run? Do you run faster by going later in the day? Confused yet? Let’s break it down…. Immediately, I think of Laura’s post with 5 reasons not to workout in the morning. All entirely valid points, proving that if you HATE morning workouts then you don’t have to feel forced in to them just because that seems to be the standard for many ruuners. Yet, I still encourage anyone asking me for tips to run consistently, to lose weight or hit anew PR to aim for a morning workout, so what gives?\",\r\n  \"duration\": 2,\r\n  \"complexity\": 3,\r\n  \"imageUrl\": \"https://mensrunninguk.co.uk/wp-content/uploads/2016/02/5-Ways-To-Perfect-Your-Parkrun.jpg\",\r\n  \"dateCreated\": \"2021-03-29T13:50:29.842Z\",\r\n  \"categoryId\": 3,\r\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/trainerpost",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"trainerpost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE AdminPost",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\" : 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/adminpost",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"adminpost"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "GET Comments by PostID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/comment?id=1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comment"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"You train like mehuhuhuhuhuhuhuhuhuhuijijijijijijijiji!\",\r\n  \"dateCreated\": \"2021-03-29T19:55:05.681Z\",\r\n  \"isUpdated\": true,\r\n  \"userId\": \"AA3CCA72-8FAC-4E55-B2AC-D0F59F6A1D7E\",\r\n  \"postId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/comment",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Like",
+			"item": [
+				{
+					"name": "GET LikesCount by PostID Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/like?id=1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"like"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"AA3CCA72-8FAC-4E55-B2AC-D0F59F6A1D7E\",\r\n  \"postId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/like",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Like",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":66,\r\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"postId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/like",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"like"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscribe",
+			"item": [
+				{
+					"name": "GET Subscribers by UserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/getsubs?userid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"getsubs"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET My Subscribes Count by subscriberId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/getmysubscount?subscriberid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"getmysubscount"
+							],
+							"query": [
+								{
+									"key": "subscriberid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET IsSubscribe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/isSubscribed?subscriberid=3FA85F64-5717-4562-B3FC-2C963F66AFA6&userid={{userId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"isSubscribed"
+							],
+							"query": [
+								{
+									"key": "subscriberid",
+									"value": "3FA85F64-5717-4562-B3FC-2C963F66AFA6"
+								},
+								{
+									"key": "userid",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Subscribe Object",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/subObj?subscriberid={{userId}}&userid=3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"subObj"
+							],
+							"query": [
+								{
+									"key": "subscriberid",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "userid",
+									"value": "3FA85F64-5717-4562-B3FC-2C963F66AFA6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Subscribers Count by UserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/getsubscount?userid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"getsubscount"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Subscriptions Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/subscount?userid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"subscount"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET My Subscribes by subscriberId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/subscribe/getmysubs?subscriberid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe",
+								"getmysubs"
+							],
+							"query": [
+								{
+									"key": "subscriberid",
+									"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Subscribe to user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": {{userId}},\r\n  \"subscriberId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/subscribe",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Unsubscribe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\" : 3,\r\n  \"userId\": \"{{userId}}\",\r\n  \"subscriberId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/subscribe",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SavedPost",
+			"item": [
+				{
+					"name": "GET Saved Posts by GUID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/SavedPost?userId=3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"SavedPost"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3FA85F64-5717-4562-B3FC-2C963F66AFA6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Save Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": {{userId}},\r\n  \"postId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/savedpost",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"savedpost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Saved Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\" : 2,\r\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"postId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/savedpost",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"savedpost"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ngrok check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://4bee496c60d6.ngrok.io/api/v1/userinfo?guid=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+					"protocol": "https",
+					"host": [
+						"4bee496c60d6",
+						"ngrok",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"userinfo"
+					],
+					"query": [
+						{
+							"key": "guid",
+							"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://localhost:44399/api/v1"
+		},
+		{
+			"key": "jwtToken",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}

@@ -1,5 +1,5 @@
---CREATE DATABASE SportHub
---GO
+CREATE DATABASE SportHub
+GO
 USE SportHub
 GO
 CREATE TABLE [Users](

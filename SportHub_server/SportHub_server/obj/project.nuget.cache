@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UsHi2nsUIc7L0tZRqM2o+87KZjF6FhZk/6fHhY0R8PPGW8CDNpivGZPvguFHVYdFbACHJCKqDQFHFJKh7p+hbQ==",
+  "dgSpecHash": "gaK6AVVi9sfUIDxQHVudyFLk3wvJG5XHi/N7C+5xh0vjdy6nx/K4X6gaavsMaMmv30BAN8wYzDk7s+z/6725KA==",
   "success": true,
   "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
   "expectedPackageFiles": [
@@ -36,9 +36,9 @@
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
-    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.4\\microsoft.entityframeworkcore.5.0.4.nupkg.sha512",
-    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.4\\microsoft.entityframeworkcore.abstractions.5.0.4.nupkg.sha512",
-    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.4\\microsoft.entityframeworkcore.analyzers.5.0.4.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.6\\microsoft.entityframeworkcore.5.0.6.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.6\\microsoft.entityframeworkcore.abstractions.5.0.6.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.6\\microsoft.entityframeworkcore.analyzers.5.0.6.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.4\\microsoft.entityframeworkcore.design.5.0.4.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\5.0.4\\microsoft.entityframeworkcore.inmemory.5.0.4.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.4\\microsoft.entityframeworkcore.relational.5.0.4.nupkg.sha512",
@@ -150,7 +150,8 @@
     "C:\\Users\\Yan\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Yan\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Yan\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Yan\\.nuget\\packages\\twilio\\5.61.0\\twilio.5.61.0.nupkg.sha512"
   ],
   "logs": []
 }

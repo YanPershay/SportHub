@@ -12,3 +12,17 @@ D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\
 D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csproj.CopyComplete
 D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.dll
 D:\Thesis\SportHUB\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.pdb
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Application.deps.json
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Application.dll
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Application.pdb
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Core.dll
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Infrastructure.dll
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Core.pdb
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\bin\Debug\netcoreapp3.1\SportHub.Infrastructure.pdb
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csprojAssemblyReference.cache
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.AssemblyInfoInputs.cache
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.AssemblyInfo.cs
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csproj.CoreCompileInputs.cache
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.csproj.CopyComplete
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.dll
+D:\Семестры\f\SportHub\SportHub_server\SportHub.Application\obj\Debug\netcoreapp3.1\SportHub.Application.pdb

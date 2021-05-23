@@ -25,6 +25,28 @@ namespace SportHub.API.Controllers
             _userService = userService;
         }
 
+        //[HttpPost("twofactauthEmail")]
+        //public IActionResult TwoFactorAuthEmail(AuthenticateRequest model)
+        //{
+        //    var response = _twoFactorService.SendEmail(model);
+
+        //    if (response == null)
+        //        return BadRequest(new { message = "Username or password is incorrect" });
+
+        //    return Ok(response);
+        //}
+
+        //[HttpPost("twofactauth")]
+        //public async Task<ActionResult<bool>> TwoFactorAuth(TwoFactor model)
+        //{
+        //    var response = await _twoFactorService.LoginTwoStep(model);
+
+        //    if (!response)
+        //        return BadRequest(new { message = "Username or password is incorrect" });
+
+        //    return Ok(response);
+        //}
+
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {

@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class CardItem extends StatefulWidget {
   final Post post;
@@ -194,8 +195,8 @@ class _CardItemState extends State<CardItem> {
     }
   }
 
-  String firstHalf;
-  String secondHalf;
+  String firstHalf = "";
+  String secondHalf = "";
 
   bool flag = true;
 
@@ -375,7 +376,19 @@ class _CardItemState extends State<CardItem> {
                       savedPostIcon()
                     ],
                   ),
-                  Divider(),
+                  Container(
+                      padding: EdgeInsets.only(left: 15.r),
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        DateFormat('dd.MM.yyyy kk:mm')
+                            .format(DateTime.parse(widget.post.dateCreated)),
+                        style: GoogleFonts.workSans(
+                            fontStyle: FontStyle.normal,
+                            fontSize: 12.r,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey),
+                      )),
+                  Divider()
                 ],
               ),
             ));

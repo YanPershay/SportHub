@@ -105,7 +105,7 @@ class _FeedPageState extends State<FeedPage> {
                     shadowColor: Colors.transparent,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Sport Hub",
+                      "Sport Club",
                       style: GoogleFonts.workSans(
                           fontStyle: FontStyle.normal,
                           fontSize: 25.r,
@@ -129,7 +129,7 @@ class _FeedPageState extends State<FeedPage> {
                     elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Sport Hub",
+                      "Sport Club",
                       style: GoogleFonts.workSans(
                           fontStyle: FontStyle.normal,
                           fontSize: 25.r,

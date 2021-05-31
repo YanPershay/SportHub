@@ -41,9 +41,9 @@ class EditAccountScreenState extends State<EditAccountScreen> {
 
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   Future<void> updateAccount() async {
-    Dialogs.showLoadingDialog(context, _keyLoader);
     setUser();
     try {
+      Dialogs.showLoadingDialog(context, _keyLoader);
       Dio dio = new Dio();
       dio.options.headers['authorization'] = 'Bearer ' + SharedPrefs.token;
       if (usernameController.text != SharedPrefs.username) {
@@ -54,6 +54,34 @@ class EditAccountScreenState extends State<EditAccountScreen> {
           if (isUsernameBusy) {
             Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
             _showDialog("Занято", "Пожалуйста, выберите другое имя.");
+          } else {
+            var responseAuth = await Dio().post(ApiEndpoints.checkPass, data: {
+              "username": SharedPrefs.username,
+              "password": oldPasswordController.text
+            });
+            var response = await dio.put(ApiEndpoints.userPUT, data: newUser);
+            if (response.statusCode == 200) {
+              var newToken = await Dio().post(ApiEndpoints.checkPass, data: {
+                "username": usernameController.text,
+                "password": newPasswordController.text
+              });
+              var authResponse = AuthResponse.fromJson(newToken.data);
+
+              Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                  .pop();
+
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString("username", usernameController.text);
+              prefs.setString("token", authResponse.token);
+              print(authResponse.token);
+              print(responseAuth.data["token"]);
+
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => BottomNavScreen()),
+                  (Route<dynamic> route) => false);
+
+              _showDialog("Отлично!", "Данные успешно обновлены!");
+            }
           }
         }
       } else {
@@ -64,7 +92,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
         var response = await dio.put(ApiEndpoints.userPUT, data: newUser);
         if (response.statusCode == 200) {
           var newToken = await Dio().post(ApiEndpoints.checkPass, data: {
-            "username": SharedPrefs.username,
+            "username": usernameController.text,
             "password": newPasswordController.text
           });
           var authResponse = AuthResponse.fromJson(newToken.data);
@@ -83,9 +111,10 @@ class EditAccountScreenState extends State<EditAccountScreen> {
 
           _showDialog("Отлично!", "Данные успешно обновлены!");
         } else {
-          _showDialog("Error", "Something went wrong, please, try again.");
+          _showDialog("Ошибка", "Что-то пошло не так, попробуйте позже.");
         }
       }
+      //}
     } catch (e) {
       Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
       _showDialog("Неправильный пароль", "Старый пароль введен неверно.");
@@ -275,7 +304,7 @@ class EditAccountScreenState extends State<EditAccountScreen> {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new TextButton(
-              child: new Text("Close"),
+              child: new Text("Ок"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

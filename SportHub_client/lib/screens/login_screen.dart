@@ -53,12 +53,12 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(16.0, 195.0, 0.0, 0.0),
-                    child: Text('hub',
+                    child: Text('club',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(145.0, 195.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(165.0, 195.0, 0.0, 0.0),
                     child: Text('.',
                         style: TextStyle(
                             fontSize: 80.0,

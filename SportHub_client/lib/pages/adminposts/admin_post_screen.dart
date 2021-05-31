@@ -54,13 +54,13 @@ class AdminPostScreenState extends State<AdminPostScreen> {
   showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("No"),
+      child: Text("Отмена"),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Yes"),
+      child: Text("Да"),
       onPressed: () {
         Navigator.of(context).pop();
         deleteTrainerPost();
@@ -69,8 +69,8 @@ class AdminPostScreenState extends State<AdminPostScreen> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Really?"),
-      content: Text("Are you sure you want to delete this post?"),
+      title: Text("Удалить?"),
+      content: Text("Вы уверены что хотите удалить эту публикацию?"),
       actions: [
         cancelButton,
         continueButton,

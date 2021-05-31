@@ -29,10 +29,10 @@ class RegistartionUserCredentialsScreenState
   void initState() {
     // TODO: implement initState
     super.initState();
-    usernameController.text = "yan_pershay";
-    emailController.text = "test@gmail.com";
-    passwordController.text = "1234";
-    confirmPasswordController.text = "12345";
+    // usernameController.text = "yan_pershay";
+    // emailController.text = "test@gmail.com";
+    // passwordController.text = "1234";
+    // confirmPasswordController.text = "12345";
   }
 
   bool _obscureText = true;

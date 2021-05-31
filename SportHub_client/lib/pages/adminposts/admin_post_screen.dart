@@ -182,7 +182,7 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                       fontSize: 20.r,
                       color: Colors.black,
                     ),
-                    textAlign: TextAlign.justify,
+                    textAlign: TextAlign.left,
                     maxLines: null,
                   ),
                 ),

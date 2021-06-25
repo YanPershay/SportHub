@@ -18,22 +18,6 @@ class NewPostScreen extends StatefulWidget {
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
-  //List<FileModel> files = [];
-  //FileModel selectedModel;
-  //String image;
-  // void getImagesPath() async {
-  //   var imagePath = await StoragePath.imagesPath;
-  //   var images = jsonDecode(imagePath) as List;
-  //   files =
-  //       images.map<FileModel>((e) => FileModel.fromJson(e)).take(10).toList();
-  //   if (files != null && files.length > 0)
-  //     setState(() {
-  //       selectedModel = files[0];
-  //       image = files[0].files[0];
-  //     });
-  // }
-  //
-
   TextEditingController controller = new TextEditingController();
   File _image;
 
@@ -96,13 +80,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
     final pickedFile =
         await picker.getImage(source: ImageSource.camera, imageQuality: 50);
     _cropImage(File(pickedFile.path));
-    setState(() {
-      // if (pickedFile != null) {
-      //   _image = File(pickedFile.path);
-      // } else {
-      //   print('No image selected.');
-      // }
-    });
+    setState(() {});
   }
 
   _imgFromGallery() async {
@@ -110,13 +88,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         await picker.getImage(source: ImageSource.gallery, imageQuality: 50);
     _cropImage(File(pickedFile.path));
 
-    setState(() {
-      //if (pickedFile != null) {
-      //  _image = File(pickedFile.path);
-      //} else {
-      //  print('No image selected.');
-      //}
-    });
+    setState(() {});
   }
 
   _cropImage(File imageFile) async {
@@ -154,14 +126,14 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Галерея'),
+                      title: new Text('Gallery'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Камера'),
+                    title: new Text('Camera'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -175,16 +147,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
   }
 
   void _showDialog(String title, String message) {
-    // flutter defined function
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: new Text(title),
           content: new Text(message),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
             new TextButton(
               child: new Text("Close"),
               onPressed: () {
@@ -207,7 +176,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Text(
-          "Создать",
+          "Create",
           style: GoogleFonts.workSans(
             fontStyle: FontStyle.normal,
             fontSize: 25.r,
@@ -278,7 +247,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
             SizedBox(height: 20),
             CupertinoButton(
               color: Colors.grey[900],
-              child: Text("Отправить"),
+              child: Text("Send"),
               onPressed: () {
                 sendImage();
               },

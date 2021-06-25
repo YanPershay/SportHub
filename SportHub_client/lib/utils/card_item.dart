@@ -112,13 +112,11 @@ class _CardItemState extends State<CardItem> {
           .delete(ApiEndpoints.addPostPOST, data: {"id": widget.post.id});
       if (response.statusCode == 200) {
         isPostDeleted = true;
-        //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         setState(() {});
       }
     } catch (e) {
       print(e);
     }
-    //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
   }
 
   bool isSavedPressed = false;
@@ -320,14 +318,12 @@ class _CardItemState extends State<CardItem> {
                                             MainAxisAlignment.end,
                                         children: <Widget>[
                                           new Text(
-                                            flag
-                                                ? "Показать полностью"
-                                                : "Скрыть",
+                                            flag ? "more" : "less",
                                             style: GoogleFonts.workSans(
                                               fontStyle: FontStyle.normal,
                                               fontSize: 15.r,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.blue[400],
+                                              color: Colors.grey[400],
                                             ),
                                           ),
                                         ],

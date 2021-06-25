@@ -54,13 +54,13 @@ class AdminPostScreenState extends State<AdminPostScreen> {
   showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("Отмена"),
+      child: Text("Cancel"),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Да"),
+      child: Text("Yes"),
       onPressed: () {
         Navigator.of(context).pop();
         deleteTrainerPost();
@@ -69,8 +69,8 @@ class AdminPostScreenState extends State<AdminPostScreen> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Удалить?"),
-      content: Text("Вы уверены что хотите удалить эту публикацию?"),
+      title: Text("Delete?"),
+      content: Text("Are you sure you want to delete this post?"),
       actions: [
         cancelButton,
         continueButton,
@@ -189,7 +189,7 @@ class AdminPostScreenState extends State<AdminPostScreen> {
                 SharedPrefs.isAdmin
                     ? CupertinoButton(
                         color: Colors.grey[900],
-                        child: Text("Удалить"),
+                        child: Text("Delete"),
                         onPressed: () {
                           showAlertDialog(context);
                         },

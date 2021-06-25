@@ -56,8 +56,8 @@ class RegistrationUserInfoScreenState
         if (response.statusCode == 200) {
           avatarUrl = response.data.toString();
         } else {
-          _showDialog("Ошибка",
-              "Проблемы с загрузко фото, пожалуйста, попробуйте еще раз.");
+          _showDialog(
+              "Error", "Error while uploading photo, please try again.");
         }
       }
       //return response.data.toString();
@@ -116,14 +116,14 @@ class RegistrationUserInfoScreenState
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Галерея'),
+                      title: new Text('Gallery'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Камера'),
+                    title: new Text('Camera'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -213,7 +213,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                          labelText: 'ИМЯ*',
+                          labelText: 'FIRST NAME*',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -227,7 +227,7 @@ class RegistrationUserInfoScreenState
                     TextFormField(
                       controller: lastNameController,
                       decoration: InputDecoration(
-                        labelText: 'ФАМИЛИЯ*',
+                        labelText: 'LAST NAME*',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -240,7 +240,7 @@ class RegistrationUserInfoScreenState
                     Row(
                       children: [
                         Text(
-                          "ДАТА РОЖДЕНИЯ: ",
+                          "DATE OF BIRTH ",
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -276,7 +276,7 @@ class RegistrationUserInfoScreenState
                                       side: BorderSide(color: Colors.black)))),
                       onPressed: () => _selectDate(context),
                       child: Text(
-                        'ВЫБЕРИТЕ ДАТУ',
+                        'SELECT DATE',
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -287,7 +287,7 @@ class RegistrationUserInfoScreenState
                     Row(
                       children: [
                         Text(
-                          'СПОРТИВНЫЙ УРОВЕНЬ:  ',
+                          'SPORT LEVEL  ',
                           style: TextStyle(
                               fontSize: 16.r,
                               fontFamily: 'Montserrat',
@@ -305,7 +305,7 @@ class RegistrationUserInfoScreenState
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'РОСТ ',
+                            labelText: 'HEIGHT ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -320,7 +320,7 @@ class RegistrationUserInfoScreenState
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'ВЕС ',
+                            labelText: 'WEIGHT ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -333,7 +333,7 @@ class RegistrationUserInfoScreenState
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'О СЕБЕ ',
+                            labelText: 'ABOUT ME ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -346,7 +346,7 @@ class RegistrationUserInfoScreenState
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'МОТИВАЦИЯ ',
+                            labelText: 'MOTIVATION ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -357,7 +357,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                         controller: countryController,
                         decoration: InputDecoration(
-                            labelText: 'СТРАНА* ',
+                            labelText: 'COUNTRY* ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -368,7 +368,7 @@ class RegistrationUserInfoScreenState
                     TextField(
                         controller: cityController,
                         decoration: InputDecoration(
-                            labelText: 'ГОРОД ',
+                            labelText: 'CITY ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -390,7 +390,7 @@ class RegistrationUserInfoScreenState
                             },
                             child: Center(
                               child: Text(
-                                'ЗАРЕГИСТРИРОВАТЬСЯ',
+                                'REGISTRATE',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -416,7 +416,7 @@ class RegistrationUserInfoScreenState
                             Navigator.of(context).pop();
                           },
                           child: Center(
-                            child: Text('НАЗАД',
+                            child: Text('BACK',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Montserrat')),
@@ -443,7 +443,7 @@ class RegistrationUserInfoScreenState
       });
   }
 
-  String dropdownValue = 'Новичок';
+  String dropdownValue = 'Beginner';
   Widget sportLevelDropdown() {
     return DropdownButton<String>(
       value: dropdownValue,
@@ -460,7 +460,7 @@ class RegistrationUserInfoScreenState
           dropdownValue = newValue;
         });
       },
-      items: <String>['Новичок', 'Средний', 'Продвинутый']
+      items: <String>['Beginner', 'Middle', 'Advanced']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -494,18 +494,15 @@ class RegistrationUserInfoScreenState
   }
 
   void _showDialog(String title, String message) {
-    // flutter defined function
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: new Text(title),
           content: new Text(message),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
             new TextButton(
-              child: new Text("Закрыть"),
+              child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

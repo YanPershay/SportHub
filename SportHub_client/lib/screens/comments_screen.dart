@@ -20,7 +20,7 @@ class CommentsScreen extends StatefulWidget {
 
 class _CommentsScreenState extends State<CommentsScreen> {
   TextEditingController commentController = new TextEditingController();
-  List<Comment> comments = new List<Comment>();
+  List<Comment> comments = <Comment>[];
 
   Future<void> getComments() async {
     try {
@@ -36,8 +36,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
   Future<void> sendComment() async {
     try {
       if (commentController.text == "") {
-        Dialogs.showMyDialog(
-            context, "Нет", "Мы не можем отправить пустой комментарий");
+        Dialogs.showMyDialog(context, "Nope", "We cannot send empty comment");
       } else {
         Comment comment = new Comment(
             userId: SharedPrefs.userId,
@@ -83,7 +82,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     iconTheme: IconThemeData(color: Colors.black),
                     elevation: 0,
                     title: Text(
-                      "Комментарии",
+                      "Comments",
                       style: GoogleFonts.workSans(
                         fontStyle: FontStyle.normal,
                         fontSize: 25.r,
@@ -110,8 +109,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       ListTile(
                         title: TextFormField(
                           controller: commentController,
-                          decoration: InputDecoration(
-                              hintText: "Напишите комментарий..."),
+                          decoration:
+                              InputDecoration(hintText: "Enter comment..."),
                         ),
                         trailing: IconButton(
                           icon: Icon(Icons.send, color: Colors.black),

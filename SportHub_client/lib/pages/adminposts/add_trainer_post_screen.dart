@@ -140,14 +140,14 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Галерея'),
+                      title: new Text('Gallery'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Камера'),
+                    title: new Text('Camera'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -198,7 +198,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
             elevation: 0,
             backgroundColor: Colors.white,
             title: Text(
-              "Создать",
+              "Create",
               style: GoogleFonts.workSans(
                 fontStyle: FontStyle.normal,
                 fontSize: 25.r,
@@ -231,7 +231,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                       controller: titleTextController,
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(),
-                        hintText: 'Заголовок',
+                        hintText: 'Title',
                       ),
                       style: GoogleFonts.workSans(
                         fontStyle: FontStyle.normal,
@@ -248,7 +248,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                         Row(
                           children: [
                             Text(
-                              "Длительность: ",
+                              "Duration: ",
                               style: GoogleFonts.workSans(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 20.r,
@@ -293,7 +293,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                         Row(
                           children: [
                             Text(
-                              "Сложность: ",
+                              "Complexity: ",
                               style: GoogleFonts.workSans(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 20.r,
@@ -377,7 +377,7 @@ class _NewTrainerPostScreenState extends State<NewTrainerPostScreen> {
                   ),
                   CupertinoButton(
                     color: Colors.grey[900],
-                    child: Text("Отправить"),
+                    child: Text("Send"),
                     onPressed: () {
                       sendPost();
                     },

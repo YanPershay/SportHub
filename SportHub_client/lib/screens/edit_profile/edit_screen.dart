@@ -5,7 +5,6 @@ import 'package:SportHub_client/screens/login_screen.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
-import 'package:SportHub_client/utils/system_padding.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,7 +87,7 @@ class _EditScreenState extends State<EditScreen> {
       appBar: AppBar(
           backgroundColor: Colors.grey[900],
           title: Text(
-            "Настройки",
+            "Settings",
             style: GoogleFonts.workSans(
                 fontStyle: FontStyle.normal,
                 fontSize: 25.r,
@@ -100,7 +99,7 @@ class _EditScreenState extends State<EditScreen> {
           children: <Widget>[
             new ListTile(
                 leading: new Icon(Icons.person),
-                title: new Text('Редактировать аккаунт'),
+                title: new Text('Edit account'),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -111,7 +110,7 @@ class _EditScreenState extends State<EditScreen> {
                 }),
             new ListTile(
               leading: new Icon(Icons.photo_camera),
-              title: new Text('Редактировать профиль'),
+              title: new Text('Edit profile'),
               onTap: () {
                 Navigator.push(
                     context,
@@ -123,7 +122,7 @@ class _EditScreenState extends State<EditScreen> {
             ),
             new ListTile(
               leading: new Icon(Icons.exit_to_app),
-              title: new Text('Выйти'),
+              title: new Text('Log out'),
               onTap: () {
                 clearSharedPrefs();
                 Navigator.of(context).pushAndRemoveUntil(
@@ -131,18 +130,6 @@ class _EditScreenState extends State<EditScreen> {
                     (Route<dynamic> route) => false);
               },
             ),
-            // new ListTile(
-            //   leading: new Icon(Icons.warning, color: Colors.red),
-            //   title: new Text('Delete your account',
-            //       style: TextStyle(color: Colors.red)),
-            //   onTap: () {
-            //     //clearSharedPrefs();
-            //     _displayDialog(context);
-            //     //Navigator.of(context).pushAndRemoveUntil(
-            //     //    MaterialPageRoute(builder: (context) => LoginScreen()),
-            //     //  (Route<dynamic> route) => false);
-            //   },
-            // ),
           ],
         ),
       ),

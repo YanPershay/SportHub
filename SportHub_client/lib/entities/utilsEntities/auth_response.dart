@@ -9,7 +9,7 @@ class AuthResponse {
   AuthResponse.fromJson(Map<String, dynamic> json) {
     guidId = json['guidId'];
     username = json['username'];
-    isAdmin = json['isAdmin'];
+    isAdmin = json['isTrainer'];
     token = json['token'];
   }
 

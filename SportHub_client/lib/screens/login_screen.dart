@@ -53,12 +53,12 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(16.0, 195.0, 0.0, 0.0),
-                    child: Text('club',
+                    child: Text('Hub',
                         style: TextStyle(
                             fontSize: 80.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(165.0, 195.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(155.0, 195.0, 0.0, 0.0),
                     child: Text('.',
                         style: TextStyle(
                             fontSize: 80.0,
@@ -75,7 +75,7 @@ class LoginScreenState extends State<LoginScreen> {
                     TextField(
                       controller: usernameController,
                       decoration: InputDecoration(
-                          labelText: 'ИМЯ ПОЛЬЗОВАТЕЛЯ',
+                          labelText: 'USERNAME',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
-                        labelText: 'ПАРОЛЬ',
+                        labelText: 'PASSWORD',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -111,21 +111,6 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                       obscureText: _obscureText,
                     ),
-                    // SizedBox(height: 5.0),
-                    // Container(
-                    //   alignment: Alignment(1.0, 0.0),
-                    //   padding: EdgeInsets.only(top: 15.0, left: 20.0),
-                    //   child: InkWell(
-                    //     child: Text(
-                    //       'Forgot Password',
-                    //       style: TextStyle(
-                    //           color: Colors.black,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontFamily: 'Montserrat',
-                    //           decoration: TextDecoration.underline),
-                    //     ),
-                    //   ),
-                    // ),
                     SizedBox(height: 40.0),
                     Container(
                       height: 40.0,
@@ -140,7 +125,7 @@ class LoginScreenState extends State<LoginScreen> {
                           },
                           child: Center(
                             child: Text(
-                              'ВОЙТИ',
+                              'LOGIN',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -157,7 +142,7 @@ class LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Нет аккаунта в SportHub?',
+                  'Not register in SportHub?',
                   style: TextStyle(fontFamily: 'Montserrat'),
                 ),
                 SizedBox(width: 5.0),
@@ -170,7 +155,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 RegistrationUserCredentialsScreen()));
                   },
                   child: Text(
-                    'Регистрация',
+                    'Registration',
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Montserrat',
@@ -190,7 +175,7 @@ class LoginScreenState extends State<LoginScreen> {
     if (usernameController.text.length == 0 ||
         passwordController.text.length == 0) {
       Dialogs.showMyDialog(
-          context, "Пусто", "Пожалуйста, заполните пустые поля.");
+          context, "Empty fields", "Pleasy, fill empty fields..");
     } else {
       Dialogs.showLoadingDialog(context, _keyLoader);
       UserCredentials userCredentials = new UserCredentials(
@@ -224,7 +209,8 @@ class LoginScreenState extends State<LoginScreen> {
             (Route<dynamic> route) => false);
       } else {
         Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-        Dialogs.showMyDialog(context, "Неверно", "Логин или пароль неверны.");
+        Dialogs.showMyDialog(
+            context, "Not correct", "Incorrect username or password.");
       }
     }
   }

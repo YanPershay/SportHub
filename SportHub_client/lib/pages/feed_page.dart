@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:SportHub_client/entities/post.dart';
 import 'package:SportHub_client/entities/saved_post.dart';
 import 'package:SportHub_client/entities/user_info.dart';
-import 'package:SportHub_client/screens/notifications/notifications_screen.dart';
 import 'package:SportHub_client/utils/card_item.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
@@ -105,7 +102,7 @@ class _FeedPageState extends State<FeedPage> {
                     shadowColor: Colors.transparent,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Sport Club",
+                      "SportHub",
                       style: GoogleFonts.workSans(
                           fontStyle: FontStyle.normal,
                           fontSize: 25.r,
@@ -129,7 +126,7 @@ class _FeedPageState extends State<FeedPage> {
                     elevation: 0,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Sport Club",
+                      "SportHub",
                       style: GoogleFonts.workSans(
                           fontStyle: FontStyle.normal,
                           fontSize: 25.r,
@@ -139,7 +136,7 @@ class _FeedPageState extends State<FeedPage> {
                 body: userPosts.isEmpty
                     ? Center(
                         child: Text(
-                            "Пока нет публикаций. Подпишитесь на кого-нибудь.",
+                            "There are no posts in feed. Please, subscribe to someone",
                             style: TextStyle(color: Colors.black)))
                     : Container(
                         child: RefreshIndicator(

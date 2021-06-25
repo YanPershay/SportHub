@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:SportHub_client/bottom_nav_screen.dart';
 import 'package:SportHub_client/entities/user_info.dart';
-import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
 import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
@@ -13,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final UserInfo userInfo;
@@ -84,7 +82,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => BottomNavScreen()),
             (Route<dynamic> route) => false);
-        _showDialog("Готово", "Профиль успешно обновлён!");
+        _showDialog("Success", "Profile was updated succussfully!");
       } else {
         Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         _showDialog("Error", "Something went wrong, please, try again.");
@@ -168,14 +166,14 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Галерея'),
+                      title: new Text('Gallery'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Камера'),
+                    title: new Text('Camera'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
@@ -193,7 +191,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         appBar: AppBar(
             backgroundColor: Colors.grey[900],
             title: Text(
-              "Ред. профиль",
+              "Edit profile",
               style: GoogleFonts.workSans(
                   fontStyle: FontStyle.normal,
                   fontSize: 25.r,
@@ -259,7 +257,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                          labelText: 'ИМЯ',
+                          labelText: 'FIRST NAME',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -273,7 +271,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextFormField(
                       controller: lastNameController,
                       decoration: InputDecoration(
-                        labelText: 'ФАМИЛИЯ',
+                        labelText: 'LAST NAME',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -288,7 +286,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     Row(
                       children: [
                         Text(
-                          'СПОРТИВНЫЙ УРОВЕНЬ:  ',
+                          'SPORT LEVEL:  ',
                           style: TextStyle(
                               fontSize: 16.r,
                               fontFamily: 'Montserrat',
@@ -306,7 +304,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'РОСТ ',
+                            labelText: 'HEIGHT ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -321,7 +319,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         decoration: InputDecoration(
-                            labelText: 'ВЕС ',
+                            labelText: 'WEIGHT ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -334,7 +332,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'О СЕБЕ ',
+                            labelText: 'ABOUT ME ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -347,7 +345,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
-                            labelText: 'МОТИВАЦИЯ ',
+                            labelText: 'MOTIVATION ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -358,7 +356,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextField(
                         controller: countryController,
                         decoration: InputDecoration(
-                            labelText: 'СТРАНА ',
+                            labelText: 'COUNTRY ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -369,7 +367,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                     TextField(
                         controller: cityController,
                         decoration: InputDecoration(
-                            labelText: 'ГОРОД ',
+                            labelText: 'CITY ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -391,7 +389,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                             },
                             child: Center(
                               child: Text(
-                                'ОБНОВИТЬ',
+                                'UPDATE',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -409,7 +407,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         controller: dateOfBirthController,
         keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
-            labelText: 'ДАТА РОЖДЕНИЯ',
+            labelText: 'DATE OF BIRTH',
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
@@ -431,7 +429,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
           dropdownValue = newValue;
         });
       },
-      items: <String>['Новичок', 'Средний', 'Продвинутый']
+      items: <String>['Beginner', 'Middle', 'Advanced']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

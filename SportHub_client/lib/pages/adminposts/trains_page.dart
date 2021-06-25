@@ -54,7 +54,7 @@ class TrainsPageState extends State<TrainsPage> {
           elevation: 0,
           backgroundColor: Colors.grey[900],
           title: Text(
-            "Блог",
+            "Blog",
             style: GoogleFonts.workSans(
                 fontStyle: FontStyle.normal,
                 fontSize: 25.r,
@@ -166,7 +166,7 @@ class TrainsPageState extends State<TrainsPage> {
                                                   ),
                                                   children: [
                                                     TextSpan(
-                                                        text: 'Длительность: ' +
+                                                        text: 'Duration: ' +
                                                             adminPost.duration
                                                                 .toString() +
                                                             '/5'),
@@ -195,7 +195,7 @@ class TrainsPageState extends State<TrainsPage> {
                                                   ),
                                                   children: [
                                                     TextSpan(
-                                                        text: 'Сложность: ' +
+                                                        text: 'Complexity: ' +
                                                             adminPost.complexity
                                                                 .toString() +
                                                             '/5'),

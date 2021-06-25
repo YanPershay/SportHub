@@ -27,17 +27,11 @@ class RegistartionUserCredentialsScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // usernameController.text = "yan_pershay";
-    // emailController.text = "test@gmail.com";
-    // passwordController.text = "1234";
-    // confirmPasswordController.text = "12345";
   }
 
   bool _obscureText = true;
 
-  // Toggles the password show status
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
@@ -84,7 +78,7 @@ class RegistartionUserCredentialsScreenState
                     TextFormField(
                       controller: usernameController,
                       decoration: InputDecoration(
-                          labelText: 'ИМЯ ПОЛЬЗОВАТЕЛЯ',
+                          labelText: 'USERNAME',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -97,7 +91,7 @@ class RegistartionUserCredentialsScreenState
                             value.length == 0 ||
                             value[0] == "." ||
                             value[0] == ",") {
-                          return 'Имя пользователя должно начинаться с букв';
+                          return 'Username should start from letters';
                         }
                         return null;
                       },
@@ -111,7 +105,7 @@ class RegistartionUserCredentialsScreenState
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) => EmailValidator.validate(value)
                           ? null
-                          : "Пожалуйста, введите корректный email.",
+                          : "Please, enter correct email.",
                       decoration: InputDecoration(
                         labelText: 'EMAIL ',
                         labelStyle: TextStyle(
@@ -126,7 +120,7 @@ class RegistartionUserCredentialsScreenState
                     TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
-                        labelText: 'ПАРОЛЬ',
+                        labelText: 'PASSWORD',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -154,7 +148,7 @@ class RegistartionUserCredentialsScreenState
                     TextField(
                       controller: confirmPasswordController,
                       decoration: InputDecoration(
-                          labelText: 'ПОДТВЕРИТЕ ПАРОЛЬ ',
+                          labelText: 'CONFIRM PASSWORD ',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
@@ -178,7 +172,7 @@ class RegistartionUserCredentialsScreenState
                             },
                             child: Center(
                               child: Text(
-                                'ДАЛЕЕ',
+                                'NEXT',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -204,7 +198,7 @@ class RegistartionUserCredentialsScreenState
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(20.0)),
                           child: Center(
-                            child: Text('НАЗАД',
+                            child: Text('BACK',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Montserrat')),
@@ -231,14 +225,11 @@ class RegistartionUserCredentialsScreenState
         if (usernameController.text.length == 0 ||
             emailController.text.length == 0 ||
             passwordController.text.length == 0) {
-          //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-          _showDialog("Пусто", "Пожалуйста, заполните пустые поля");
+          _showDialog("Empty fields", "Please, fill empty fields.");
         } else {
           if (passwordController.text.length < 8) {
-            //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-            _showDialog("Слабый пароль",
-                "Пароль должен содержать не менее 8 символов.");
-            //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+            _showDialog("Weak password",
+                "Password should contain more than 7 symbols.");
           } else {
             Dialogs.showLoadingDialog(context, _keyLoader);
             var response = await Dio()
@@ -248,8 +239,7 @@ class RegistartionUserCredentialsScreenState
               if (isUsernameBusy) {
                 Navigator.of(_keyLoader.currentContext, rootNavigator: true)
                     .pop();
-                _showDialog(
-                    "Занято", "Пожалуйста, выберите другое имя пользователя.");
+                _showDialog("Busy", "Please, select other username.");
               } else {
                 if (passwordController.text == confirmPasswordController.text) {
                   Navigator.of(_keyLoader.currentContext, rootNavigator: true)
@@ -263,7 +253,7 @@ class RegistartionUserCredentialsScreenState
                 } else {
                   Navigator.of(_keyLoader.currentContext, rootNavigator: true)
                       .pop();
-                  _showDialog("Ошибка", "Пароль не подтверждён.");
+                  _showDialog("Error", "Password not confirmed.");
                 }
               }
             } else {

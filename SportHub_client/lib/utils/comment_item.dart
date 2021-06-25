@@ -1,7 +1,6 @@
 import 'package:SportHub_client/entities/comment.dart';
 import 'package:SportHub_client/pages/user_profile_page.dart';
 import 'package:SportHub_client/utils/api_endpoints.dart';
-import 'package:SportHub_client/utils/dialogs.dart';
 import 'package:SportHub_client/utils/shared_prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
@@ -24,19 +23,16 @@ class _CommentItemState extends State<CommentItem> {
   bool isCommentDeleted = false;
 
   Future<void> deleteComment() async {
-    //Dialogs.showLoadingDialog(context, _keyLoader);
     try {
       var response = await Dio().delete(ApiEndpoints.deleteCommentDELETE,
           data: {"id": widget.comment.id});
       if (response.statusCode == 200) {
         isCommentDeleted = true;
-        //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
         setState(() {});
       }
     } catch (e) {
       print(e);
     }
-    //Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
   }
 
   @override
@@ -137,7 +133,7 @@ class _CommentItemState extends State<CommentItem> {
                                             deleteComment();
                                           },
                                           child: Text(
-                                            "Удалить",
+                                            "Delete",
                                             style: GoogleFonts.workSans(
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 15.r,

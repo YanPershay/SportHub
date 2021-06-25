@@ -42,7 +42,7 @@ class Dialogs {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new TextButton(
-              child: new Text("Закрыть"),
+              child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

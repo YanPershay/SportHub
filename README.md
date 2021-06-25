@@ -39,6 +39,7 @@ You can crop the image if you want.
 <br>
 
 If everything suits you, you can send a pack and it will appear on the blog.
+
 <img src="./Assets/14.jpg" width="200" height="400">
 <br>
 

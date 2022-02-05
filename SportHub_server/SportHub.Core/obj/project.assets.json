@@ -1862,11 +1862,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
+      "projectUniqueName": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
       "projectName": "SportHub.Core",
-      "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
+      "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
       "packagesPath": "C:\\Users\\Yan\\.nuget\\packages\\",
-      "outputPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\obj\\",
+      "outputPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yan\\AppData\\Roaming\\NuGet\\NuGet.Config",

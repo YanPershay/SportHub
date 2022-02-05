@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gaK6AVVi9sfUIDxQHVudyFLk3wvJG5XHi/N7C+5xh0vjdy6nx/K4X6gaavsMaMmv30BAN8wYzDk7s+z/6725KA==",
+  "dgSpecHash": "ThVXW8OGy/cLPfyiXLyG804k8ZaKxUPNGWFiU76fbnmSibB1YkWP3Xlkq8efNbBJCGsgLty4xk0ljCgp7/RjPA==",
   "success": true,
-  "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
+  "projectFilePath": "D:\\SportHub-master\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yan\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

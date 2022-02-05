@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6DwAmQrBC1H4RhV0r7MLwgGJMtK1vkUAZjwUmCdQDknqCOMBlQlOr7GN28sF9fBjQK+NLqnVzbGigQ5lz7oBTw==",
+  "dgSpecHash": "9hddAj0Iyez4O4BIaSGzDfBTAHEjBhZLytRQ1tx7chWhGJc8ORpBs7ccaiKXrfzLfXl7/Oca0tCDj09c/DgmDA==",
   "success": true,
-  "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj",
+  "projectFilePath": "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yan\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

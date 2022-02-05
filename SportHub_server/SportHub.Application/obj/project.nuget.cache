@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sQ8nJJbm32IAf1iJuNn0AWZu9BPd+N9uVTb71gtjwZk06rh80LlnEkhgUhfF3/YxGHZSXzyh07uw2yBZgm2RCQ==",
+  "dgSpecHash": "fdnRHjvLkZ+fwlGWOhpr5IvJEtPwgSjLG+jRTCjLytBmA4Dfi6BZGddaKHru1NxJr+C80qTGwRmGnkrZhQGobQ==",
   "success": true,
-  "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj",
+  "projectFilePath": "D:\\SportHub-master\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yan\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj": {}
+    "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj": {
+    "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
+        "projectUniqueName": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
         "projectName": "SportHub.Core",
-        "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
+        "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
         "packagesPath": "C:\\Users\\Yan\\.nuget\\packages\\",
-        "outputPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\obj\\",
+        "outputPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -84,14 +84,14 @@
         }
       }
     },
-    "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj": {
+    "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj",
+        "projectUniqueName": "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj",
         "projectName": "SportHub.Infrastructure",
-        "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj",
+        "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Yan\\.nuget\\packages\\",
-        "outputPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\obj\\",
+        "outputPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -108,8 +108,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj": {
-                "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj"
+              "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj": {
+                "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj"
               }
             }
           }

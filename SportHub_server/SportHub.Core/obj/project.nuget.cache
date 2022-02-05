@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8zoH/lOxjfquzTNQTzkWx4b8FHM550bkgSLsDuiOPRYH08OkLekcq286Nju8I67aNvIHN7hZOhFpocHZsBI18Q==",
+  "dgSpecHash": "7+cTRHXkQtojA+QOo8ddvCe6At6277OgCs2gJnWLqcX0eCf3RKIfzbyOHOfjDaAXQywiYGthJvKh9o7X+rPJcA==",
   "success": true,
-  "projectFilePath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
+  "projectFilePath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yan\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Yan\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

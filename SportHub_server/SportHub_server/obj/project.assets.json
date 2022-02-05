@@ -7245,11 +7245,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
+      "projectUniqueName": "D:\\SportHub-master\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
       "projectName": "SportHub.API",
-      "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
+      "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub_server\\SportHub.API.csproj",
       "packagesPath": "C:\\Users\\Yan\\.nuget\\packages\\",
-      "outputPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub_server\\obj\\",
+      "outputPath": "D:\\SportHub-master\\SportHub_server\\SportHub_server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7266,14 +7266,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj": {
-              "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj"
+            "D:\\SportHub-master\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj": {
+              "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Application\\SportHub.Application.csproj"
             },
-            "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj": {
-              "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj"
+            "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj": {
+              "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Core\\SportHub.Core.csproj"
             },
-            "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj": {
-              "projectPath": "D:\\Thesis\\SportHUB\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj"
+            "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj": {
+              "projectPath": "D:\\SportHub-master\\SportHub_server\\SportHub.Infrastructure\\SportHub.Infrastructure.csproj"
             }
           }
         }
